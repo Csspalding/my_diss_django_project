@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load staticfiles %}<!-- New line -->
+{% load staticfiles %}<!-- New line -->
+
+<html lang="en">
+
+
+  <head>
+    <title>CupcakeCodeAbout</title>
+  </head>
+
+
+  <body>
+    <h1>Cassie says...</h1>
+    <div>
+        here is the about page..<br />
+        <strong>{{ boldmessage }} </strong><br />
+    </div>
+
+    <div>
+        <img src="{% static 'images/vanilla2_cupcake.jpg'%}"   alt="Picture of Vanilla Cup Cakes" /><!-- New line -->
+     </div>
+
+     <div>
+     <br />
+			My easter cupcakes picture :  <br />
+        <img src="{% static 'images/easter_cupcakes.jpg'%}"         alt="Picture of Easter Cup Cakes" /><!-- New line -->
+        
+       
+    </div>
+
+  </body>
+
+
+</html>
+
+

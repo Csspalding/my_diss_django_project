@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load staticfiles %}<!-- New line -->
+
+
+<html lang="en">
+
+
+  <head>
+    <title>Cupcake Code Home </title>
+  </head>
+
+
+  <body>
+    <h1>Cassie says...</h1>
+    <div>
+        here is the Home page..<br />
+        <strong>{{ boldmessage }} </strong><br />
+    </div>
+
+    <div>
+     <a href="/cupcake_site/about/">About</a><br />
+        <img src="{% static 'images/vanilla2_cupcake.jpg'%}"   alt="Picture of Vanilla Cup Cakes" /><!-- New line -->
+     </div>
+
+     <div>
+     <br />
+			My Star Wars Trooper cupcakes picture :  <br />
+        <img src="{{ MEDIA_URL}}trooper_cupcakes.jpg"            alt="Picture of Star Wars Storm Trooper Cup Cakes" /><!-- New line -->
+        
+       
+    </div>
+
+  </body>
+
+
+</html>
+
+
