@@ -1,0 +1,50 @@
+Aug04 2019 Cass 2140148s
+STARTED MY_DISS _PROJECT
+In User\Cassie\Projects 
+//created venv 
+>mkvirtual env dissenv
+(dissenv) pip install django==2.1.5
+(dissenv) C:\Users\Cassie\Projects>python --version
+Python 3.6.7 :: Anaconda, Inc.
+(dissenv) pip install pillow==5.4.1 //handles jpeg files
+
+django-admin.py startproject my_diss_django_project
+//Cd into django project directory, check it has manage.py 
+>python manage.py runserver //test server
+//returns message to , migrate files so do it 
+>python manage.py migrate
+>python manage.py runserver //test migration
+>ipconfig
+//MY MACHING IP ADD 192.168.0.42
+>python manage.py runserver 192.168.0.42:5555 //forces development server to respond to incomming TCP port 5555
+//allow users from other machines in same network to test development can access my project NB not for deployment
+
+//Create App Check you are in project dir with manage.py
+>python manage.py startapp cupcake_site //check it has admin.py etc
+//still in venv start vscode
+>code .
+//use vscode in project settings.py add to installed apps dic 'cupcake_site'
+
+//set up version contol in project dir
+>git init
+>type nul>.gitignore //Create .gitignore file
+//add to .gitignore
+.pyc
+.DS_Store
+__pycache__/
+db.sqlite3
+db.phpmysql
+*.key
+thumbs.db
+//stage all
+git add .
+//commit all
+git commit -m "SetUpBasic django project and cupcake_site app"
+//On gitHub create new repo called my_diss_django_project NB no readme or .gitignore
+//cmd
+echo "# my_diss_django_project" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/Csspalding/my_diss_django_project.git
+git push -u origin master

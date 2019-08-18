@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+{% load staticfiles %}<!-- New line -->
+
+<html lang="en">
+  
+  {% comment %} {% load rango_template_tags %}
+  sidebar is in the rango_template tag {% endcomment %}
+
+<head>
+<!--  #author Cass July 8th 2019 this is the BASE.html
+from bootstrap 4 CSS getting started link is copied from the CND box. Note there is also a JavaScript & Poppie -->
+<!--Browser tab title-->
+<title>
+{% block title_block %}
+{% endblock %}
+</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">    
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <header class = "container centre-align">
+<!--divide page into two areas-->
+<div class="row">
+<!--leftof page is for the website title over image-->
+  <div class="col-sm-4"> 
+    <div class="container">
+     {% comment %}TEXT OVER IMAGE {% endcomment %}
+<div class="card card-blog">
+    <div class="card">
+        {% comment %}  class="img-fluid" {% endcomment %}
+            <img id="image" src="{% static 'images/glasses.jpg' %}" alt="Code Background" style="width:100%;">
+        </a>
+    </div>
+       <div class="card-body text-center carousel-caption">
+        <h3 class="card-title">
+            CUPCAKE CODE<>
+        </h3>
+          <div class="card-description">
+            <div class="table-responsive">
+
+            </div>
+        </div>
+    </div>
+</div>
+  </div>
+      
+  </div> 
+  <div class="col-sm-8">
+   <!--right of page is for the buttons to features, links and apps--> 
+    <div class="container">
+    <h2>CUPCAKE CODE <> anyone can code....</h2>
+    <!--row Navigation BAR?? adapted from https://getbootstrap.com/docs/4.0/components/navbar/#responsive-behaviors-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    {% comment %} <a class="navbar-brand" href="#">CupCakeCode</a> {% endcomment %}
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'cupcake_site:index' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'cupcake_site:about' %}">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Blog</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Learning Tools</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Login</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+         {% comment %} BUTTONS
+         <a href="{% url 'cupcake_site:index' %}" class="btn btn-secondary" role="button">Home</a>
+         <a href="{% url 'cupcake_site:about' %}" class="btn btn-secondary" role="button">About</a>
+         <a href="/posts" class="btn btn-secondary" role="button">Blog</a>
+         <a href="/info" class="btn btn-secondary" role="button">Learning Resources</a>
+         <a href="cup_cake" class="btn btn-secondary" role="button">CupCakeApp</a>
+         <a href="cup_cake" class="btn btn-secondary" role="button">Did You Know?</a>
+         <a href="cup_cake" class="btn btn-secondary" role="button">Login</a> {% endcomment %}
+    </div>
+    <div class="card">
+        {% comment %} <img id="rectangular" class="img-fluid" src="{% static 'images/digitalcakes.jpg' %}" alt="Code Background" style="width:100%; height:50%;">  {% endcomment %}
+          
+    </div>
+</div>
+      
+  </div>
+</div>  
+</header> 
+
+
+<div>
+{% block body_block %}
+{% endblock %}
+</div>  
+<div class = "container">
+<!--This is the footer layout for all pages-->
+        <br>
+        <br>
+        <br>
+        <a style = "display:block" class="center-align" href="{% url 'admin:login' %}" >AdminLogin</a>
+        <!-- todo Login href-->
+        <a style = "display:block" class="center-align" href="#" >Login or Register</a>
+        <a style = "display:block" class="center-align" href="/contact" >Contact Us</a>
+    </div>
+     {% comment %}EXAMPLE CODE with authenticiation/login /restriction etc see AJAX first <div> 
+      <ul>
+      {% if user.is_authenticated %}
+          <li> <a href="{% url 'rango:restricted' %}">Restricted Page</a></li> 
+          <li> <a href="{% url 'rango:logout' %}">Logout</a></li> 
+          <li> <a href="{% url 'rango:add_category' %}">Add New Category</a></li> 
+      {% else %}
+          <li> <a href="{% url 'rango:login' %}">Login</a></li> 
+          <li> <a href="{% url 'rango:register' %}">Sign Up</a></li> 
+      {% endif %}
+          <li> <a href="{% url 'rango:about' %}">About</a></li> 
+          <li> <a href="{% url 'rango:index' %}">Index</a></li> 
+      </ul>
+    </div>    {% endcomment %}
+</body>
+</html>
+
+
+

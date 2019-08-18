@@ -1,38 +1,63 @@
-<!DOCTYPE html>
+{% extends 'cupcake_site/base.html' %}
 {% load staticfiles %}<!-- New line -->
+{% block title_block %}   
+    CupCakeHomePage
+{% endblock %}
 
-
-<html lang="en">
-
-
-  <head>
-    <title>Cupcake Code Home </title>
-  </head>
-
-
-  <body>
-    <h1>Cassie says...</h1>
-    <div>
-        here is the Home page..<br />
-        <strong>{{ boldmessage }} </strong><br />
+{% block body_block %}
+ <header class = "container centre-align">
+<div class="row">
+<div class="col-sm-6">
+<div class="container">
+ {% comment %} {% if user.is_authenticated %} {% endcomment %}
+        <h4>Welcome {{ user.username }}</h4> 
+        <p>An information website aimed at encouraging women to learn to code,
+         enabling and empowering you with how to get started. 
+        Why not try out some code now? Try the quiz below.</p>
+    {% comment %} {% else %} {% endcomment %}
+        {% comment %} Sign in to experience the awesome features of this site {% endcomment %}
+        {% comment %} <strong>{{ boldmessage }} </strong><br />  {% endcomment %}
+    {% comment %} {% endif %} {% endcomment %}
+    
+      
+        {% comment %} <strong>{{ boldmessage }} </strong><br /> {% endcomment %}
+    {% comment %} </div> {% endcomment %}
+{% comment %} Add a link to CUPCAKE try some code now, get rid of pictures place links and images in base.html {% endcomment %}
+    
+    <div class="card card-blog">
+        <div class="card">
+        <a href="#">
+            <img id="image" src="{% static 'images/plantsLaptop.jpg' %}" alt="Picture of a Desk with PC and plants" style="width:100%;">
+        </a>
+        </div>
+    <div class="card-body text-centre carousel-caption">
+        <h3 class="card-title" >
+           !! TRY SOME CODE !! <br/>
+           3 min quiz
+        </h3>
+        <div class="card-description">
+        <div class="table-responsive">
+        </div> 
+        </div>
+        <div class="card-footer">
+        {% comment %} todo map link url to app <a href="{% url 'cupcake_site:cupcakeapp' %}"{% endcomment %}
+            <a href="{% url 'cupcake_site:index' %}" class="btn btn-danger btn-round">CLICK HERE TO START</a>
+        </div>
     </div>
-
-    <div>
-     <a href="/cupcake_site/about/">About</a><br />
-        <img src="{% static 'images/vanilla2_cupcake.jpg'%}"   alt="Picture of Vanilla Cup Cakes" /><!-- New line -->
-     </div>
-
-     <div>
-     <br />
-			My Star Wars Trooper cupcakes picture :  <br />
-        <img src="{{ MEDIA_URL}}trooper_cupcakes.jpg"            alt="Picture of Star Wars Storm Trooper Cup Cakes" /><!-- New line -->
-        
-       
     </div>
+</div>
+</div>
 
-  </body>
-
-
-</html>
-
+<div class="col-sm-6">
+     <div class="container">
+<br/>
+		<h4 class="centre-align">My coding journey so far:  </h4><br />
+        <img src="{% static 'images/Jo.jpg' %}" style="width:100%;" alt="Picture of Person" /><!-- New line --> 
+        <p>My name is Cass and I have been coding for 2 years <a href="{% url 'cupcake_site:index' %}" >Read More</a> Check out the Blog if you would like to find out how I got into coding, and why more of us should...as well as many more inspirational stories from women in tech.
+        Join the Digial Revolution and start learning, check out Learning tools to find out how to get started, find free resources, advice on equiptment, meetup groups and much more.</p>  
+    </div>
+</div>
+</div>
+    
+{% endblock %}
 

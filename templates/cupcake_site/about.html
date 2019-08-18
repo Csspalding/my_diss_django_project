@@ -1,37 +1,35 @@
-<!DOCTYPE html>
+{% extends 'cupcake_site/base.html' %}
 {% load staticfiles %}<!-- New line -->
-{% load staticfiles %}<!-- New line -->
 
-<html lang="en">
+{% block title_block %}   
+    CupCakeAbout
+{% endblock %}
 
-
-  <head>
-    <title>CupcakeCodeAbout</title>
-  </head>
-
-
-  <body>
-    <h1>Cassie says...</h1>
-    <div>
-        here is the about page..<br />
+   
+{% block body_block %}
+ <header class = "container centre-align">
+    {% comment %} divide page into two areas left for main text and right for maybe a sidebar later {% endcomment %}
+    <div class="row">
+    <div class="col-sm-8">
+     <div class="container">
+        <h1>About CupCakeCode..</h1><br />
         <strong>{{ boldmessage }} </strong><br />
-    </div>
-
-    <div>
-        <img src="{% static 'images/vanilla2_cupcake.jpg'%}"   alt="Picture of Vanilla Cup Cakes" /><!-- New line -->
+    
+{% comment %} insert coding image  in a div {% endcomment %}
+    <div >
+        <img src="{% static 'images/diagcode.jpg' %}"   alt="Picture of Code" /><!-- New line -->
      </div>
+<p>text with more information on women coding and job opportunities etc</p>
+     </div>
+     </div>
+     
 
-     <div>
-     <br />
-			My easter cupcakes picture :  <br />
-        <img src="{% static 'images/easter_cupcakes.jpg'%}"         alt="Picture of Easter Cup Cakes" /><!-- New line -->
-        
+      <div class="col-sm-4">
+     <h1>possible sidebar</h1><br />  <br />
+        <img src="{% static 'images/easter_cupcakes.jpg'%}"         alt="Picture of Easter Cup Cakes" /><!-- New line -->   
        
     </div>
-
-  </body>
-
-
-</html>
+    </div>
+{% endblock %} 
 
 
