@@ -1,0 +1,15 @@
+{% extends 'posts/posts_layout.html' %}{#author Cass 2140148s July 2019#}
+{# this is a loop in to list the posts, users click/hyperlink to display the right one #}
+{% block blog_content %}
+ 
+
+    <h4 class = "container center-align"><n></n><n></n>l a t e s t &nbsp;&nbsp;p o s t s</h4>
+    <h6 class = "centre-align blue lighten-4", class="container centre-align">sub heading</h6>
+
+    <ul class = "collection">
+        {% for post in posts %} 
+            <li class = "collection-item"><a href= "/posts/posts_details/{{post.id}}">{{post.title}}</a></li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

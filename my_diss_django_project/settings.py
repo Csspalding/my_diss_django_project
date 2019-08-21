@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cupcake_site'
+    'cupcake_site',
+    'posts'
 ]
 
 MIDDLEWARE = [

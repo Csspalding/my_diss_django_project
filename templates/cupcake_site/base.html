@@ -43,7 +43,7 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
 <div class="card card-blog">
     <div class="card">
         {% comment %}  class="img-fluid" {% endcomment %}
-            <img id="image" src="{% static 'images/glasses.jpg' %}" alt="Code Background" style="width:100%;">
+            <img id="image" src="{% static 'images/rainbow_cupcakes.jpg' %}" alt="Code Background" style="width:100%;">
         </a>
     </div>
        <div class="card-body text-center carousel-caption">
@@ -79,10 +79,10 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
         <a class="nav-link" href="{% url 'cupcake_site:about' %}">About</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Blog</a>
+        <a class="nav-link" href="{% url 'posts:posts_index' %}">Blog</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Learning Tools</a>
+        <a class="nav-link" href="{% url 'cupcake_site:tools' %}">Learning Tools</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Login</a>
@@ -114,19 +114,18 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
 </div>  
 </header> 
 
-
+{% comment %}put body_block in a scroll bar {% endcomment %}
 <div>
+
 {% block body_block %}
 {% endblock %}
-</div>  
+</div> 
+<br/> 
 <div class = "container">
-<!--This is the footer layout for all pages-->
-        <br>
-        <br>
-        <br>
+<!--This is the footer layout for all pages can change what this is to social network sites-->
         <a style = "display:block" class="center-align" href="{% url 'admin:login' %}" >AdminLogin</a>
         <!-- todo Login href-->
-        <a style = "display:block" class="center-align" href="#" >Login or Register</a>
+        <a style = "display:block" class="center-align" href="#" >Register</a>
         <a style = "display:block" class="center-align" href="/contact" >Contact Us</a>
     </div>
      {% comment %}EXAMPLE CODE with authenticiation/login /restriction etc see AJAX first <div> 

@@ -17,11 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from cupcake_site import views
+from cupcake_site import views #is this the right structure for the index page?
 
 urlpatterns = [
     path('', views.index, name='index'),
     path('cupcake_site/', include('cupcake_site.urls')),#urls startwith 'cupcake_site/' are handled by cupcake_site app
+    path('posts/', include('posts.urls')),#urls startwith 'cupcake_site/' are handled by cupcake_site app
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

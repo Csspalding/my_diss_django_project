@@ -1,0 +1,30 @@
+{% extends 'cupcake_site/base.html' %}
+<!--  #author Cass 2140148s July 8th 2019  -->
+   
+<!--Browser tab title-->	
+				{% block title_block %}
+				    BlogCupCakeCode
+				{% endblock %}
+		
+ <div class = "container"> 
+{% block body_block %} 
+
+<!-- Blog container for posts 
+MaterizeCSS getting started link is copied from the CND box. -->
+
+{% comment %} Different Design style in a box <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> {% endcomment %}
+    <header class = "container center-align">
+        <h1><b><i>B L O G </i></b></h1> 
+    </header>
+    
+    <!--so each template is different wrap into a container, this is Jinja below in brackets-->
+    <div class = "container">
+{% comment %} see index.html {% endcomment %}
+        {% block blog_content %}
+        {% endblock %}
+
+        
+       
+{% endblock %} 
+<!--footer is inherited from cupcakecode base template-->
+  
