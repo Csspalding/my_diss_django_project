@@ -22,14 +22,17 @@ def h(request):
 
 def tools(request):
   #get all the categories, later maximum 10 [:10]
-  category_list = Category.objects.all()
+  category_list = Category.objects.all()#can order by likes
+  page_list = Page.objects.order_by('views')[:5]
   #category_list = Category.objects.order_by('-likes')[:5]
   #save them
   context_dict ={}
   context_dict ['categories'] = category_list
+  context_dict ['pages'] = page_list
+  
   return render(request, 'cupcake_site/tools.html', context=context_dict)
 
-def show_category(request,category_name_slug):
+def show_category(request, category_name_slug):
   context_dict={'boldmessage': 'Many Free Tools On-Line'}
   try:
     # get () returns DoesNotExist or instance // try/catch  handles exception if no categories exist
@@ -45,7 +48,7 @@ def show_category(request,category_name_slug):
     #set context_dict to None as none found, DoesNotExist exception is displayed
     context_dict['pages'] = None 
     context_dict['category']= None 
-  return render(request, 'cupcake_site/show_tool_list.html', context=context_dict)
+  return render(request, 'cupcake_site/tools_category.html', context=context_dict)
 #now map your Url to the view rango/about.html
 
 

@@ -7,10 +7,10 @@ from cupcake_site.models import Category, Page
 class PageAdmin(admin.ModelAdmin):
   list_display = ('title','description','category', 'url')
 
-# class CategoryAdmin(admin.ModelAdmin):
-#   prepopulated_fields = {'slug':('name',)}
+class CategoryAdmin(admin.ModelAdmin):
+  prepopulated_fields = {'slug':('name',)}
 
-admin.site.register(Category)
+admin.site.register(Category, CategoryAdmin)
 admin.site.register(Page, PageAdmin)
 # admin.site.register(UserProfile)
 

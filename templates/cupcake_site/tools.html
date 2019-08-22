@@ -2,28 +2,32 @@
 {% load staticfiles %}<!-- New line -->
 
 {% block title_block %}   
-    ToolsCupCakeCode
+    LearningToolsCupCakeCode
 {% endblock %}
 
    
 {% block body_block %}
 {% comment %} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> {% endcomment %}
 <div>
-<h3 class = "centre-align blue lighten-4", class="container centre-align">{{post.title}}</h3>
+ <div class="col-sm-4"> 
+<h3 class = "centre-align blue lighten-4", class="container centre-align"> Learning Tools</h3>
     <div class ="card">
         <div class = "card-content">
-           <h3>Learning Tools</h3>
+    <div>
+    <h3>Top Categories</h3>
     {% if categories %}
       <ul>
       {% for category in categories %}
-      <li>{{category.name}}</li>
-      {% comment %} <li><a href="/rango/category/{{category.slug }}/" >{{ category.name}}</a></li> {% endcomment %}
-          {% comment %} <li><a href="{% url 'cupcake_site:show_category' category.slug %}" >{{ category.name}}</a> </li>  {% endcomment %}
+      <li><a href="/cupcake_site/tools/{{category.slug }}/" >{{ category.name}}</a></li>
+          {% comment %} <li><a href="{% url 'cupcake_site:show_category'/category.slug %}" >{{ category.name}}</a> </li>  {% endcomment %}
       {%endfor %}
       </ul>
     {% else %}
         <strong>There are no categories present.</strong>
     {% endif %}
+    </div>
+          
+  
     </div>
   </div>
  </div>

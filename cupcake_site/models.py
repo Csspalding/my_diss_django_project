@@ -9,11 +9,11 @@ class Category(models.Model):
   name = models.CharField(max_length=128, unique=True)
   views = models.IntegerField(default=0)
   likes = models.IntegerField(default=0)
-  #image = models.ImageField()
-  #slug = models.SlugField(unique=True)# warning cannot add this unique attribute til after the database is created and populated as this unique constraint would have been violated
-  #thumbnail image would be good too
+  slug = models.SlugField()# warning cannot add this unique TRUE attribute til after the database is created and populated as this unique constraint would have been violated
+ 
 
   def save(self, *args, **kwargs):
+    #override save() so if the category changes so does it's slug for clean url's 
     self.slug = slugify(self.name)
     super(Category, self).save(*args, **kwargs)
 
@@ -36,7 +36,7 @@ class Page(models.Model):
     
     #changes spelling for Pages to Page
     class Meta:
-      verbose_name_plural = 'Page'
+      verbose_name_plural = 'Pages'
    
     #string method prints out the page title
     def __str__(self):
