@@ -29,6 +29,11 @@
     {% else %}
           The specified category does not exist!
     {% endif %}
+     {% comment %} {% if user.is_authenticated %} 
+     <div>
+     <a style = "display:block" class="center-align" href="{% url 'cupcake_site:add_page' %}" >Add New Page</a>
+      </div>
+      {% endcomment %}
   {% endblock %}
 
 

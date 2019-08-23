@@ -45,8 +45,22 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cupcake_site',
-    'posts'
+    'posts',
+    'crispy_forms',
+    'registration'
 ]
+#use bootstrap4 templates with crispy forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+#Tango with Django page155
+#If set to true, users can register
+REGISTRATION_OPEN = True
+#If true, logs in a user after registering
+REGISTRATION_AUTO_LOGIN = True
+#url Django redirects to when users have successfully logged in
+LOGIN_REDIRECT_URL = 'cupcake_site:index'
+#if login is unsuccessful Django redirects users to this page
+LOGIN_URL ='auth_login'    
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -129,7 +143,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR]
-
 
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'

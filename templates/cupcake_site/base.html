@@ -18,7 +18,7 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">    
-<!-- Latest compiled and minified CSS -->
+<!-- Latest compiled and minified CSS bootstrap 4 in crispy forms https://stackpath.bootstrapcdn.com  for maxcdn.bootstrapcdn-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <!-- jQuery library -->
@@ -127,6 +127,7 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
         <!-- todo Login href-->
         <a style = "display:block" class="center-align" href="#" >Register</a>
         <a style = "display:block" class="center-align" href="/contact" >Contact Us</a>
+        <a style = "display:block" class="center-align" href="/contact" >Profile</a>
     </div>
      {% comment %}EXAMPLE CODE with authenticiation/login /restriction etc see AJAX first <div> 
       <ul>
@@ -134,6 +135,7 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
           <li> <a href="{% url 'rango:restricted' %}">Restricted Page</a></li> 
           <li> <a href="{% url 'rango:logout' %}">Logout</a></li> 
           <li> <a href="{% url 'rango:add_category' %}">Add New Category</a></li> 
+          <li> <a href="{% url 'rango:profile' %}">Profile</a></li> 
       {% else %}
           <li> <a href="{% url 'rango:login' %}">Login</a></li> 
           <li> <a href="{% url 'rango:register' %}">Sign Up</a></li> 

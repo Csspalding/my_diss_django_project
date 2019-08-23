@@ -1,0 +1,11 @@
+{% comment %} {% extends 'cupcake_site/base.html'%}
+
+{% block body_block%}
+<form method='post'>
+  {% csrf_tocken %}
+
+  {{ crispy form }}
+
+  <button type="submit" class= "btn btn-sucess"> Save Category</button>
+  </form>
+  {% endblock %} {% endcomment %}

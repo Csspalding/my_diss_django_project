@@ -1,12 +1,47 @@
 {%extends 'cupcake_site/base.html' %}
-{% load staticfiles %}<!-- New line -->
+{% load staticfiles %}
+{% block title_block %}
+    selectedTool
+     {{category.slug}}Cupcake 
+{% endblock %}
+
+ <head>
+  <!--also put JavaScript file for bootstrap 4 in here if using js-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!--container, row, col_x and justify-content-centre creates a simple layout with one row and one column-->
+   
+  </head> 
+{% block body_block %}
+<div class="container d-flex h-100">
+      <div class="row justify-content-center">
+        <div class="col-20"> 
+ <h3>Add a new category to Learning Tools</h3><br />
+        {% load crispy_forms_tags %}
+<!--This is the crispy form default block -->
+                {% block main %}
+                <form  method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <!--Added in a submit button to save the form to the db-->
+                    <button  type="submit"  class="btn btn-success">Submit</button>
+                </form>
+                {% endblock %}
+         </div>
+      </div>
+    </div>
+{% endblock %}
+
+
+
+
+{% comment %} {% load staticfiles %}<!-- New line -->
 
 {% block title_block %}
     selectedTool
-    {% comment %} {{category.slug}}Cupcake {% endcomment %}
+     {{category.slug}}Cupcake 
 {% endblock %}
 
    
 {% block body_block %}
 This is Learing Tools Page
-{% endblock %}
+{% endblock %} {% endcomment %}

@@ -10,7 +10,7 @@ class Category(models.Model):
   views = models.IntegerField(default=0)
   likes = models.IntegerField(default=0)
   slug = models.SlugField()# warning cannot add this unique TRUE attribute til after the database is created and populated as this unique constraint would have been violated
- 
+ #todo set slug attribute pass unique=true
 
   def save(self, *args, **kwargs):
     #override save() so if the category changes so does it's slug for clean url's 

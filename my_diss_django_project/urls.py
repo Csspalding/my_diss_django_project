@@ -24,6 +24,7 @@ urlpatterns = [
     path('cupcake_site/', include('cupcake_site.urls')),#urls startwith 'cupcake_site/' are handled by cupcake_site app
     path('posts/', include('posts.urls')),#urls startwith 'cupcake_site/' are handled by cupcake_site app
     path('admin/', admin.site.urls),
+    path('accounts/',include('registration.backends.simple.urls'))#redux registration package for user registration, authentication and login
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
