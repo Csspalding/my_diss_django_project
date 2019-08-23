@@ -76,12 +76,29 @@ def show_category(request, category_name_slug):
     #     super(CategoryForm, self).__init__(*args, **kwargs)
     #     self.fields['name'].help_text = "Enter a new Category name"
 
+class PageCreateView(CreateView):
+    #@method_decorator(login_required)
+    def get(self, request):
+      form=PageForm()
+      return render(request, 'cupcake_site/add_page.html', {'form': form})
+      
+    #@method_decorator(login_required)
+    def post(self, request):
+      form= PageForm(request.POST)
+
+      if form.is_valid():
+        form.save(commit=True)
+        return show_category(request)
+      else:
+        print(form.errors)
+      return render(request, 'cupcake_site/add_page.html', {'form': form}) 
+
 class CategoryCreateView(CreateView):
     #@method_decorator(login_required)
     def get(self, request):
       form=CategoryForm()
       return render(request, 'cupcake_site/add_category.html', {'form': form})
-      
+
     #@method_decorator(login_required)
     def post(self, request):
       form= CategoryForm(request.POST)
