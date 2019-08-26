@@ -1,0 +1,51 @@
+{% extends 'cupcake_site/base.html' %}
+
+
+{% block title_block %}   
+    LoginCupcake
+{% endblock %}
+
+
+{% block body_block %}
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet">
+    <div class="container d-flex h-100">
+      <div class="row justify-content-center">
+        <div class="col-40"> 
+
+    <div class="jumbotron p-4">
+        <h1 class="jumbotron-heading">Login</h1>
+        <p>Not yet signed up?<br/> 
+        Register here for an account to access full features of this site
+         <a style = "display:block" class="center-align" href="{% url 'registration_register' %}" >Register</a> </p>
+    </div>
+    
+    <div class="container">
+        <form class="form-signin" role="form" method="post" action=".">
+            {% csrf_token %}
+            <label for="inputUsername" class="sr-only">Username</label>
+            <input type="text" name="username" id="id_username" class="form-control" placeholder="Username" required autofocus>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" name="password" id="id_password" class="form-control" placeholder="Password" required>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">Sign in</button>
+        </form>
+    </div>
+
+    </div>
+    </div>
+    </div>
+{% endblock %}   
+{% comment %} {% block body_block %}
+<h1>Login</h1>
+<form method='post' action = ".">
+  {% csrf_token %}
+
+  {{ form.as_p }}
+
+  <input type="submit" value="Login"/>
+  <input type="hidden" name= "next" value = "{{ next }}"/>
+  </form>
+  <p> Not registered?
+  <a href="{%url 'registration_register' %}">Register</a>
+  </p>
+  {% endblock %} {% endcomment %}
+

@@ -2,10 +2,10 @@
 
 {% block body_block%}
 <form method='post'>
-  {% csrf_tocken %}
+  {% csrf_token %}
 
   {{ crispy form }}
-
+{{ TEMPLATE_PACK }}/field.html.
   <button type="submit" class= "btn btn-sucess"> Save Category</button>
   </form>
   {% endblock %} {% endcomment %}

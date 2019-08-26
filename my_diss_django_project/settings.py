@@ -40,6 +40,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'registration',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -47,10 +49,10 @@ INSTALLED_APPS = [
     'cupcake_site',
     'posts',
     'crispy_forms',
-    'registration'
 ]
 #use bootstrap4 templates with crispy forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
 #Tango with Django page155
 #If set to true, users can register

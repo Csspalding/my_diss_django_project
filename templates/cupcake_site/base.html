@@ -85,7 +85,7 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
         <a class="nav-link" href="{% url 'cupcake_site:tools' %}">Learning Tools</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Login</a>
+        <a class="nav-link" href="{% url 'auth_login' %}">Login</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
@@ -95,14 +95,7 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
   </div>
 </nav>
 
-         {% comment %} BUTTONS
-         <a href="{% url 'cupcake_site:index' %}" class="btn btn-secondary" role="button">Home</a>
-         <a href="{% url 'cupcake_site:about' %}" class="btn btn-secondary" role="button">About</a>
-         <a href="/posts" class="btn btn-secondary" role="button">Blog</a>
-         <a href="/info" class="btn btn-secondary" role="button">Learning Resources</a>
-         <a href="cup_cake" class="btn btn-secondary" role="button">CupCakeApp</a>
-         <a href="cup_cake" class="btn btn-secondary" role="button">Did You Know?</a>
-         <a href="cup_cake" class="btn btn-secondary" role="button">Login</a> {% endcomment %}
+        
     </div>
     <div class="card">
         {% comment %} <img id="rectangular" class="img-fluid" src="{% static 'images/digitalcakes.jpg' %}" alt="Code Background" style="width:100%; height:50%;">  {% endcomment %}
@@ -123,17 +116,23 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
 <br/> 
 <div class = "container">
 <!--This is the footer layout for all pages can change what this is to social network sites-->
+
+
         <a style = "display:block" class="center-align" href="{% url 'admin:login' %}" >AdminLogin</a>
+        <a style = "display:block" class="center-align" href="{% url 'auth_logout' %}" >Logout</a>
         <!-- todo Login href-->
-        <a style = "display:block" class="center-align" href="#" >Register</a>
+        <a style = "display:block" class="center-align" href="{% url 'registration_register' %}" >Sign up</a>
         <a style = "display:block" class="center-align" href="/contact" >Contact Us</a>
-        <a style = "display:block" class="center-align" href="/contact" >Profile</a>
+        <a style = "display:block" class="center-align" href="/profile" >Profile</a>
     </div>
+
+
      {% comment %}EXAMPLE CODE with authenticiation/login /restriction etc see AJAX first <div> 
       <ul>
       {% if user.is_authenticated %}
           <li> <a href="{% url 'rango:restricted' %}">Restricted Page</a></li> 
-          <li> <a href="{% url 'rango:logout' %}">Logout</a></li> 
+          <li> <a href="{% url 'rango:logout' %}">Logout</a></li>
+           
           <li> <a href="{% url 'rango:add_category' %}">Add New Category</a></li> 
           <li> <a href="{% url 'rango:profile' %}">Profile</a></li> 
       {% else %}
@@ -142,8 +141,8 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
       {% endif %}
           <li> <a href="{% url 'rango:about' %}">About</a></li> 
           <li> <a href="{% url 'rango:index' %}">Index</a></li> 
-      </ul>
-    </div>    {% endcomment %}
+      </ul> {% endcomment %}
+    </div>   
 </body>
 </html>
 

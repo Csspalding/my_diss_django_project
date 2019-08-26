@@ -15,8 +15,10 @@ urlpatterns = [
     path('tools/', views.tools, name='tools'),
     path('tools/<slug:category_name_slug>/', views.show_category, name='show_category'),
     path('add_category/',views.CategoryCreateView.as_view(), name='add_category'),
-    path('add_page/',views.PageCreateView.as_view(), name='add_page'),
+    path('tools/<slug:category_name_slug>/add_page/', views.add_page, name='add_page'),
+    #path('add_page/',views.PageCreateView.as_view(), name='add_page'),
     #path('profile/',views.profile, name='profile')#user can see/edit their profile
+    
 ]
 
 

@@ -22,7 +22,7 @@
                 {% block main %}
                 <form  method="post">
                     {% csrf_token %}
-                    {{ form|crispy }}
+                    {{ form|crispy }} {{category.slug}}
                     <!--Added in a submit button to save the form to the db-->
                     <button  type="submit"  class="btn btn-success">Submit</button>
                 </form>

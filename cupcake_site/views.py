@@ -1,22 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.http import HttpResponse
-#from django.utils.decorators import method_decorator
+from django.utils.decorators import method_decorator
 from crispy_forms.helper import FormHelper
 from django.views import View
 from django.views.generic import CreateView
 
 from cupcake_site.models import Category, Page
 from cupcake_site.forms import CategoryForm, PageForm
-# Create your views here.
-
-#index view is the home page for the project
 #view handles responce to request from client
 
 
+#index view is the home page for the project
 def index(request):
   #construct a dictionary to pass to the template engin as its context.
   context_dict= {'boldmessage':'did you know... you can learn coding skills for free...'}
- 
   return render(request, 'cupcake_site/index.html', context=context_dict)
 
 
@@ -41,11 +39,10 @@ def tools(request):
   context_dict ={}
   context_dict ['categories'] = category_list
   context_dict ['pages'] = page_list
-  
   return render(request, 'cupcake_site/tools.html', context=context_dict)
 
 def show_category(request, category_name_slug):
-  context_dict={'boldmessage': 'Many Free Tools On-Line'}
+  context_dict={'boldmessage': 'There are many Free Learning Tools On-Line, click on a category below to see the links.'}
   try:
     # get () returns DoesNotExist or instance // try/catch  handles exception if no categories exist
     category= Category.objects.get(slug=category_name_slug)
@@ -61,38 +58,77 @@ def show_category(request, category_name_slug):
     context_dict['pages'] = None 
     context_dict['category']= None 
   return render(request, 'cupcake_site/tools_category.html', context=context_dict)
-#now map your Url to the view rango/about.html
 
 
-#class CategoryCreateView(CreateView):
-    # model= Category
-    # template_name= 'cupcake_site/add_category.html'
-    # fields= ('name',)   
-    # def get_initial(self, *args, **kwargs):
-    #     initial = super(CategoryCreateView, self).get_initial(**kwargs)
-    #     initial['name'] = 'Enter a new category name'
-    #     return initial
-    # def __init__(self, *args, **kwargs):
-    #     super(CategoryForm, self).__init__(*args, **kwargs)
-    #     self.fields['name'].help_text = "Enter a new Category name"
+def add_page(request, category_name_slug):
+  try:
+    category = Category.objects.get(slug=category_name_slug)
+  except Category.DoesNotExist:
+    category = None
 
-class PageCreateView(CreateView):
-    #@method_decorator(login_required)
-    def get(self, request):
-      form=PageForm()
-      return render(request, 'cupcake_site/add_page.html', {'form': form})
+  form = PageForm()
+  if request.method =='POST':
+    form = PageForm(request.POST)
+
+    if form.is_valid():
+      if category:
+        page = form.save(commit=False)
+        page.category = category
+        page.view =0
+        page.save()
+    #once page form is created redirect user to the show_category() view, if a match is found from show_category ()the complete url is returned
+    #as an added complication show_category(category_name_slug) passed in parameter, by providing a value in dictionary as kwargs to the reverse function it can formulate the url
+        form.helper.form_action = reverse('url_name', kwargs={'category_name_slug': category_name_slug})
+        return redirect(reverse('cupcake_site:show_category', kwargs={'category_name_slug':category_name_slug}))
+        #return show_category(request, category_name_slug)
+    else:
+      print (form.errors)
+
+  context_dict = {'form':form, 'category':category} #objects passed through the template context dictionary to the html
+  return render(request, 'cupcake_site/add_page.html',context=context_dict)
+
+#Error get() missing 1 required positional argument: 'category_name_slug'
+# class PageCreateView(CreateView): 
+#     #@method_decorator(login_required)
+#     def get_page_cat(self, category_name_slug):#helper method to get the category slug
+#       try:
+#         category_slug = Category.objects.get(slug=category_name_slug)
+#       except Category.DoesNotExist:
+#         category = None
+#       return category_name_slug
+
+#     #@method_decorator(login_required)
+#     def get(self, request, category_name_slug):
+#       try:
+#         slug = self.get_page_cat(self, category_name_slug)#get the category learning tool the page adds on to
+#       except TypeError:
+#         return redirect('cupcake_site/tools.html')#if there is an error redirect them to learning tools page
+
+#       form=PageForm()
+#       context_dict = {'form': form, 
+#                   'slug':slug}
+#       return render(request, 'cupcake_site/add_page.html', context_dict)
       
-    #@method_decorator(login_required)
-    def post(self, request):
-      form= PageForm(request.POST)
+    # #@method_decorator(login_required)
+    # def post(self, request, category_name_slug):
+    #   try:
+    #     (form, slug)=self.get_page_cat(category_name_slug)
+    #   except TypeError:
+    #     return redirect('cupcake_site/tools.html')
+    #   form= PageForm(request.POST)
 
-      if form.is_valid():
-        form.save(commit=True)
-        return show_category(request)
-      else:
-        print(form.errors)
-      return render(request, 'cupcake_site/add_page.html', {'form': form}) 
+    #   if form.is_valid():
+    #     form.save(commit=True)
+    #     #return render(request, 'cupcake_site/tools.html') 
+    #     return redirect(reverse('tools/<slug:category_name_slug>',kwargs={'category_name_slug': category_name_slug}))
+    #   else:
+    #     print(form.errors)
+    #   context_dict = {'form': form, 
+    #               'slug':slug}
+    #   return render(request, 'cupcake_site/add_page.html', context_dict) 
 
+     
+#Class to create and process the Form to add a new Category to Learning Tools       
 class CategoryCreateView(CreateView):
     #@method_decorator(login_required)
     def get(self, request):
@@ -110,6 +146,8 @@ class CategoryCreateView(CreateView):
         print(form.errors)
       return render(request, 'cupcake_site/add_category.html', {'form': form})  
 
+
+#EXAMPLE
 # class BookCreateView(CreateView):
 #     template_name = 'books/book-create.html'
 #     form_class = BookCreateForm

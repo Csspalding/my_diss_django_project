@@ -19,7 +19,7 @@
       <ul>
       {% for category in categories %}
       <li><a href="/cupcake_site/tools/{{category.slug }}/" >{{ category.name}}</a></li>
-          {% comment %} <li><a href="{% url 'cupcake_site:show_category'/category.slug %}" >{{ category.name}}</a> </li>  {% endcomment %}
+          {% comment %} <li><a href="{% url 'cupcake_site:show_category' category.slug %}" >{{ category.name}}</a> </li>  {% endcomment %}
       {%endfor %}
       </ul>
     {% else %}
@@ -31,8 +31,9 @@
     </div>
   </div>
  </div>
-{% comment %} {% if user.is_authenticated %}  {% endcomment %}
+ {% if user.is_authenticated %}
      <div>
      <a style = "display:block" class="center-align" href="{% url 'cupcake_site:add_category' %}" >Add New Category</a>
       </div>
+       {% endif %} 
 {% endblock %}
