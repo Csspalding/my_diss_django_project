@@ -145,29 +145,6 @@ class CategoryCreateView(CreateView):
       else:
         print(form.errors)
       return render(request, 'cupcake_site/add_category.html', {'form': form})  
-
-
-#EXAMPLE
-# class BookCreateView(CreateView):
-#     template_name = 'books/book-create.html'
-#     form_class = BookCreateForm
-
-#     def form_valid(self, form):
-#         self.object = form.save(commit=False)
-#         self.object.user = self.request.user
-#         self.object.save()
-#         return HttpResponseRedirect(self.get_success_url())
-
-#     def get_initial(self, *args, **kwargs):
-#         initial = super(BookCreateView, self).get_initial(**kwargs)
-#         initial['title'] = 'My Title'
-#         return initial
-
-#     def get_form_kwargs(self, *args, **kwargs):
-#         kwargs = super(BookCreateView, self).get_form_kwargs(*args, **kwargs)
-#         kwargs['user'] = self.request.user
-#         return kwargs
-
    
 #TODO
 # def register_profile():

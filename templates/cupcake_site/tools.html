@@ -2,38 +2,44 @@
 {% load staticfiles %}<!-- New line -->
 
 {% block title_block %}   
-    LearningToolsCupCakeCode
+    LearningToolsCupcakeCode
 {% endblock %}
 
    
 {% block body_block %}
 {% comment %} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> {% endcomment %}
 <div>
- <div class="col-sm-4"> 
-<h3 class = "centre-align blue lighten-4", class="container centre-align"> Learning Tools</h3>
+ {% comment %} <div class="col-sm-4">  {% endcomment %}
+  <header class = "container center-align">
+        <h1><b><i>Learning Tools </i></b></h1> 
+    </header>
+    
+    
+<div class = "container">
+<h3 class = "centre-align blue lighten-4", class="container centre-align"> Top Categories</h3>
     <div class ="card">
         <div class = "card-content">
     <div>
-    <h3>Top Categories</h3>
+    {% comment %} <h3>Top Categories</h3> {% endcomment %}
     {% if categories %}
       <ul>
       {% for category in categories %}
-      <li><a href="/cupcake_site/tools/{{category.slug }}/" >{{ category.name}}</a></li>
-          {% comment %} <li><a href="{% url 'cupcake_site:show_category' category.slug %}" >{{ category.name}}</a> </li>  {% endcomment %}
+      {% comment %} <li><a href="/cupcake_site/tools/{{category.slug }}/" >{{ category.name}}</a></li> {% endcomment %}
+          <li><a href="{% url 'cupcake_site:show_category' category.slug %}" >{{ category.name}}</a> </li> 
       {%endfor %}
       </ul>
     {% else %}
         <strong>There are no categories present.</strong>
     {% endif %}
     </div>
-          
+  <!--Link to add a new category - this is still inside the card-->        
+ {% if user.is_authenticated %}
+<div>
+    <a style = "display:block" class="center-align" href="{% url 'cupcake_site:add_category' %}" >Add New Category</a>
+      </div>
+       {% endif %} 
   
     </div>
   </div>
  </div>
- {% if user.is_authenticated %}
-     <div>
-     <a style = "display:block" class="center-align" href="{% url 'cupcake_site:add_category' %}" >Add New Category</a>
-      </div>
-       {% endif %} 
 {% endblock %}

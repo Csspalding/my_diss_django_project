@@ -41,14 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'registration',
-    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cupcake_site',
     'posts',
-    'crispy_forms',
+    'crispy_forms'
 ]
 #use bootstrap4 templates with crispy forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

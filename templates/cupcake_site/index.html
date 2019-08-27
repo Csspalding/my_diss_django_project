@@ -1,7 +1,7 @@
 {% extends 'cupcake_site/base.html' %}
 {% load staticfiles %}<!-- New line -->
 {% block title_block %}   
-    CupCakeHomePage
+    HomeCupcakeCode
 {% endblock %}
 
 {% block body_block %}
@@ -12,22 +12,16 @@
 <!-- Page Left Row-->
 <div class="col-sm-6">
 <div class="container">
-
- {% comment %} {% if user.is_authenticated %} {% endcomment %}
-        <h3>Hello {{ user.username }}</h3> 
+<!--Welcome message or, if logged in Hello username-->
+        {% if user.is_authenticated %}
+        <h3>Hello  {{ user.username }}</h3> 
+        {% else %}
+        <h3> Welcome!</h3><h6><a href="{% url 'registration_register' %}" >Sign up</a> to experience more awesome features of this!</h6>
+        {% endif %}
         <p>An information website aimed at encouraging women to learn to code,
          enabling and empowering you with how to get started. 
         Why not try out some code now? Try the code intro on cupcakes below.</p>
-    {% comment %} {% else %} {% endcomment %}
-        {% comment %} Sign in to experience the awesome features of this site {% endcomment %}
-        {% comment %} <strong>{{ boldmessage }} </strong><br />  {% endcomment %}
-    {% comment %} {% endif %} {% endcomment %}
-    
-      
-        {% comment %} <strong>{{ boldmessage }} </strong><br /> {% endcomment %}
-    {% comment %} </div> {% endcomment %}
-{% comment %} Add a link to CUPCAKE try some code now, get rid of pictures place links and images in base.html {% endcomment %}
-    
+ <!--Card diplay Cupcake 3min Code App. Computer desk image with try some code message, click here to start button-->   
     <div class="card card-blog">
     <div class="card">
         <a href="#">
@@ -35,55 +29,44 @@
         </a>
         </div>
     <div class="card-body text-centre carousel-caption">
-        <h3 class="card-title" >
-           !! TRY SOME CODE !! <br/>
-           3 min code intro on cup cakes
-        </h3>
-        <div class="card-description">
-        <div class="table-responsive">
-        </div> 
-        </div>
+        <h3 class="card-title" >!! TRY SOME CODE !! </h3>
+    <div class="card-description"><strong>3 min code fun on cupcakes</strong>
+    <div class="table-responsive">go go go
+    </div> 
+    </div>
         <div class="card-footer">
         {% comment %} todo map link url to app <a href="{% url 'cupcake_site:cupcakeapp' %}"{% endcomment %}
             <a href="{% url 'cupcake_site:index' %}" class="btn btn-danger btn-round">CLICK HERE TO START</a>
-        </div>
-        
+        </div> 
+    </div> 
     </div>
-    
-    </div><h6>For more coding exercises and lessons...</h6>
-<p>Check out Learning Tools <a href="{% url 'cupcake_site:tools' %}" >Click Here</a>. There's so many free resources on line, give it a go. You might want to try one of code a week, or 20 minutes a day. You might think you prefer learning face to face, there are a few organisation listed that offer coding workshops and classes for free. If you have access to a PC why not try out the free courses as well, you might surprise yourself. There is an amazing quantiy of resources available on line. Once you get started it's actually pretty addictive,epecially if you like problem solving or designing, there's always something new to learn. You may want to check out formal certified Computer Science course at your local college or university. And if you get stuck on a project, support is out there, chances are other people have experienced the same problem, and there's an answer posted someone on the internet. Also look out for Meet Up Groups in your area who offer beginers help with their projects. 
-<!--So if you'd like to know more but not sure where to begin, why not check out my starter guide?--> 
+<!--text under image of plants/Laptop-->
+<h6>For more coding exercises and lessons...</h6>
+<p>Check out Learning Tools <a href="{% url 'cupcake_site:tools' %}" >Click Here</a>. Like cakes? I'm sure you've baked a few cupcakes over time, so you might just suprise yourself and be able to learn to code. There is an amazing quantity of resources available on-line and free guidance on offer. Once you get started, like baking cakes, it's actually pretty addictive. </p>
+<p>If you are like me then you're good at organising, keeping things clean, and being adaptable to fit around others. Applying your life skills and learning to code could make you more employable in the future. The great thing about coding is nobody knows it all, and there's always something new to learn. I've found coding suprisingly creative and you could too! 
 </div>
-
 </div>
-
-
-<!-- Page  Right Row-->
-
+{% comment %} You might want to try one of code a week, or 20 minutes a day. You might think you prefer learning face to face, there are a few organisation listed that offer coding workshops and classes for free. If you have access to a PC why not try out the free courses as well, you might surprise yourself.  {% endcomment %}
+{% comment %} You may want to check out formal certified Computer Science course at your local college or university. And if you get stuck on a project, support is out there, chances are other people have experienced the same problem, and there's an answer posted someone on the internet. Also look out for Meet Up Groups in your area who offer beginers help with their projects.  {% endcomment %}
+<!-- Page  Right -->
 <div class="col-sm-6">
 <div class="container">
-      {% comment %} <div class="card card-blog">
-      <div class="card"> {% endcomment %}
         <h3 >Hi I'm Cass,</h3>	
         <h5>I've set up this site to encourage you into coding!</h5>
-        <img src="{% static 'images/Jo.jpg' %}" style="width:100%;" alt="Picture of Person" /><!-- New line -->
-        <link href="indexStyleSheet.css" type="text/css" rel="stylesheet">
-
-      {% comment %} <div class="card example-1 scrollbar-ripe-malinka">
-      <div class="card-body">
-        <h6 id="section1"><strong>My coding journey so far...</strong></h6> {% endcomment %}
+        <img src="{% static 'images/Jo.jpg' %}" style="width:100%;" alt="Picture of Cass" />
+        <!--text under image of person-->
         <h6>My coding journey so far...</h6>
-        <p>I have been coding for 2 years, inspired by wanting to know more about how to protect my kids on-line. <a href="{% url 'cupcake_site:index' %}" >Read More</a> Check out my Blog if you would like to find out how I got into coding, and why more of us should...as well as many more inspirational stories from women in tech. It would be great if I could inspire you into trying out some code. I've found it much more interesting and creative than I could ever have imagined. Embracing technology can empower your confidence in any job and open the door to some great career opportunities.  
-        Join the Digial Revolution and start learning, check out Learning tools to find out how to get started, find free resources, advice on equiptment, meetup groups and much more.</p> 
+        <p>I have been coding for 2 years, inspired by wanting to know more about how to protect my kids on-line. <a href="{% url 'posts:posts_index' %}">Read More</a> Check out my Blog if you would like to find out how I got into coding, and why more of us should...as well as many more inspirational stories from women in tech. It would be great if I could inspire you into trying out some code or even enrolling on a course. I've found it much more interesting and creative than I could ever have imagined. </p>
+        <p>Embracing technology can empower your confidence in any job and open the door to some great career opportunities.  Join the Digial Revolution and start learning, check out Learning tools to find out how to get started, find free resources, meetup groups and much more.</p> 
      </div>
-    </div> 
     <!-- Card 1 --> 
-    </div>
+    </div> 
     <!-- Grid column -->
-</div>
+    </div>
 <!-- Container -->
 </div>
 <!-- Row -->
+</div>
     
 {% endblock %}
 

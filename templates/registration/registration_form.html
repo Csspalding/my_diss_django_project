@@ -6,33 +6,10 @@
 {% endblock %}
 
 {% block body_block %}
-
-<div class="container d-flex h-100">
-      <div class="row justify-content-center">
-        <div class="col-40"> 
- <div class="jumbotron p-4">
-        <div class="container">
-            <h1 class="jumotron-heading">Sign Up</h1>
-        </div>
-    </div>
-
-    <form method="post" action = ".">
-        {% csrf_token %}
-
-        {{ form.as_p }}
-        
-        <input type ="submit" value="Sign Up" />
-    </form>
-</div>
-</div>
-</div> 
-{%endblock%}
-
-{% comment %} {% block body_block %}
     <div class="jumbotron p-4">
         <div class="container">
             <h1 class="jumotron-heading">Register for a Cupcake Code account</h1>
-            <p>Registration allows you to view other members, like pages and blog articles, add your own learning resources links you recommend, and be part of the community by posting a blog of your own coding journey if you wish. </p>
+            <p>Registration allows you to be part of the community by creating a profile. Once registered you can view other profiles, recommend and add your own learning resources links to our learning tools, have a voice by posting comments or likes on blog articles/learning resources or even posting an article of your own, telling us about your coding journey. We would love to hear from you. </p>
         </div>
     </div>
     
@@ -74,4 +51,4 @@
             </div>
         </div>
     </div>
-{% endblock %} {% endcomment %}
+{% endblock %} 

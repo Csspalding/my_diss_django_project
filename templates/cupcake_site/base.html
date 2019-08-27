@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-{% load staticfiles %}<!-- New line -->
-
+{% load staticfiles %}
 <html lang="en">
-  
   {% comment %} {% load rango_template_tags %}
-  sidebar is in the rango_template tag {% endcomment %}
-
+  sidebar is in the rango_template tag  {% endcomment %}
 <head>
 <!--  #author Cass July 8th 2019 this is the BASE.html
 from bootstrap 4 CSS getting started link is copied from the CND box. Note there is also a JavaScript & Poppie -->
+
 <!--Browser tab title-->
 <title>
 {% block title_block %}
@@ -18,7 +16,7 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">    
-<!-- Latest compiled and minified CSS bootstrap 4 in crispy forms https://stackpath.bootstrapcdn.com  for maxcdn.bootstrapcdn-->
+<!-- CSS bootstrap 4 in crispy forms replace  https://stackpath.bootstrapcdn.com  for maxcdn.bootstrapcdn-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <!-- jQuery library -->
@@ -33,44 +31,45 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
 </head>
 
 <body>
+<!--Navigation Bar and Header for the site-->
     <header class = "container centre-align">
 <!--divide page into two areas-->
 <div class="row">
-<!--leftof page is for the website title over image-->
+<!--left of page holds website cupcake code title over cupcake image container-->
   <div class="col-sm-4"> 
     <div class="container">
-     {% comment %}TEXT OVER IMAGE {% endcomment %}
-<div class="card card-blog">
-    <div class="card">
-        {% comment %}  class="img-fluid" {% endcomment %}
-            <img id="image" src="{% static 'images/rainbow_cupcakes.jpg' %}" alt="Code Background" style="width:100%;">
-        </a>
-    </div>
+    <!--TEXT OVER IMAGE CARD-->
+    <div class="card card-blog">
+      <div class="card">
+        <img id="image" src="{% static 'images/rainbow_cupcakes.jpg' %}" alt="Cupcake Code Background image logo" style="width:100%;"></a>
+      </div>
        <div class="card-body text-center carousel-caption">
-        <h3 class="card-title">
-            CUPCAKE CODE<>
-        </h3>
+        <h3 class="card-title">CUPCAKE CODE<></h3>
           <div class="card-description">
             <div class="table-responsive">
-
             </div>
         </div>
+      <!--close card, then slose card-blog-->
+      </div>
     </div>
-</div>
-  </div>
-      
+    <!--close container, then close column-->
+    </div>  
   </div> 
+
   <div class="col-sm-8">
-   <!--right of page is for the buttons to features, links and apps--> 
+   <!--right of page is wider area for the navigation bar --> 
     <div class="container">
+  <!--logo header above navigation buttons-->
     <h2>CUPCAKE CODE <> anyone can code....</h2>
-    <!--row Navigation BAR?? adapted from https://getbootstrap.com/docs/4.0/components/navbar/#responsive-behaviors-->
+    <!--Navigation BAR adapted from https://getbootstrap.com/docs/4.0/components/navbar/#responsive-behaviors-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-    {% comment %} <a class="navbar-brand" href="#">CupCakeCode</a> {% endcomment %}
+    {% comment %} Could add a heading here to the Nav Bar if requried <a class="navbar-brand" href="#">CupCakeCode</a> {% endcomment %}
+   
+    <!--List of Links for Navigation Bar-->
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'cupcake_site:index' %}">Home <span class="sr-only">(current)</span></a>
@@ -88,61 +87,43 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
         <a class="nav-link" href="{% url 'auth_login' %}">Login</a>
       </li>
     </ul>
+    <!--Search Bar-->
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
-</nav>
-
-        
-    </div>
-    <div class="card">
-        {% comment %} <img id="rectangular" class="img-fluid" src="{% static 'images/digitalcakes.jpg' %}" alt="Code Background" style="width:100%; height:50%;">  {% endcomment %}
-          
-    </div>
+</nav>        
 </div>
-      
-  </div>
+
+    <div class="card">
+        {% comment %} Could add another image or animation in the area beneath the nav bar if required this is an EXAMPLE
+        <img id="rectangular" class="img-fluid" src="{% static 'images/digitalcakes.jpg' %}" alt="Code Background" style="width:100%; height:50%;">  {% endcomment %}    
+    </div>
+<!--close the above nav bar column, then close the container-->
+</div>    
+</div>
+<!--close the row-->
 </div>  
 </header> 
 
-{% comment %}put body_block in a scroll bar {% endcomment %}
 <div>
-
 {% block body_block %}
 {% endblock %}
-</div> 
+</div>
+<!--This is the footer layout with authenticiation restriction-->
 <br/> 
 <div class = "container">
-<!--This is the footer layout for all pages can change what this is to social network sites-->
-
-
-        <a style = "display:block" class="center-align" href="{% url 'admin:login' %}" >AdminLogin</a>
-        <a style = "display:block" class="center-align" href="{% url 'auth_logout' %}" >Logout</a>
-        <!-- todo Login href-->
-        <a style = "display:block" class="center-align" href="{% url 'registration_register' %}" >Sign up</a>
-        <a style = "display:block" class="center-align" href="/contact" >Contact Us</a>
-        <a style = "display:block" class="center-align" href="/profile" >Profile</a>
-    </div>
-
-
-     {% comment %}EXAMPLE CODE with authenticiation/login /restriction etc see AJAX first <div> 
-      <ul>
       {% if user.is_authenticated %}
-          <li> <a href="{% url 'rango:restricted' %}">Restricted Page</a></li> 
-          <li> <a href="{% url 'rango:logout' %}">Logout</a></li>
-           
-          <li> <a href="{% url 'rango:add_category' %}">Add New Category</a></li> 
-          <li> <a href="{% url 'rango:profile' %}">Profile</a></li> 
-      {% else %}
-          <li> <a href="{% url 'rango:login' %}">Login</a></li> 
-          <li> <a href="{% url 'rango:register' %}">Sign Up</a></li> 
+           <a style = "display:block" class="center-align" href="{% url 'admin:login' %}" >Admin</a>
+           <a style = "display:block" class="center-align" href="{% url 'auth_logout' %}" >Logout</a>
+           <a style = "display:block" class="center-align" href="/profile" >My Profile</a>
+      {% else %} 
+           <a style = "display:block" class="center-align" href="{% url 'registration_register' %}" >Sign up</a>
       {% endif %}
-          <li> <a href="{% url 'rango:about' %}">About</a></li> 
-          <li> <a href="{% url 'rango:index' %}">Index</a></li> 
-      </ul> {% endcomment %}
-    </div>   
+        <a style = "display:block" class="center-align" href="/contact" >Contact Cupcake Code</a>
+</div>
+</div>  
 </body>
 </html>
 
