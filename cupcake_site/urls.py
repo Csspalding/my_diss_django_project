@@ -11,15 +11,18 @@ app_name = 'cupcake_site'
 urlpatterns = [
     path('', views.index, name='index'), #this url points to the index view function
     path('about/', views.AboutView.as_view(), name='about'),
-    path('h/', views.h, name='h'),
+    path('h/', views.h, name='h'),#carsole  todo place this in a template tag on About later
     path('tools/', views.tools, name='tools'),
     path('tools/<slug:category_name_slug>/', views.show_category, name='show_category'),
     path('add_category/',views.CategoryCreateView.as_view(), name='add_category'),
     path('tools/<slug:category_name_slug>/add_page/', views.add_page, name='add_page'),
-    #path('add_page/',views.PageCreateView.as_view(), name='add_page'),
-    #path('profile/',views.profile, name='profile')#user can see/edit their profile
+    path('register_profile/', views.RegisterProfileCreateView.as_view(), name='register_profile'),
+    path('profile/<username>/', views.ProfileCreateView.as_view(), name='profile'),
+    path('profiles/', views.ListProfilesView.as_view(), name='list_profiles'),
+]  
+    #path('add_page/',views.PageCreateView.as_view(), name='add_page')
     
-]
+
 
 
 #from rango import views

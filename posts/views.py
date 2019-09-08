@@ -1,15 +1,23 @@
 
+from django.views import generic
 from django.shortcuts import render
 from django.http import HttpResponse
 #from django.urls import reverse
 #from app.models import Page
-from .models import Posts
+from posts.models import Posts
+#from posts.models import Comment
 #from app.forms import PageForm
 #from datetime import datetime
 
 
-# Create your views here.
 
+# class PostsList(generic.ListView):
+#     queryset = Posts.objects.filter(status=1).order_by('-created_on')
+#     template_name = 'index.html'
+
+# class PostsDetail(generic.DetailView):
+#     model = Posts
+#     template_name = 'post_detail.html'
 
 
 def posts_index(request):
@@ -32,7 +40,48 @@ def posts_index(request):
 
 def posts_details(request, id):
     post = Posts.objects.get(id=id)
+#modified from https://realpython.com/get-started-with-django-1/ but my posts get id not pk
+    #comments = Comment.objects.filter(post=post)
+
+    # form = CommentForm()
+    # if request.method == 'POST':
+    #     form = CommentForm(request.POST)
+    #     if form.is_valid():
+    #         comment = Comment(
+    #             author=form.cleaned_data["author"],
+    #             body=form.cleaned_data["body"],
+    #             post=post
+    #         )
+    #         comment.save()
+        # context = {
+        #     'post': post,
+
+        # 'comments': comments,
+        # 'form': form
+
     context = {
-        'post': post
-    }
+        'post': post,
+
+        }
     return render(request, 'posts/posts_details.html', context)
+
+#class PostDetailsCreateView(CreateView):
+
+# def get_user_details(self, username):
+#       try:
+#           user = User.objects.get(username=username)
+#       except User.DoesNotExist:
+#           return None
+      
+#       userprofile = UserProfile.objects.get_or_create(user=user)[0]
+#  @method_decorator(login_required)
+#     def get(self, request, username):
+#         try:
+#             (user, userprofile, form) = self.get_user_details(username)    
+#         except TypeError:
+#             return redirect('cupcake_site:index')
+        
+#         context_dict = {'userprofile': userprofile,
+#                         'selecteduser': user,
+#                         'form': form,
+#                         }

@@ -21,7 +21,12 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 #static dir variable so Django knows where to find my static media and images
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
+
+#media directory root and path so Django can find media files
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = MEDIA_DIR
+MEDIA_URL = '/media/'
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -141,9 +146,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR]
 
-MEDIA_ROOT = MEDIA_DIR
-MEDIA_URL = '/media/'
+

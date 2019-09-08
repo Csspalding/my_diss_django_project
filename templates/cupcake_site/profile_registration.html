@@ -1,0 +1,43 @@
+{%extends 'cupcake_site/base.html' %}
+{% load staticfiles %}
+<!--Create and display CreateUserProfile Form -->
+{% block title_block %}
+ChangeUserProfile CupcakeCode 
+{% endblock %}
+
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<!--container, row, col_x and justify-content-centre creates a simple layout with one row and one column-->
+</head> 
+
+{% block body_block %}
+{% load crispy_forms_tags %}
+ <div class="jumbotron p-4">
+    <div class="container">
+       <h1 class="jumotron-heading">{{user.username}}, create your Profile</h1>
+
+<!--display user's profile picture -->
+      {% comment %} <div class="container">
+      <div class="col-sm-4">
+      <br/>  {% endcomment %}
+
+<!--This is the crispy form -->
+            {% block main %}
+                <form  method="post" action="{% url 'cupcake_site:register_profile' %}" enctype="multipart/form-data">
+<!--default profile picture image to display-->
+                <input type="image" src="{% static 'images/no_user_image.jpg' %}" width="100" hight="100" alt="profile picture" asp-route="Custom">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                   
+                    <!--Added in a submit button to save the form to the db-->
+                    <button  type="submit"  class="btn btn-success">Create Profile</button>
+                </form>
+            {% endblock %}
+         </div>
+      </div>
+    </div>
+{% endblock %}
+
+
+
+

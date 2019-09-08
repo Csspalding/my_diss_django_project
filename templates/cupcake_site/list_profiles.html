@@ -1,0 +1,42 @@
+{% extends 'cupcake_site/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    User Profiles
+{% endblock %}
+
+{% block body_block %}
+    <div class="jumbotron p-4">
+        <div class="container">
+            <h1 class="jumotron-heading">User Profiles</h1>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="row">
+            {% if userprofile_list %}
+            <div class="panel-body">
+                <div class="list-group">
+                    {% for listuser in userprofile_list %}
+                    <div class="list-group-item">
+                        <h4 class="list-group-item-heading">
+                            <a href="{% url 'cupcake_site:profile' listuser.user.username %}">
+                                {% if listuser.picture %}
+                                <img src="{{ MEDIA_URL }}{{ listuser.picture }}" width="50" height="50" />
+                                {% else %}
+                                <img src="{% static url 'carrot_cupcakes.jpg' %}" width="50" height="50" />
+                                {% endif %}
+                                {{ listuser.user.username }}
+                            </a>
+                        </h4>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% else %}
+            <p>There are no users with profiles at present on this site.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+

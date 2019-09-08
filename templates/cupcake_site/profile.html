@@ -1,0 +1,68 @@
+{%extends 'cupcake_site/base.html' %}
+{% load staticfiles %}
+<!--Display a User's Profile 
+if selected user is the logged in user: display form to enable user to amemd profile details-->
+{% block title_block %}
+Profile {{ selecteduser.username }} 
+{% endblock %}
+
+ <head>
+ 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<!--container, row, col_x and justify-content-centre creates a simple layout with one row and one column-->
+   
+  </head> 
+{% block body_block %}
+
+{% load crispy_forms_tags %}
+<!--Display  User's username in heading https://getbootstrap.com/docs/4.0/components/jumbotron/-->
+    
+      <div class="jumotron jumbotron-fluid">   
+      <div class="container">
+      {% if selecteduser == user %}
+           <h1 class="jumotron-heading">My Profile {{ selecteduser.username }} </h1>
+      <!--if selecteduser is not logged in user, display the selected user member's username-->
+      {% else %}
+            <h1 class="jumotron-heading">Profile: {{ selecteduser.username }} </h1>
+        {% endif %}
+      </div>
+      </div>
+
+<!--display user's profile picture -->
+      <div class="container">
+      <div class="col-sm-4">
+      {% if userprofile.picture %}
+
+       <br />
+        <img src="{{ MEDIA_URL }}{{ userprofile.picture }}" width="300" hight="300" alt="{{selecteduser.username}}'s profile picture {{userprofile.picture.name}}" /><!-- New line -->   
+        <br/>
+      {% else %}
+      <!--if media files are not loading, render a default static file-->
+      <br/>
+      <img src="{% static url 'no_user_image.jpg' %}" width="50" height="50" />
+      <br/>
+      
+      {% endif %}
+
+     <!--display current user's profile details form enable them to update profile picture or email -->
+        <div> {% if selecteduser == user %}
+
+        <form method = "post" action="." enctype="multipart/form-data">
+              {% csrf_token %} 
+              {{ form|crispy}} 
+              <input type= "submit" value ="Update"/>
+        </form>
+        {% else %}
+        <!--if selected user is not logged in user - display the selected user member's profile bio details-->
+        <p><strong>Bio</strong><br/>
+        {{userprofile.bio}}
+        {% endif %}
+        </div>
+        </div>
+        </div>                 
+                
+{% endblock %}
+
+
+
+

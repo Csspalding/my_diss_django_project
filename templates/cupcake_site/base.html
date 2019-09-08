@@ -36,7 +36,7 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
 <!--divide page into two areas-->
 <div class="row">
 <!--left of page holds website cupcake code title over cupcake image container-->
-  <div class="col-sm-4"> 
+  <div class="col-sm-3"> 
     <div class="container">
     <!--TEXT OVER IMAGE CARD-->
     <div class="card card-blog">
@@ -44,7 +44,7 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
         <img id="image" src="{% static 'images/rainbow_cupcakes.jpg' %}" alt="Cupcake Code Background image logo" style="width:100%;"></a>
       </div>
        <div class="card-body text-center carousel-caption">
-        <h3 class="card-title">CUPCAKE CODE<></h3>
+        <h4 class="card-title">CUPCAKE CODE<></h4>
           <div class="card-description">
             <div class="table-responsive">
             </div>
@@ -56,7 +56,7 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
     </div>  
   </div> 
 
-  <div class="col-sm-8">
+  <div class="col-sm-9">
    <!--right of page is wider area for the navigation bar --> 
     <div class="container">
   <!--logo header above navigation buttons-->
@@ -67,7 +67,8 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
       <span class="navbar-toggler-icon"></span>
     </button>
   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-    {% comment %} Could add a heading here to the Nav Bar if requried <a class="navbar-brand" href="#">CupCakeCode</a> {% endcomment %}
+    <!--heading  Nav Bar if requried-->
+    {% comment %} <a class="navbar-brand" href="#">CupCakeCode</a> {% endcomment %}
    
     <!--List of Links for Navigation Bar-->
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -83,9 +84,21 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
       <li class="nav-item">
         <a class="nav-link" href="{% url 'cupcake_site:tools' %}">Learning Tools</a>
       </li>
+       {% if user.is_authenticated %}
+       <li class="nav-item">
+        <a class="nav-link" href="{% url 'auth_logout' %}">Logout</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'cupcake_site:profile' user.username %}">My Profile</a>
+      </li>
+      {% else %}
       <li class="nav-item">
         <a class="nav-link" href="{% url 'auth_login' %}">Login</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'registration_register' %}">SignUp</a>
+      </li>
+       {% endif %}
     </ul>
     <!--Search Bar-->
     <form class="form-inline my-2 my-lg-0">
@@ -116,10 +129,7 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
 <div class = "container">
       {% if user.is_authenticated %}
            <a style = "display:block" class="center-align" href="{% url 'admin:login' %}" >Admin</a>
-           <a style = "display:block" class="center-align" href="{% url 'auth_logout' %}" >Logout</a>
-           <a style = "display:block" class="center-align" href="/profile" >My Profile</a>
-      {% else %} 
-           <a style = "display:block" class="center-align" href="{% url 'registration_register' %}" >Sign up</a>
+           <a style = "display:block" class="center-align" href="{% url 'cupcake_site:list_profiles' %}" >List of Members</a>
       {% endif %}
         <a style = "display:block" class="center-align" href="/contact" >Contact Cupcake Code</a>
 </div>
