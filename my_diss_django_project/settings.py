@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cupcake_site',
     'posts',
-    'crispy_forms'
+    'crispy_forms',
+    'coverage'
 ]
 #use bootstrap4 templates with crispy forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

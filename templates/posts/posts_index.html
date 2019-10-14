@@ -12,5 +12,10 @@
             <li class = "collection-item"><a href= "/posts/posts_details/{{post.id}}">{{post.title}}</a></li>
         {% endfor %}
     </ul>
+    {% if user.is_authenticated %}
+    <div>
+    <a style = "display:block" class="center-align" href="{% url 'posts:add_post' %}" >Add New Category</a>
+    </div>
+    {% endif %} 
 
 {% endblock %}

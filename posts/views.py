@@ -1,35 +1,25 @@
-
-from django.views import generic
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-#from django.urls import reverse
-#from app.models import Page
+from django.urls import reverse
 from posts.models import Posts
 #from posts.models import Comment
-#from app.forms import PageForm
-#from datetime import datetime
+from datetime import datetime
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from crispy_forms.helper import FormHelper
+from django.views import View
+from django.views.generic import CreateView
+from django.utils import timezone
 
-
-
-# class PostsList(generic.ListView):
-#     queryset = Posts.objects.filter(status=1).order_by('-created_on')
-#     template_name = 'index.html'
-
-# class PostsDetail(generic.DetailView):
-#     model = Posts
-#     template_name = 'post_detail.html'
+from cupcake_site.models import UserProfile
+from posts.models import Posts
+#from posts.models import Comments
+from posts.forms import PostForm 
+#from posts.forms import CommentForm 
 
 
 def posts_index(request):
-    #return HttpResponse('Hello from Posts') #USE THIS FIRST to test page link works  - restful API
-    
-    # to bring in data, the model is imported above see .models import Posts 
-    #posts= Posts.objects.all()[:20] # this specifies a max 20 first/recent Post or Blog objects from the model Posts
-    #return render(request, 'posts/index.html')
-   
-
-    #a neater way of writing the above is to wrap in a variable convention often calls 'context' or 'data'
-
     posts= Posts.objects.all()[:10] #gets the first 10 posts
     context = {
         'title':'Latest Posts',
@@ -65,23 +55,56 @@ def posts_details(request, id):
         }
     return render(request, 'posts/posts_details.html', context)
 
-#class PostDetailsCreateView(CreateView):
 
-# def get_user_details(self, username):
-#       try:
-#           user = User.objects.get(username=username)
-#       except User.DoesNotExist:
-#           return None
+class PostCreateView(CreateView):
+    def get_user_details(self, username):
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return None
       
-#       userprofile = UserProfile.objects.get_or_create(user=user)[0]
-#  @method_decorator(login_required)
-#     def get(self, request, username):
-#         try:
-#             (user, userprofile, form) = self.get_user_details(username)    
-#         except TypeError:
-#             return redirect('cupcake_site:index')
+        posts = Posts.objects.get_or_create(user=user)[0]
+        form = PostForm({'title': posts.title,
+        'body': posts.body,
+        'created_by': user,})
+        return (user, posts, form)
+
+    @method_decorator(login_required)
+    def get(self, request, username):
+        try:
+            (user, post, form) = self.get_user_details(username)    
+        except TypeError:
+            return redirect('cupcake_site:index')
         
-#         context_dict = {'userprofile': userprofile,
-#                         'selecteduser': user,
-#                         'form': form,
-#                         }
+        context_dict = {'post': post,
+                        'created_by': user,
+                        'form': form,
+                        }
+        form.helper.include_media = True
+        return render(request,'posts/add_post.html', context_dict)
+
+    @method_decorator(login_required)
+    def post(self, request, username):
+        try:
+            (user, post, form) = self.get_user_details(username)
+        except TypeError:
+            return redirect('cupcake_site:index')
+
+        #To test user authentication    
+        if user == request.user:
+            form = PostForm(request.POST, request.FILES, instance=post)
+  
+            if form.is_valid():
+              form.save(commit=True)
+              form.helper.include_media = True
+              return redirect('cupcake_site:index', user.username)
+
+            else:
+                print(form.errors)
+
+            context_dict = {'post': post,
+                            'selecteduser': user,
+                            'form': form}
+        form.helper.include_media = True
+        return render(request, 'posts/add_post.html', context_dict)
+    #todo def post and test user is authentication see cupcake views profilecreateview method

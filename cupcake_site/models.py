@@ -48,13 +48,11 @@ class UserProfile(models.Model):
     # a user attribute is required
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     #other 3 attributes are user biography, email and picture 
-    bio = models.CharField(max_length=5000)
+    bio = models.CharField(max_length=5000, blank=True)
     email = models.EmailField(blank=True)
     #upload_to store user images in the project MEDIA_ROOT
-    picture = models.ImageField(upload_to='profile_images/' , blank=True)#
-    #list_blog_posts =models.FileField()
-    #blog_post = models.OneToManyField(User, on_delete=models.CASCADE)
-
+    picture = models.ImageField(upload_to='profile_images/' , blank=True)
+    
     #set a default profile pic image https://stackoverflow.com/questions/13090505/render-default-image-django
     def picture_or_default(self, default_path="/static/images/no_user_image.jpg"):
         if self.picture:
