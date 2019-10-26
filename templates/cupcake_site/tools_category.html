@@ -22,19 +22,18 @@
         {% else %}
           <strong>No pages currently in category.</strong>
         {% endif %}
+        
+        &emsp;&emsp;&nbsp;&nbsp;<a href="{% url 'cupcake_site:tools' %}">Back</a>
+        <br>
 
        {% if user.is_authenticated %}
-                <a href="{% url 'cupcake_site:add_page' category.slug %}">Add a Page</a>
   <!-- category.slug is passed thorugh as a parameter to the url template tag --> 
+        &emsp;&emsp;&nbsp;&nbsp;<a href="{% url 'cupcake_site:add_page' category.slug %}">Add a Page</a>
        {% endif %} 
     {% else %}
           The specified category does not exist!
     {% endif %}
-  {% comment %} {% if user.is_authenticated %} 
-    <div>
-      <a style = "display:block" class="center-align" href="{% url 'cupcake_site:add_page' %}" >Add New Page</a>
-    </div>
-  {% endif %} {% endcomment %}
+  
 
   {% endblock %}
 

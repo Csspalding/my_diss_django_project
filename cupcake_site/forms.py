@@ -26,12 +26,13 @@ class CategoryForm(forms.ModelForm):
 
 class PageForm(forms.ModelForm):
   title = forms.CharField(max_length=128, help_text="Please enter the title of the web page.")
-  url = forms.URLField(max_length=200, help_text="Please enter the web address of the page you want to add. Hint: you can copy and paste the link from your browser")
+  url = forms.URLField(max_length=200, help_text="Please enter the web address of the page you want to add. Hint: you can copy and paste the link from your browser.")
   views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
 
   #visible fields displayed to user inner class Meta 
   class Meta:
     model = Page
+    #Name = ('Title',) TODO Test this
     exclude = ('category',)
 
   def __init__(self, *args, **kwargs):
@@ -44,6 +45,9 @@ class PageForm(forms.ModelForm):
 
     #TODO ALSO CONSIDER HANDLING SECURE https:// too!
     #if the url is not empty and doesn't start with 'http://' then prepend 'http://'
+
+    #TODO Test this next line and solve https issue
+    #if url and (not url.startswith('http://')) or (not url.startswith('https://')) :
     if url and not url.startswith('http://'):
       url = 'http://'+ url
       cleaned_data['url'] = url
@@ -78,8 +82,7 @@ class ImageUploadForm(forms.Form):
 class UserProfileForm(forms.ModelForm):#when a userprofile is made it wont yet have instance of a user unless already registered
   def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
-       
+        self.helper = FormHelper()   
 
   class Meta:
     model = UserProfile
@@ -121,3 +124,19 @@ class UserProfileForm(forms.ModelForm):#when a userprofile is made it wont yet h
             pass
 
         return pic
+
+
+#to avoid Djano userprofile default being displayed https://simpleisbetterthancomplex.com/tutorial/2016/11/23/how-to-add-user-profile-to-django-admin.html
+  # class ProfileInline(admin.StackedInline):
+  #   model = Profile
+  #   can_delete = False
+  #   verbose_name_plural = 'Profile'
+  #   fk_name = 'user'
+
+  # class CustomUserAdmin(UserAdmin):
+  #   inlines = (ProfileInline, )def get_inline_instances(self, request, obj=None):
+  #       if not obj:
+  #           return list()
+  #       return super(CustomUserAdmin, self).get_inline_instances(request, obj)
+  # admin.site.unregister(User)
+#   admin.site.register(User, CustomUserAdmin)  

@@ -19,17 +19,27 @@ from posts.forms import PostForm
 #from posts.forms import CommentForm 
 
 
-def posts_index(request):
-    posts= Posts.objects.all()[:10] #gets the first 10 posts
+def posts_index(request, User):
+    try:
+        posts=Posts.objects.all()[:10] #gets the first 10 posts 
+    except Posts.DoesNotExist:
+        return None 
     context = {
-        'title':'Latest Posts',
-        'posts': posts
-    }
-    return render(request, 'posts/posts_index.html', context)
-
+            #'page_title':'Latest Posts',
+            'posts': posts
+            }
+    return render(request, 'posts:posts_index', context)
+    
+    #return HttpResponse("hello from posts")
 
 def posts_details(request, id):
     post = Posts.objects.get(id=id)
+    context = {
+        'post': post,
+    }
+    return render(request, 'posts:posts_details', context)
+
+
 #modified from https://realpython.com/get-started-with-django-1/ but my posts get id not pk
     #comments = Comment.objects.filter(post=post)
 
@@ -49,11 +59,11 @@ def posts_details(request, id):
         # 'comments': comments,
         # 'form': form
 
-    context = {
-        'post': post,
+    # context = {
+    #     'post': post,
 
-        }
-    return render(request, 'posts/posts_details.html', context)
+    #     }
+    # return render(request, 'posts/posts_details.html', context)
 
 
 class PostCreateView(CreateView):
@@ -62,11 +72,13 @@ class PostCreateView(CreateView):
             user = User.objects.get(username=username)
         except User.DoesNotExist:
             return None
-      
-        posts = Posts.objects.get_or_create(user=user)[0]
-        form = PostForm({'title': posts.title,
-        'body': posts.body,
-        'created_by': user,})
+        if user.is_active:
+            posts = Posts.objects.get_or_create(user=user)[0]
+            form = PostForm({'title': posts.title,
+            'body': posts.body,
+            'created_by': user,})
+        else:
+            redirect()
         return (user, posts, form)
 
     @method_decorator(login_required)
@@ -74,7 +86,7 @@ class PostCreateView(CreateView):
         try:
             (user, post, form) = self.get_user_details(username)    
         except TypeError:
-            return redirect('cupcake_site:index')
+            return redirect('accounts:register')
         
         context_dict = {'post': post,
                         'created_by': user,
@@ -97,7 +109,7 @@ class PostCreateView(CreateView):
             if form.is_valid():
               form.save(commit=True)
               form.helper.include_media = True
-              return redirect('cupcake_site:index', user.username)
+              return redirect('posts:posts_index', user.username)
 
             else:
                 print(form.errors)

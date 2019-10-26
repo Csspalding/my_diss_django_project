@@ -18,7 +18,7 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Posts
         fields = ('title', 'body',)
-    
+    # TODO image
 
 
 #adapted to a crispy CreateViewfrom https://realpython.com/get-started-with-django-1/

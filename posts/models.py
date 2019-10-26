@@ -14,36 +14,38 @@ STATUS = (
     
 class Posts(models.Model):
     title = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200)#add unique true later
+    slug = models.SlugField(max_length=200, blank=True)#add unique true attribute after database is created to avoid database errors as Posts has User as ForeignKey, so a User has to be created prior to a post being created.
     body = models.TextField()
     # a user attribute is required
-    created_by = models.OneToOneField(User,on_delete=models.CASCADE) 
-    #Not correct //created_by = models.ForeignKey(User,editable=False,null=True,blank=True, on_delete=models.CASCADE) 
+    author_post = models.ForeignKey(User, on_delete=models.CASCADE) 
     created_at = models.DateTimeField(default=datetime.now, blank=True)
     last_modified = models.DateTimeField(auto_now=True)
-    status = models.IntegerField(choices=STATUS, default=0)
-    
+    status = models.IntegerField(choices=STATUS, default=1) #default to publish for now
+    #featured_image = models.ImageField(upload_to='static/blog/uploads/%Y/%m/%d/', blank=True, null=True)
    
-    
-#To display the blog post title of each of the items listed in Posts instead of default Post Object 1,2,3 in model
-#to handle the case of no author adapted from  #o_c https://stackoverflow.com/questions/937954/how-do-you-specify-a-default-for-a-django-foreignkey-model-or-adminmodel-field
+#To display the post title with a clean slug instead of default Post Object 1,2,3 
     def save(self, *args, **kwargs):
-    #   #override save() so if the title changes so does it's slug  
-      self.slug = slugify(self.title)
-#       if self.author is None:  # Set default reference if author is None
-      super(Posts, self).save(*args, **kwargs)
-    #     self.author = User.objects.get(id=1) 
-   
-
-    def __str__(self):
-        return self.title
-
+        self.slug = slugify(self.title)
+        super(Posts, self).save(*args, **kwargs)
+    
 #Tango book & travery media tutorial
 #add this code and get rid of the extra default 's' on Postss, as displayed on /admin page 
     class Meta:
         verbose_name_plural = "Posts"
         #ordering=['-created_at']/ or ordering by likes?
+       # ordering = ['-updated_on'] # or ordering by ['last_modified']
 
+    def __str__(self):
+        return self.title
+    
+
+
+ #-user-when-creating-an-object-in-django-admin
+#with this code I may not need to set an created_by_attribute in populatePostsDb.py
+    # def save_model(self, request, obj, form, change):
+    #     if not obj.created_by_user:
+    #         obj.created_by_user = request.user
+    #     obj.save() 
 
 #Comment code adapted from https://realpython.com/get-started-with-django-1/
 

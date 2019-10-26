@@ -25,24 +25,34 @@ def populate():
 				"views":9} ,
 
 				{"title":"Head First Python", 
-				"description":"A modern book available from most Local Libraries. Head First cover lots of coding languages, this one is Python, great for beginers with a very visual and fun, learn by doing. This link requires you register with O'Reilly.", 
+				"description":"A modern book available from most Local Libraries. The Head First books cover lots of coding languages, \nthis one is Python, great for beginers with a very visual and fun, learn by doing style.\nThis link requires you register with O'Reilly.", 
 				"url":"http://shop.oreilly.com/product/0636920036777.do",
 				"views":9},
 
 				{"title":"Python Cookbook", 
-				"description":"Available free from this link, this book is daunting for beginers but a great comprehensive guide to Python version 3. Learn Python the Hard Way is a better way to get started", 
+				"description":"Available free from this link, this book is daunting for beginers but a great comprehensive guide to Python version 3.\n 'Learn Python the Hard Way' maybe a better way to get started.", 
 				"url":"https://github.com/sjyuan-cc/programming-books/blob/master/Language/Python/Python%20Cookbook%2C%203rd%20Edition.pdf",
 				"views":9},
 
 				{"title":"Packt", 
-				"description":"This site offers discounts and features different Free eBook every day you can save to your account and read on line if you register. Wide ranging e-books for various stages of learning. ", 
+				"description":"This site offers discounts and features different Free eBook every day you can save to your account and read on line if you register. \nWide ranging e-books for various stages of learning. ", 
 				"url":"https://www.packtpub.com/gb/",
 				"views":9},
 				
 				{"title":"Learn Python the Hard Way",
 				"description":"A starter book that drums in the basics for total beginers, who like learning by reading and writing, widely available to read for free on line, the link here requires you register with O'Reilly.", 
 				"url":"https://www.oreilly.com/library/view/learn-python-the/9780133124316/",
-				"views":9} ]
+				"views":9},
+				
+				{"title":"Big Java : Late Objects",
+				"description":"Want to learn Java? Not the easiest language to start with, but this a great book, very detailled with lots of examples and explanations, \npacked with exercises, although you may also need an instructor or someone who knows Java well to help you. It's expensive so try to pick up a used copy or track down a copy from a local library. Some chapters may be free on line.",
+				"url": "https://www.goodreads.com/book/show/13837978-big-java",
+				"views":3}
+				
+				
+				 ]
+
+
 
 		web_pages = [
 				{"title":"22 Ways to Learn to Code for Free in 2019",
@@ -51,17 +61,17 @@ def populate():
 				"views":64},
 
 				{"title":"Top 10 ways to teach yourself to code",
-				"description":"Advice on how to start learning to code by Melanie Pinola and Gloria Sin and which learning tools to try out, including a guide to deciding which programing language to learn.", 
+				"description":"Advice on how to start learning to code by Melanie Pinola and Gloria Sin and which learning tools to try out, \nincluding a guide to help you in deciding which programing language to learn.", 
 				"url":"https://lifehacker.com/top-10-ways-to-teach-yourself-to-code-1684250889",
 				"views":77 },
 
 				{"title":"Complete Beginers Guide to Interaction Design",
-				"description":"If your interested in User Experience (UX)also referred to as UI for user interaction this link is a great guide written by the UXBooth editorial team", 
+				"description":"If your interested in  UX (User Experience) also referred to as UI (User Interaction), this link is a great guide written by the UXBooth editorial team", 
 				"url":"https://www.uxbooth.com/articles/complete-beginners-guide-to-interaction-design/",
 				"views":2},
 
 				{"title":"Official Python Documentation",
-				"description":"This isn't the most friendly page for total beginers, but it is the essential documentation of Python language, includes set up instructions, and all the code syntax a bit like a language dictionary with grammar, as you become more advanced this documentation becomes more readable and useful as a reference", 
+				"description":"Be warned - this isn't the most friendly page for total beginers, however it is the essential documentation of Python language, includes set up instructions, and all the code syntax a bit like a language dictionary with grammar, as you become more advanced this documentation becomes more readable and useful as a reference. Try out the tutorial", 
 				"url":"https://docs.python.org/3/",
 				"views":10} ]
 
@@ -216,11 +226,11 @@ def populate():
 
 #cats is a dictionary list of tools, each  contain dictionary of pages 
 		cats = {
-					"Book Link": {"pages": book_pages, 'views':77, 'likes':9}, 
-					"Web Learning Link": {"pages": web_pages,'views':104, 'likes':25 }, 
-					"Video Tutorial Link": {"pages": course_pages,'views':21, 'likes':14},
-					"Women Specific Web Link":{"pages": women_pages, 'views':0, 'likes':0},
-					"Meet Up Group":{"pages": meetup_pages, 'views':0, 'likes':0}
+					"Books - to get you started": {"pages": book_pages, 'views':77, 'likes':9}, 
+					"Web Learning Links": {"pages": web_pages,'views':104, 'likes':25 }, 
+					"Video Tutorials": {"pages": course_pages,'views':21, 'likes':14},
+					"Women Specific Websites":{"pages": women_pages, 'views':0, 'likes':0},
+					"Meet Up Groups":{"pages": meetup_pages, 'views':0, 'likes':0}
 					}
       
 #loop through cats dictionary add each category then add all the associated pages for that category

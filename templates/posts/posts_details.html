@@ -16,6 +16,6 @@ from the database to display in this text field container #}
             {{post.created_at}}
         </div>
     </div>
-<a style = "display:block" class="center-align" href= "/posts" class="btn">Go Back</a> 
-{% comment %} {% url 'posts:posts_index'%} {% endcomment %}
+<a style = "display:block" class="center-align" href= "{% url 'posts:posts_index' %}" class="btn">Go Back</a> 
+
 {% endblock %}
