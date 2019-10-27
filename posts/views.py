@@ -31,12 +31,15 @@ def posts_index(request):
     #return HttpResponse("hello from posts")
 
 def posts_details(request, id):
-    post = Posts.objects.get(id=id)
+    try:
+        post = Posts.objects.get(id=id)
+    except Posts.DoesNotExist:
+        return None
     context = {
         'post': post,
     }
-    return render(request, 'posts:posts_details', context)
-
+    return render(request, 'posts/posts_details.html', context)
+    #return HttpResponse("hello from posts details")
 
 #modified from https://realpython.com/get-started-with-django-1/ but my posts get id not pk
     #comments = Comment.objects.filter(post=post)

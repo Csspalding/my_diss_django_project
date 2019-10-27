@@ -87,7 +87,7 @@ def add_page(request, category_name_slug):
         return redirect(reverse('cupcake_site:show_category', kwargs={'category_name_slug':category_name_slug}))
         #return show_category(request, category_name_slug)
     else:
-      print (form.errors)
+      print(form.errors)
 
   context_dict = {'form':form, 'category':category} #objects passed through the template context dictionary to the html
   return render(request, 'cupcake_site/add_page.html',context=context_dict)

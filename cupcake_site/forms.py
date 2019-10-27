@@ -36,12 +36,13 @@ class PageForm(forms.ModelForm):
     exclude = ('category',)
 
   def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    super().__init__(*args, **kwargs)
 
 #override ModelForm clean() to handles missing data or default fields in this case url syntax 
   def clean(self):
     cleaned_data = self.cleaned_data
-    url = cleaned_data.get('url') #get function will return None if user enters nothing as new form will not exist
+    url = cleaned_data.get('url') 
+    #get function will return None if user enters nothing as new form will not exist
 
     #TODO ALSO CONSIDER HANDLING SECURE https:// too!
     #if the url is not empty and doesn't start with 'http://' then prepend 'http://'
@@ -59,7 +60,7 @@ class UserForm(forms.ModelForm):
   password = forms.CharField(widget=forms.PasswordInput())#hides password as it is typed
   #visible fields displayed to user  
   def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    super().__init__(*args, **kwargs)
 
   class Meta:#meta classes must have a model, they describe additional properties for that class
     #and must specify the fields to include or exclude which are associated with the model and should
@@ -81,15 +82,14 @@ class ImageUploadForm(forms.Form):
 
 class UserProfileForm(forms.ModelForm):#when a userprofile is made it wont yet have instance of a user unless already registered
   def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.helper = FormHelper()   
+    super().__init__(*args, **kwargs)
+    self.helper = FormHelper()   
 
   class Meta:
     model = UserProfile
     fields = ('bio','email', 'picture')
     #clean_pic=('picture')
     #picture = ImageField(widget=PictureWidget)
-
 
     #https://stackoverflow.com/questions/6396442/add-image-avatar-field-to-users-in-django/6396744
     def clean_pic(self):
@@ -110,18 +110,17 @@ class UserProfileForm(forms.ModelForm):#when a userprofile is made it wont yet h
             if not (main == 'image' and sub in ['jpeg', 'pjpeg', 'gif', 'png']):
                 raise forms.ValidationError(u'Please use a JPEG, '
                     'GIF or PNG image.')
-
             #validate file size
             if len(pic) > (20 * 1024):
-                raise forms.ValidationError(
-                    u'Your Profile picture file size may not exceed 20k.')
+              raise forms.ValidationError
+            (u'Your Profile picture file size may not exceed 20k.')
 
         except AttributeError:
+            pass
             """
             Handles case when we updating the user profile
             and does not supply a new profile picture
             """
-            pass
 
         return pic
 

@@ -10,15 +10,19 @@ from crispy_forms.helper import FormHelper
 from django.core.files.images import get_image_dimensions
 
 class PostForm(forms.ModelForm):
+    #views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
+    #likes = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
+    #slug = forms.CharField(widget=forms.HiddenInput(), required=False)
+
     #when a post is made it wont yet have instance of a user unless already registered
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
+        #self.helper = FormHelper()
     
     class Meta:
         model = Posts
-        fields = ('title', 'body',)
-    # TODO image
+        fields = ('title', 'body')
+    # TODO status image
 
 
 #adapted to a crispy CreateViewfrom https://realpython.com/get-started-with-django-1/

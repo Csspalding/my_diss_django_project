@@ -20,29 +20,32 @@ DISPLAY = (
 
 """Model for Blog Posts"""       
 class Posts(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, blank=True)# choices=DISPLAY, default=1)
     slug = models.SlugField(max_length=200, blank=True)#add unique true attribute after database is created. """Adding unique=True attrubute after database is created avoids database conflicts, as posts are only for registered users, this are constrained to a userprofile instance existing"""
     body = models.TextField()
     """post has one author but authors have many posts, relationship is ForeignKey to userprofile"""
     author_post = models.ForeignKey(UserProfile, on_delete=models.CASCADE) 
     created_at = models.DateTimeField(default=datetime.now, blank=True)
     last_modified = models.DateTimeField(auto_now=True)
-    status = models.IntegerField(choices=STATUS, default=1) #default to publish for now
-    #featured_image = models.ImageField(upload_to='static/blog/uploads/%Y/%m/%d/', blank=True, null=True)
+    """option to set posts to be diplayed or not"""
+    status= models.BooleanField(default=True) 
+    #post_image = models.ImageField(upload_to='post_images/' , blank=True)
    
     """To display the post title with a clean slug instead of default Post id""" 
     def save(self, *args, **kwargs,):
         self.slug = slugify(self.title)
-        #self.author_post.is_active
-        #obj.created_by_user = request.user
         super(Posts, self).save(*args, **kwargs)
     
+    # def get_absolute_url(self):
+    #     return reverse('post.views.post_details' (), kwargs={post.id: self.id})
+
 #Tango book & travery media tutorial
 #add this code and get rid of the extra default 's' on Postss, as displayed on /admin page 
     class Meta:
         verbose_name_plural = "Posts"
-        #ordering=['-created_at']/ or ordering by likes?
-        # ordering = ['-updated_on'] # or ordering by ['last_modified']
+        ordering=['-created_at']
+        # / or ordering by likes?
+        #ordering = ['-id'] # or ordering by ['last_modified']
 
     def __str__(self):
         return self.title

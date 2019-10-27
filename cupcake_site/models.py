@@ -27,7 +27,6 @@ class Category(models.Model):
 
 
 class Page(models.Model): 
-  #fields in a Page
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=500)
