@@ -18,7 +18,7 @@ DISPLAY = (
         (1, "Yes")
 )
 
-"""Model for Blog Post"""       
+"""Model for Blog Posts"""       
 class Posts(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, blank=True)#add unique true attribute after database is created. """Adding unique=True attrubute after database is created avoids database conflicts, as posts are only for registered users, this are constrained to a userprofile instance existing"""

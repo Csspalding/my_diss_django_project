@@ -20,17 +20,14 @@ from posts.forms import PostForm
 
 
 def posts_index(request):
-    
     try:
         posts=Posts.objects.all()[:10] #gets the first 10 posts 
     except Posts.DoesNotExist:
         return None 
     context = {
-            #'page_title':'Latest Posts',
             'posts': posts
             }
-    return render(request, 'posts:posts_index', context)
-    
+    return render(request, 'posts/posts_index.html', context)
     #return HttpResponse("hello from posts")
 
 def posts_details(request, id):
@@ -74,7 +71,7 @@ class PostCreateView(CreateView):
         except User.DoesNotExist:
             return None
         if user.is_active:
-            posts = Posts.objects.get_or_create(user=user)[0]
+            posts = Posts.objects.get_or_create(user=user)
             form = PostForm({'title': posts.title,
             'body': posts.body,
             'author_post': user,})
@@ -110,7 +107,7 @@ class PostCreateView(CreateView):
             if form.is_valid():
               form.save(commit=True)
               form.helper.include_media = True
-              return redirect('posts:posts_index', user.username)
+              return redirect('posts:posts_home', user.username)
 
             else:
                 print(form.errors)
