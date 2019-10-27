@@ -10,9 +10,9 @@ app_name = 'posts'
 urlpatterns = [
   path('', views.posts_index, name='posts_index'), 
   re_path(r'^posts_details/(?P<id>[0-9])/$', views.posts_details, name= 'posts_details'), 
+  path('add_post/', views.PostCreateView.as_view(),name = 'add_post'), 
 ]
   
-  #path('add_post/', views.PostCreateView.as_view(),name = 'add_post'), 
   
   #THIS IS THE WRONG PATH - this is create the view of a post, and a form to amend it
   #path('add_post', views.PostCreateView.as_view(), name='add_post'),

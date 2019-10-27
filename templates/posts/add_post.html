@@ -14,25 +14,66 @@ AddPost CupcakeCode
 {% load crispy_forms_tags %}
  <div class="jumbotron p-4">
     <div class="container">
-       <h1 class="jumotron-heading">{{user.username}}, create your Blog article</h1>
+     <!-- ony authenticated users should access this page -->
+       <h1 class="jumotron-heading">{{selecteduser.username}}, create your Blog article</h1>
 
-<!--Crispy form -->
+<!--display user's profile picture -->
+      <div class="container">
+      <div class="col-sm-4">
+      {% if userprofile.picture %}
+
+       <br />
+        <img src="{{ MEDIA_URL }}{{ post.post_image }}" width="300" hight="300" alt="{{selecteduser.username}}'s profile picture {{post.post_image.name}}" /><!-- New line -->   
+        <br/>
+      {% else %}
+      <!--if media files are not loading, render a default static file-->
+      <br/>
+      <img src="{% static url 'no_user_image.jpg' %}" width="50" height="50" />
+      <br/>
+      
+      {% endif %}
+
+<!--Crispy form-->
+     <!--display post details form enable them to update values title, picture, body, status-->
+        <div> {% if selecteduser == user %}
+
+        <form method = "post" action="." enctype="multipart/form-data">
+              {% csrf_token %} 
+              {{ form|crispy}} 
+              <input type= "submit" value ="Update"/>
+        </form>
+        {% else %}
+        
+        {% endif %}
+        </div>
+        </div>
+        </div>                 
+                
+{% endblock %}
+
+
+
+
+
+
+<!--Crispy form 
             {% block main %}
-                <form  method="post" action="{% url 'posts:#' %}" enctype="multipart/form-data">
+                {% comment %} <form  method="post" action="{% url 'posts:#' %}" enctype="multipart/form-data"> {% endcomment %}
+                 <form  method="post">
                     {% csrf_token %}
                     {{form|crispy}}
-                   <!--Todo add button for save draft ?? not sure action is needed above unless pic included in model-->
+                   TODO add button for save draft ?? not sure action is needed above unless pic included in model-->
                    
-                    <!--Added in a submit button to save the form to the db-->
+                    <!--Added in a submit button to save the form to the db
                     <button  type="submit"  class="btn btn-success">Post your Blog article</button>
                 </form>
-                <!-- TODO add a button and logic save post as draft -->
+                 TODO add a button and logic save post as draft 
             {% endblock %}
          </div>
       </div>
     </div>
 {% endblock %}
-
+-->
 
 
 

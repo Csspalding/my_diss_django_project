@@ -16,10 +16,10 @@
             {% comment %} {% endif %} {% endcomment %}
         {% endfor %}
     </ul>
-    {% comment %} {% if user.is_authenticated %} {% endcomment %}
+    {% if user.is_authenticated %} 
     <div>
-    {% comment %} <a style = "display:block" class="center-align" href="{% url 'posts:add_post' %}" >Add New Post</a> {% endcomment %}
+    <a style = "display:block" class="center-align" href="{% url 'posts:add_post' %}" >Add New Post</a> 
     </div>
-    {% comment %} {% endif %}  {% endcomment %}
+    {% endif %} 
 
 {% endblock %}
