@@ -133,8 +133,9 @@ class RegisterProfileCreateView(CreateView):
       else:
         print(form.errors)
     
-      return render(request, 'cupcake_site/profile_registration.html', {'form': form})  
+      return render(request, 'cupcake_site/profile_registration.html', {'form': form}) 
 
+#allow a registered user to view and amend their profile
 class ProfileCreateView(CreateView):
     def get_user_details(self, username):
       try:
@@ -146,6 +147,9 @@ class ProfileCreateView(CreateView):
       include_media = True
       form = UserProfileForm({'bio': userprofile.bio,
                               'email':userprofile.email,
+                              #'web' :userprofile.web,
+                              #'coding_level':userprofile.coding_level,
+                              #'tech_interests':userprofile.tech_interests,
                               'picture': userprofile.picture})
       return (user, userprofile, form)
   

@@ -29,7 +29,13 @@ class Posts(models.Model):
     last_modified = models.DateTimeField(auto_now=True)
     """option to set posts to be diplayed or not"""
     status= models.BooleanField(default=True) 
-    #post_image = models.ImageField(upload_to='post_images/' , blank=True)
+    post_image = models.ImageField(upload_to='post_images/', blank=True)
+
+    # def picture_or_default(self, default_path="/static/images/no_user_image.jpg"):
+    #     if self.picture:
+    #         return self.picture
+    #     return default_path
+        #{{ user.picture_or_default }} in template
    
     """To display the post title with a clean slug instead of default Post id""" 
     def save(self, *args, **kwargs,):

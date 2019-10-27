@@ -21,7 +21,7 @@ class PostForm(forms.ModelForm):
     
     class Meta:
         model = Posts
-        fields = ('title', 'body')
+        fields = ('title', 'body', 'picture')
     # TODO status image
 
 

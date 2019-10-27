@@ -125,7 +125,7 @@ class UserProfileForm(forms.ModelForm):#when a userprofile is made it wont yet h
         return pic
 
 
-#to avoid Djano userprofile default being displayed https://simpleisbetterthancomplex.com/tutorial/2016/11/23/how-to-add-user-profile-to-django-admin.html
+#to avoid Django userprofile default being displayed https://simpleisbetterthancomplex.com/tutorial/2016/11/23/how-to-add-user-profile-to-django-admin.html
   # class ProfileInline(admin.StackedInline):
   #   model = Profile
   #   can_delete = False

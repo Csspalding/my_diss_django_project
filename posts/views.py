@@ -18,7 +18,7 @@ from posts.models import Posts
 from posts.forms import PostForm 
 #from posts.forms import CommentForm 
 
-
+#any user can view a list of titles of published blog posts
 def posts_index(request):
     try:
         posts=Posts.objects.all()[:10] #gets the first 10 posts 
@@ -30,6 +30,7 @@ def posts_index(request):
     return render(request, 'posts/posts_index.html', context)
     #return HttpResponse("hello from posts")
 
+#any user can view the details a published blog post
 def posts_details(request, id):
     try:
         post = Posts.objects.get(id=id)
@@ -66,20 +67,21 @@ def posts_details(request, id):
     #     }
     # return render(request, 'posts/posts_details.html', context)
 
-
+#allow a registered user to create a new post
 class PostCreateView(CreateView):
     def get_user_details(self, username):
         try:
             user = User.objects.get(username=username)
         except User.DoesNotExist:
             return None
-        if user.is_active:
-            posts = Posts.objects.get_or_create(user=user)
-            form = PostForm({'title': posts.title,
-            'body': posts.body,
-            'author_post': user,})
-        else:
-            redirect()
+
+        
+        posts = Posts.objects.get_or_create(author_post=user)
+        include_media=True
+        form = PostForm({'title': posts.title,
+        'body': posts.body,
+        'author_post': user,
+        'post_image': post.image})
         return (user, posts, form)
 
     @method_decorator(login_required)
@@ -87,7 +89,7 @@ class PostCreateView(CreateView):
         try:
             (user, post, form) = self.get_user_details(username)    
         except TypeError:
-            return redirect('accounts:register')
+            return redirect('posts:posts_index')
         
         context_dict = {'post': post,
                         'author_post': user,
@@ -101,7 +103,7 @@ class PostCreateView(CreateView):
         try:
             (user, post, form) = self.get_user_details(username)
         except TypeError:
-            return redirect('cupcake_site:index')
+            return redirect('posts:posts_index')
 
         #To test user authentication    
         if user == request.user:
@@ -110,7 +112,7 @@ class PostCreateView(CreateView):
             if form.is_valid():
               form.save(commit=True)
               form.helper.include_media = True
-              return redirect('posts:posts_home', user.username)
+              return redirect('posts:posts_index', user.username)
 
             else:
                 print(form.errors)
