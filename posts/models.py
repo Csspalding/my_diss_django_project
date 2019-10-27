@@ -1,6 +1,8 @@
 from django.db import models
 from datetime import datetime
-from django.contrib.auth.models import User
+from django.urls import reverse
+from django.contrib.auth.models import User # PostAuthor and CommentAuthor
+from cupcake_site.models import UserProfile
 from django.template.defaultfilters import slugify
 
 
@@ -11,21 +13,41 @@ STATUS = (
         (0, "Draft"),
         (1, "Publish")
 )
+DISPLAY = (
+        (0, "No"),
+        (1, "Yes")
+)
+
+"""Model for Blogger"""
+# class PostAuthor(models.Model):
+#     author=models.ForeignKey(User, on_delete=models.CASCADE)
     
+#     class Meta:
+#         ordering = ["author", ]
+
+#     def get_absolute_url(self):
+#         return reverse('blogs-by-author', args=[str(self.id)])
+
+#     def __str__(self):
+#         return self.user.username
+
+"""Model for Blog Post"""       
 class Posts(models.Model):
     title = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200, blank=True)#add unique true attribute after database is created to avoid database errors as Posts has User as ForeignKey, so a User has to be created prior to a post being created.
+    slug = models.SlugField(max_length=200, blank=True)#add unique true attribute after database is create. This avoids database conflicts Posts links User as ForeignKey.
     body = models.TextField()
-    # a user attribute is required
-    author_post = models.ForeignKey(User, on_delete=models.CASCADE) 
+    #post has one author but authors have many posts, relationship is ForeignKey
+    author_post = models.ForeignKey(UserProfile, on_delete=models.CASCADE) 
     created_at = models.DateTimeField(default=datetime.now, blank=True)
     last_modified = models.DateTimeField(auto_now=True)
     status = models.IntegerField(choices=STATUS, default=1) #default to publish for now
     #featured_image = models.ImageField(upload_to='static/blog/uploads/%Y/%m/%d/', blank=True, null=True)
    
 #To display the post title with a clean slug instead of default Post Object 1,2,3 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs,):
         self.slug = slugify(self.title)
+        #self.author_post.is_active
+        #obj.created_by_user = request.user
         super(Posts, self).save(*args, **kwargs)
     
 #Tango book & travery media tutorial
@@ -33,7 +55,7 @@ class Posts(models.Model):
     class Meta:
         verbose_name_plural = "Posts"
         #ordering=['-created_at']/ or ordering by likes?
-       # ordering = ['-updated_on'] # or ordering by ['last_modified']
+        # ordering = ['-updated_on'] # or ordering by ['last_modified']
 
     def __str__(self):
         return self.title

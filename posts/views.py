@@ -76,7 +76,7 @@ class PostCreateView(CreateView):
             posts = Posts.objects.get_or_create(user=user)[0]
             form = PostForm({'title': posts.title,
             'body': posts.body,
-            'created_by': user,})
+            'author_post': user,})
         else:
             redirect()
         return (user, posts, form)
@@ -89,7 +89,7 @@ class PostCreateView(CreateView):
             return redirect('accounts:register')
         
         context_dict = {'post': post,
-                        'created_by': user,
+                        'author_post': user,
                         'form': form,
                         }
         form.helper.include_media = True
