@@ -19,7 +19,8 @@ from posts.forms import PostForm
 #from posts.forms import CommentForm 
 
 
-def posts_index(request, User):
+def posts_index(request):
+    
     try:
         posts=Posts.objects.all()[:10] #gets the first 10 posts 
     except Posts.DoesNotExist:
