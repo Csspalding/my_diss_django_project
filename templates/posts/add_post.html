@@ -1,54 +1,57 @@
-{%extends 'post/base.html' %}
+{%extends 'cupcake_site/base.html' %}
 {% load staticfiles %}
-<!--Create and display CreateUserProfile Form -->
+<!--Create and display PostCreatView Form to add a new post if user is logged in. -->
 {% block title_block %}
-AddPost CupcakeCode 
+AddPost 
 {% endblock %}
 
-<head>
+
+<head> 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <!--container, row, col_x and justify-content-centre creates a simple layout with one row and one column-->
-</head> 
+</head>  
 
 {% block body_block %}
+
 {% load crispy_forms_tags %}
  <div class="jumbotron p-4">
     <div class="container">
      <!-- ony authenticated users should access this page -->
-       <h1 class="jumotron-heading">{{selecteduser.username}}, create your Blog article</h1>
+       <h1 class="jumotron-heading">{{post.author_post}} create your new Blog article</h1>
 
-<!--display user's profile picture -->
-      <div class="container">
+<!--display  - TODO refactor picture this not necessary here -->
+      {% comment %} <div class="container">
       <div class="col-sm-4">
-      {% if userprofile.picture %}
+      {% if post.post_image %}
 
        <br />
-        <img src="{{ MEDIA_URL }}{{ post.post_image }}" width="300" hight="300" alt="{{selecteduser.username}}'s profile picture {{post.post_image.name}}" /><!-- New line -->   
+        <img src="{{ MEDIA_URL }}{{ post.post_image }}" width="300" hight="300" alt="{{post.author_post}}'s profile picture {{post.post_image.name}}" /><!-- New line -->   
         <br/>
       {% else %}
       <!--if media files are not loading, render a default static file-->
       <br/>
-      <img src="{% static url 'no_user_image.jpg' %}" width="50" height="50" />
+      <img src="{% static url 'carrot_cupcakes.jpg' %}" width="50" height="50" />
       <br/>
       
-      {% endif %}
+      {% endif %} {% endcomment %}
 
 <!--Crispy form-->
+ {% block main %} 
      <!--display post details form enable them to update values title, picture, body, status-->
-        <div> {% if selecteduser == user %}
-
+        {% comment %} <div>  {% if user.is_authenticated %}  {% endcomment %}
         <form method = "post" action="." enctype="multipart/form-data">
               {% csrf_token %} 
               {{ form|crispy}} 
-              <input type= "submit" value ="Update"/>
+              <input type= "submit" value ="Submit"/>
         </form>
-        {% else %}
-        
-        {% endif %}
+        {% comment %} {% else %} {% endcomment %}
+   {% comment %} {% endblock %}      {% endcomment %}
+        {% comment %} {% endif %} {% endcomment %}
         </div>
         </div>
         </div>                 
-                
+  {% endblock %}              
+
 {% endblock %}
 
 
@@ -56,24 +59,6 @@ AddPost CupcakeCode
 
 
 
-<!--Crispy form 
-            {% block main %}
-                {% comment %} <form  method="post" action="{% url 'posts:#' %}" enctype="multipart/form-data"> {% endcomment %}
-                 <form  method="post">
-                    {% csrf_token %}
-                    {{form|crispy}}
-                   TODO add button for save draft ?? not sure action is needed above unless pic included in model-->
-                   
-                    <!--Added in a submit button to save the form to the db
-                    <button  type="submit"  class="btn btn-success">Post your Blog article</button>
-                </form>
-                 TODO add a button and logic save post as draft 
-            {% endblock %}
-         </div>
-      </div>
-    </div>
-{% endblock %}
--->
 
 
 

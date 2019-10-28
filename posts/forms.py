@@ -18,10 +18,25 @@ class PostForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         #self.helper = FormHelper()
-    
+
     class Meta:
         model = Posts
         fields = ('title', 'body', 'post_image')
+
+class PostCreateForm(forms.ModelForm):
+    class Meta:
+        model = Posts
+        exclude = ('slug',)
+
+    def __init__(self, *args, **kwargs):
+        self.author_post = kwargs.pop('user')
+        super(PostCreateForm, self).__init__(*args, **kwargs)
+
+    def clean_title(self):
+        title = self.cleaned_data['title']
+        if Posts.objects.filter(author_post=self.author_post, title=title).exists():
+            raise forms.ValidationError("You have already written a post with same title.")
+        return title
     # TODO status image
 
 
@@ -45,3 +60,5 @@ class PostForm(forms.ModelForm):
     #         "placeholder": "Any comments?"
     #     })
     # )
+
+   

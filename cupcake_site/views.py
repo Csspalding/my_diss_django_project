@@ -25,6 +25,9 @@ def index(request):
 class AboutView(View):
   def get(self, request):
     context_dict={'boldmessage': 'We need more women in tech'}
+    #NOT WORKING YET tracking visits
+    #context_dict = {}
+    #context_dict['visits'] = request.session['visits']
     return render(request, 'cupcake_site/about.html', context=context_dict)
 
 #carsole for the About page todo change this

@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from posts.models import Posts
 #from posts.models import Comment
@@ -15,7 +16,7 @@ from django.utils import timezone
 from cupcake_site.models import UserProfile
 from posts.models import Posts
 #from posts.models import Comments
-from posts.forms import PostForm 
+from posts.forms import PostCreateForm 
 #from posts.forms import CommentForm 
 
 #any user can view a list of titles of published blog posts
@@ -68,58 +69,31 @@ def posts_details(request, id):
     # return render(request, 'posts/posts_details.html', context)
 
 #allow a registered user to create a new post
+
 class PostCreateView(CreateView):
-    def get_user_details(self, username):
-        try:
-            user = User.objects.get(username=username)
-        except User.DoesNotExist:
-            return None
+    template_name = 'posts/add_post.html'
+    form_class = PostCreateForm
+    
+    def get_object(self, queryset=None):
+      return self.request.user.UserProfile
 
-        
-        posts = Posts.objects.get_or_create(author_post=user)
-        include_media=True
-        form = PostForm({'title': posts.title,
-        'body': posts.body,
-        'author_post': user,
-        'post_image': post.image})
-        return (user, posts, form)
+    def form_valid(self, form):
+        form.instance.author_post = self.request.userprofile
+        return super(PostCreateView, self).form_valid(form)
+    
+    # def form_valid(self, form):
+    #     self.object = form.save(commit=False)
+    #     self.object.author_post = self.request.userprofile.username
+    #     self.object.save()
+    #     return HttpResponseRedirect(self.get_success_url())
 
-    @method_decorator(login_required)
-    def get(self, request, username):
-        try:
-            (user, post, form) = self.get_user_details(username)    
-        except TypeError:
-            return redirect('posts:posts_index')
-        
-        context_dict = {'post': post,
-                        'author_post': user,
-                        'form': form,
-                        }
-        form.helper.include_media = True
-        return render(request,'posts/add_post.html', context_dict)
-
-    @method_decorator(login_required)
-    def post(self, request, username):
-        try:
-            (user, post, form) = self.get_user_details(username)
-        except TypeError:
-            return redirect('posts:posts_index')
-
-        #To test user authentication    
-        if user == request.user:
-            form = PostForm(request.POST, request.FILES, instance=post)
-  
-            if form.is_valid():
-              form.save(commit=True)
-              form.helper.include_media = True
-              return redirect('posts:posts_index', user.username)
-
-            else:
-                print(form.errors)
-
-            context_dict = {'post': post,
-                            'selecteduser': user,
-                            'form': form}
-        form.helper.include_media = True
-        return render(request, 'posts/add_post.html', context_dict)
-    #todo def post and test user is authentication see cupcake views profilecreateview method
+    def get_initial(self, *args, **kwargs):
+        initial = super(PostCreateView, self).get_initial(**kwargs)
+        """populate body with initial data"""
+        initial['body'] = 'My blog post'
+        return initial
+    
+    def get_form_kwargs(self, *args, **kwargs):
+        kwargs = super(PostCreateView, self).get_form_kwargs(*args, **kwargs)
+        kwargs['user'] = self.request.user
+        return kwargs

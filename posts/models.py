@@ -28,7 +28,7 @@ class Posts(models.Model):
     created_at = models.DateTimeField(default=datetime.now, blank=True)
     last_modified = models.DateTimeField(auto_now=True)
     """option to set posts to be diplayed or not"""
-    status= models.BooleanField(default=True) 
+    status= models.BooleanField(default=True)#add helper text to explain display /draft
     post_image = models.ImageField(upload_to='post_images/', blank=True)
 
     # def picture_or_default(self, default_path="/static/images/no_user_image.jpg"):
@@ -37,7 +37,7 @@ class Posts(models.Model):
     #     return default_path
         #{{ user.picture_or_default }} in template
    
-    """To display the post title with a clean slug instead of default Post id""" 
+    """To display the post title with a clean slug instead of default post id""" 
     def save(self, *args, **kwargs,):
         self.slug = slugify(self.title)
         super(Posts, self).save(*args, **kwargs)
@@ -55,7 +55,9 @@ class Posts(models.Model):
 
     def __str__(self):
         return self.title
-    
+
+    def get_absolute_url(self):
+        return reverse('posts:add_post', args=[self.id])
 
 
  #-user-when-creating-an-object-in-django-admin
@@ -81,4 +83,6 @@ class Posts(models.Model):
 
 #     def __str__(self):
 #         return self.author # .auth.models import User as registered by redux package
+
+
         
