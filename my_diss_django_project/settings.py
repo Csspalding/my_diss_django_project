@@ -151,4 +151,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR]
 
-
+#UserProfile
+AUTH_PROFILE_MODULE = 'cupcake_site.UserProfile'

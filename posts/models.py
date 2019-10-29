@@ -24,7 +24,7 @@ class Posts(models.Model):
     slug = models.SlugField(max_length=200, blank=True)#add unique true attribute after database is created. """Adding unique=True attrubute after database is created avoids database conflicts, as posts are only for registered users, this are constrained to a userprofile instance existing"""
     body = models.TextField()
     """post has one author but authors have many posts, relationship is ForeignKey to userprofile"""
-    author_post = models.ForeignKey(UserProfile, on_delete=models.CASCADE) 
+    author_post = models.ForeignKey(UserProfile, on_delete=models.CASCADE, unique=True) #added unique
     created_at = models.DateTimeField(default=datetime.now, blank=True)
     last_modified = models.DateTimeField(auto_now=True)
     """option to set posts to be diplayed or not"""

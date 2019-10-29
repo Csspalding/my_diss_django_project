@@ -73,27 +73,57 @@ def posts_details(request, id):
 class PostCreateView(CreateView):
     template_name = 'posts/add_post.html'
     form_class = PostCreateForm
-    
+
+    @method_decorator(login_required)
     def get_object(self, queryset=None):
       return self.request.user.UserProfile
+      #return self.request.username.UserProfile
 
-    def form_valid(self, form):
-        form.instance.author_post = self.request.userprofile
-        return super(PostCreateView, self).form_valid(form)
-    
+    # @method_decorator(login_required)
     # def form_valid(self, form):
-    #     self.object = form.save(commit=False)
-    #     self.object.author_post = self.request.userprofile.username
-    #     self.object.save()
-    #     return HttpResponseRedirect(self.get_success_url())
-
+    #     form.instance.author_post = self.request.userprofile
+    #     return super(PostCreateView, self).form_valid(form)
+    
+    #@method_decorator(login_required)
+    @login_required
+    def form_valid(self, form):
+        #PostCreateForm.instance.author_post = self.request.userprofile
+        #author_post = User.objects.get(username=username)
+        self.object = form.save(commit=False)
+        self.object.author_post = self.request.user
+        #self.object.username = self.request.username
+        #self.object.author_post = self.request.author_post
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+    
+   
     def get_initial(self, *args, **kwargs):
+        #PostCreateForm.instance.userprofile = self.request.username
         initial = super(PostCreateView, self).get_initial(**kwargs)
         """populate body with initial data"""
         initial['body'] = 'My blog post'
-        return initial
-    
+        #author_post= {}
+        return {
+            'initial' : initial,
+            'author_post': self.request.user
+            }
+
+    # https://stackoverflow.com/questions/48365303/using-django-createview-how-can-i-access-the-request-session-user-variable
+# def get_initial(self):
+#         return {
+#              'author': self.request.user,
+#              'publish_date': datetime.date.today()
+#         }
+
+
     def get_form_kwargs(self, *args, **kwargs):
         kwargs = super(PostCreateView, self).get_form_kwargs(*args, **kwargs)
+        #kwargs["request"] = self.request
         kwargs['user'] = self.request.user
+        #kwargs['user'] = self.request.author_post
+
         return kwargs
+
+# https://stackoverflow.com/questions/13460426/get-user-profile-in-django    
+# a=User.objects.get(email='x@x.xom')
+# a.get_profile().DOB will give the dateofbirth value from extrauser table.
