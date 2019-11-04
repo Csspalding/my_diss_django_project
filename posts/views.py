@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
 from django.views import View
 from django.views.generic import CreateView
+from django.views.generic import DetailView
 from django.utils import timezone
 
 from cupcake_site.models import UserProfile
@@ -68,62 +69,42 @@ def posts_details(request, id):
     #     }
     # return render(request, 'posts/posts_details.html', context)
 
-#allow a registered user to create a new post
+"""allow a registered user to create a new post, adapted from tutorial https://www.agiliq.com/blog/2019/01/django-createview/#using-createview"""
+#correct way to decorate a class, name the function to be decorated.TEST when redirect url is working 
+#@method_decorator(login_required, name='form_valid') 
 
 class PostCreateView(CreateView):
     template_name = 'posts/add_post.html'
     form_class = PostCreateForm
 
-    @method_decorator(login_required)
-    def get_object(self, queryset=None):
-      return self.request.user.UserProfile
-      #return self.request.username.UserProfile
-
-    # @method_decorator(login_required)
-    # def form_valid(self, form):
-    #     form.instance.author_post = self.request.userprofile
-    #     return super(PostCreateView, self).form_valid(form)
-    
-    #@method_decorator(login_required)
-    @login_required
     def form_valid(self, form):
-        #PostCreateForm.instance.author_post = self.request.userprofile
-        #author_post = User.objects.get(username=username)
         self.object = form.save(commit=False)
-        self.object.author_post = self.request.user
-        #self.object.username = self.request.username
-        #self.object.author_post = self.request.author_post
+        self.object.user = self.request.user
         self.object.save()
-        return HttpResponseRedirect(self.get_success_url())
-    
-   
+        #return HttpResponseRedirect(self.get_success_url()) #THIS IS THE PROBLEM LINE
+        #return HttpResponseRedirect('/posts/posts_details/'+ str(self.object.id)) #THIS IS CORRECT BUT CAUSES ERROR url posts/posts_details/18  - page not to be found! 
+        return HttpResponse("form is saved")
+
+       # """populate body with initial data"""
     def get_initial(self, *args, **kwargs):
-        #PostCreateForm.instance.userprofile = self.request.username
         initial = super(PostCreateView, self).get_initial(**kwargs)
-        """populate body with initial data"""
         initial['body'] = 'My blog post'
         #author_post= {}
         return {
             'initial' : initial,
-            'author_post': self.request.user
             }
-
-    # https://stackoverflow.com/questions/48365303/using-django-createview-how-can-i-access-the-request-session-user-variable
-# def get_initial(self):
-#         return {
-#              'author': self.request.user,
-#              'publish_date': datetime.date.today()
-#         }
-
 
     def get_form_kwargs(self, *args, **kwargs):
         kwargs = super(PostCreateView, self).get_form_kwargs(*args, **kwargs)
-        #kwargs["request"] = self.request
         kwargs['user'] = self.request.user
-        #kwargs['user'] = self.request.author_post
-
         return kwargs
 
-# https://stackoverflow.com/questions/13460426/get-user-profile-in-django    
-# a=User.objects.get(email='x@x.xom')
-# a.get_profile().DOB will give the dateofbirth value from extrauser table.
+# """class to display the view of a single post instance using generic DetailView created adapted from https://www.agiliq.com/blog/2019/01/django-when-and-how-use-detailview/"""
+# #login should be required
+# class PostDetailView(DetailView):
+#     model = Posts
+#     #queryset = Posts.objects.filter(is_published=True)# bool for if the post status is draft or publish, remove model attribute to replace with this
+#     def get(self, request, *args, **kwargs):
+#         post = get_object_or_404(Posts, pk=kwargs['pk'])
+#         context = {'post': post}
+#         return render(request, 'posts/posts_details.html', context)

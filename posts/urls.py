@@ -1,6 +1,8 @@
 from django.urls import path
 from django.urls import re_path
-from posts import views
+#from posts import views TEST CHANGING THIS LINE
+#from django.views import posts.views.PostCreateView
+from . import views
 
 #Latest Posts Index Page  
 
@@ -9,9 +11,11 @@ app_name = 'posts'
 
 urlpatterns = [
   path('', views.posts_index, name='posts_index'), 
-  re_path(r'^posts_details/(?P<id>[0-9])/$', views.posts_details, name= 'posts_details'), 
+  re_path(r'^posts_details/(?P<id>[0-200])/$', views.posts_details, name= 'posts_details'), 
   path('add_post/', views.PostCreateView.as_view(),name = 'add_post'), 
+  #path('<int:pk>/', views.PostDetailView.as_view(), name='posts_details'),
 ]
+
   
   
   #THIS IS THE WRONG PATH - this is create the view of a post, and a form to amend it

@@ -8,7 +8,7 @@ from cupcake_site.models import UserProfile
 #     max_num = 0
 
 class PostsAdmin(admin.ModelAdmin):
-    list_display = ('title', 'id','created_at', 'last_modified','author_post' )
+    list_display = ('title', 'id','created_at', 'last_modified','user' )
     list_filter=("status",)
     prepopulated_fields = {'slug':('title',)} 
     #inlines = [PostCommentsInline]
