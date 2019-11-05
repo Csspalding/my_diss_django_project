@@ -1,19 +1,17 @@
 {% extends 'posts/posts_layout.html' %}
-{#author Cass 2140148s July 2019#}
-{#this is a loop in to list the posts, users click/hyperlink post.title to display the selected post detail #}
+{% load staticfiles %}
+
 {% block blog_content %}
  
 
+    <!--for each post if the status is publish, display the title as a link-->
     <h4 class = "container center-align"><n></n><n></n>l a t e s t &nbsp;&nbsp;p o s t s</h4>
     <h6 class = "centre-align blue lighten-4", class="container centre-align">sub heading</h6>
 
     <ul class = "collection">
-    <!--for each post if the status is publish, display the title as a link-->
         {% for post in posts %} 
-            {% comment %} {% if post.title.choices == 1 %}  {% endcomment %}
-            {% comment %} <li class = "collection-item"><a href= "{% url 'posts_details/{{post.id}}' %}">{{post.title}}</a></li> {% endcomment %}
-            <li class = "collection-item"><a href= "/posts/posts_details/{{post.id}}">{{post.title}}></a></li>
-            {% comment %} {% endif %} {% endcomment %}
+            <li class = "collection-item"><a href= "{% url 'posts:posts_details' id=post.id %}%">{{post.title}}>
+            </a></li>
         {% endfor %}
     </ul>
     {% if user.is_authenticated %} 

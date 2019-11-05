@@ -13,37 +13,33 @@ class PostForm(forms.ModelForm):
     #views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
     #likes = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
     #slug = forms.CharField(widget=forms.HiddenInput(), required=False)
-
     #when a post is made it wont yet have instance of a user unless already registered
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        #self.helper = FormHelper()
 
     class Meta:
         model = Posts
         fields = ('title', 'body', 'post_image')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
 
 class PostCreateForm(forms.ModelForm):
     class Meta:
         model = Posts
         exclude = ('slug', 'user')
 
+#https://stackoverflow.com/questions/49218302/python-difference-between-kwargs-pop-and-kwargs-get If i use kwargs.get I get an error TypeError at /posts/add_post/     __init__() got an unexpected keyword argument 'user'
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
-        super(PostCreateForm, self).__init__(*args, **kwargs)
-
-    # def __init__(self, *args, **kwargs):
-    #     # kwargs.pop  has key error userprofile  - changed to kwargs.get error is init gets unexpected 
-    #argument request
-    #     self.author_post = kwargs.pop('user')
-    #     #author_post = self.form(author_post=author_post)
-    #     super(PostCreateForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
+        #super(PostCreateForm, self).__init__(*args, **kwargs)
 
     def clean_title(self):
         title = self.cleaned_data['title']
         if Posts.objects.filter(user=self.user, title=title).exists():
-            raise forms.ValidationError("You have already written a post with same title.")
+            raise forms.ValidationError("You have already written a post with the same title.")
         return title
+
       #     #error cannot resolve keywork into field user/ userprofile /username BUT when I use author_post= Error is cannot query Cassie2  must use UserProfile instance
     #     #profile = request.user.get_profile()
     #     if Posts.objects.filter(title=title).exists():

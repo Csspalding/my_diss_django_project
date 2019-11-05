@@ -19,11 +19,11 @@ AddPost
      <!-- ony authenticated users should access this page -->
        <h1 class="jumotron-heading">{{post.author_post}} create your new Blog article</h1>
 
-<!--display  - TODO refactor picture this not necessary here -->
-      {% comment %} <div class="container">
+<!--display  - TODO refactor picture this not necessary here, but may be in a display and update  -->
+      {% comment %} 
+      <div class="container">
       <div class="col-sm-4">
       {% if post.post_image %}
-
        <br />
         <img src="{{ MEDIA_URL }}{{ post.post_image }}" width="300" hight="300" alt="{{post.author_post}}'s profile picture {{post.post_image.name}}" /><!-- New line -->   
         <br/>
@@ -32,8 +32,8 @@ AddPost
       <br/>
       <img src="{% static url 'carrot_cupcakes.jpg' %}" width="50" height="50" />
       <br/>
-      
-      {% endif %} {% endcomment %}
+      {% endif %} 
+      {% endcomment %}
 
 <!--Crispy form-->
  {% block main %} 
@@ -44,9 +44,6 @@ AddPost
               {{ form|crispy}} 
               <input type= "submit" value ="Submit"/>
         </form>
-        {% comment %} {% else %} {% endcomment %}
-   {% comment %} {% endblock %}      {% endcomment %}
-        {% comment %} {% endif %} {% endcomment %}
         </div>
         </div>
         </div>                 

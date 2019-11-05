@@ -69,7 +69,7 @@ def posts_details(request, id):
     #     }
     # return render(request, 'posts/posts_details.html', context)
 
-"""allow a registered user to create a new post, adapted from tutorial https://www.agiliq.com/blog/2019/01/django-createview/#using-createview"""
+#allow a registered user to create a new post, adapted from tutorial https://www.agiliq.com/blog/2019/01/django-createview/#using-createview"""
 #correct way to decorate a class, name the function to be decorated.TEST when redirect url is working 
 #@method_decorator(login_required, name='form_valid') 
 
@@ -82,14 +82,17 @@ class PostCreateView(CreateView):
         self.object.user = self.request.user
         self.object.save()
         #return HttpResponseRedirect(self.get_success_url()) #THIS IS THE PROBLEM LINE
-        #return HttpResponseRedirect('/posts/posts_details/'+ str(self.object.id)) #THIS IS CORRECT BUT CAUSES ERROR url posts/posts_details/18  - page not to be found! 
-        return HttpResponse("form is saved")
+        return HttpResponseRedirect('/posts/posts_details/'+ str(self.object.id))  
+        #posts/posts_details/18  - page not to be found! 
+        #return HttpResponse("form is saved")
+        #form.helper.form_action = reverse('url_name', kwargs={'category_name_slug': category_name_slug})
+        #return redirect(reverse('cupcake_site:show_category', kwargs={'category_name_slug':category_name_slug}))
+
 
        # """populate body with initial data"""
     def get_initial(self, *args, **kwargs):
         initial = super(PostCreateView, self).get_initial(**kwargs)
         initial['body'] = 'My blog post'
-        #author_post= {}
         return {
             'initial' : initial,
             }

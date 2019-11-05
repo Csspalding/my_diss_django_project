@@ -1,12 +1,11 @@
 {% extends 'posts/posts_layout.html' %}
-{#
-
-this file gets a post title from views.py details method where 
+{% load staticfiles %}
+<!--this file gets a post title from views.py details method where 
 it loops though the id for the item object clicked on and gets the object 
-from the database to display in this text field container #}
+from the database to display in this text field container -->
 
 {% block blog_content %}
-
+{% comment %} TODO add blog picture into the post {% endcomment %}
 <h3 class = "centre-align blue lighten-4", class="container centre-align">{{post.title}}</h3>
     <div class ="card">
         <div class = "card-content">
