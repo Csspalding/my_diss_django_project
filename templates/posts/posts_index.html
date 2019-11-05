@@ -10,7 +10,7 @@
 
     <ul class = "collection">
         {% for post in posts %} 
-            <li class = "collection-item"><a href= "{% url 'posts:posts_details' id=post.id %}%">{{post.title}}>
+            <li class = "collection-item"><a href= "{% url 'posts:posts_details' id=post.id %}">{{post.title}}>
             </a></li>
         {% endfor %}
     </ul>
