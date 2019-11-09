@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.http import HttpRequest
 from django.urls import reverse
+from django.urls import reverse_lazy
+
 from posts.models import Posts
 #from posts.models import Comment
 from datetime import datetime
@@ -33,15 +36,17 @@ def posts_index(request):
     #return HttpResponse("hello from posts")
 
 #any user can view the details a published blog post
+
 def posts_details(request, id):
-    try:
-        post = Posts.objects.get(id=id)
-    except Posts.DoesNotExist:
-        return None
+    #try:
+    post = Posts.objects.get(id=object.id)
+    #except Posts.DoesNotExist:
+    #    return None
     context = {
-        'post': post,
+        'post': post
     }
     return render(request, 'posts/posts_details.html', context)
+
     #return HttpResponse("hello from posts details")
 
 #modified from https://realpython.com/get-started-with-django-1/ but my posts get id not pk
@@ -76,18 +81,21 @@ def posts_details(request, id):
 class PostCreateView(CreateView):
     template_name = 'posts/add_post.html'
     form_class = PostCreateForm
+    #lazy reverse returns an object
+    #success_url = reverse_lazy('posts:posts_details', args=[id])
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
         #return HttpResponseRedirect(self.get_success_url()) #THIS IS THE PROBLEM LINE
-        return HttpResponseRedirect('/posts/posts_details/'+ str(self.object.id))  
-        #posts/posts_details/18  - page not to be found! 
-        #return HttpResponse("form is saved")
-        #form.helper.form_action = reverse('url_name', kwargs={'category_name_slug': category_name_slug})
-        #return redirect(reverse('cupcake_site:show_category', kwargs={'category_name_slug':category_name_slug}))
-
+        #return HttpResponseRedirect('/posts/posts_details/'+ str(self.object.id))  #THIS WORKS but page strange page not found error 
+        #posts/posts_details/18  - page not to be found! even though url is a match
+        return HttpResponse("form is saved")
+        #form.helper.form_action = reverse('url_name', kwargs={'id': id})
+        #return redirect(reverse('posts:posts_details', kwargs={'pk':self.object.id})
+        #HttpRequest.build_absolute_uri()
+        #return redirect(reverse('posts:posts_index')) #redirect to post index page once form is saved
 
        # """populate body with initial data"""
     def get_initial(self, *args, **kwargs):

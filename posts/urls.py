@@ -2,7 +2,6 @@ from django.urls import path
 from django.urls import re_path
 #from django.generic.views import CreateView
 from posts import views
-from django.utils.translation import gettext_lazy as _
 
 
 #Latest Posts Index Page  
@@ -13,7 +12,8 @@ app_name = 'posts'
 
 urlpatterns = [
   path('', views.posts_index, name='posts_index'), 
-  re_path(r'^posts_details/(?P<id>[0-20])/$',views.posts_details, name='posts_details'), 
+  
+  path('posts_details/<int:post.id>', views.posts_details, name='posts_details'), 
   path('add_post/', views.PostCreateView.as_view(),name = 'add_post'), 
 ]
 
