@@ -121,8 +121,9 @@ class PostDetail(DetailView):
     template_name = 'posts/posts_detail.html'
     #success_url = 
 
-#     #queryset = Posts.objects.filter(is_published=True)# bool for if the post status is draft or publish, remove model attribute to replace with this
-#     def get(self, request, *args, **kwargs):
-#         post = get_object_or_404(Posts, pk=kwargs['pk'])
-#         context = {'post': post}
-#         return render(request, 'posts/posts_details.html', context)
+#queryset = Posts.objects.filter(is_published=True)# bool for if the post status is draft or publish, remove model attribute to replace with this
+
+    def get(self, request, *args, **kwargs):
+        post = get_object_or_404(Posts, pk=kwargs['pk'])
+        context = {'post': post}
+        return render(request, 'posts/posts_details.html', context)

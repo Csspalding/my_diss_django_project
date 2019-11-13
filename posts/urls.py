@@ -17,7 +17,7 @@ urlpatterns = [
   # path('', views.hello_world, name='hello_world'),
   path('', views.posts_index, name='posts_index'),  
   path('posts_create/', views.PostCreate.as_view(),name = 'posts_create'), 
-  path('posts_detail/<int:id>', views.PostDetail.as_view(), name='posts_detail'), 
+  path('posts_detail/<int:pk>', views.PostDetail.as_view(), name='posts_detail'), 
    #path('paste/<int:pk>', PasteDetail.as_view(), name='pastebin_paste_detail'),
 ]
 

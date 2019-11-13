@@ -37,6 +37,7 @@ class PostCreateForm(forms.ModelForm):
     def clean_title(self):
         title = self.cleaned_data['title']
         if Posts.objects.filter(user=self.user, title=title).exists():
+            #user = self.user
             raise forms.ValidationError("You have already written a post with the same title.")
         return title
 

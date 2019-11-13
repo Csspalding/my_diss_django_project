@@ -14,7 +14,7 @@
     </ul>
     {% if user.is_authenticated %} 
     <div>
-    <a style = "display:block" class="center-align" href="/posts/posts_create.html"  >Add New Post</a> 
+    <a style = "display:block" class="center-align" href="{% url 'posts:posts_create' %}"  >Add New Post</a> 
     </div>
     {% endif %} 
 

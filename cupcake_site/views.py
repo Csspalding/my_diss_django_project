@@ -86,7 +86,9 @@ def add_page(request, category_name_slug):
         page.save()
     #once page form is created redirect user to the show_category() view, if a match is found from show_category ()the complete url is returned
     #as an added complication show_category(category_name_slug) passed in parameter, by providing a value in dictionary as kwargs to the reverse function it can formulate the url
-        form.helper.form_action = reverse('url_name', kwargs={'category_name_slug': category_name_slug})
+
+        #form.helper.form_action = reverse('url_name', kwargs={'category_name_slug': category_name_slug})
+        
         return redirect(reverse('cupcake_site:show_category', kwargs={'category_name_slug':category_name_slug}))
         #return show_category(request, category_name_slug)
     else:
