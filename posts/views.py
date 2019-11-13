@@ -5,23 +5,26 @@ from django.http import HttpRequest
 from django.urls import reverse
 from django.urls import reverse_lazy
 
-from posts.models import Posts
 #from posts.models import Comment
 from datetime import datetime
+from django.utils import timezone
+
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from posts.forms import PostForm, PostCreateForm
 from crispy_forms.helper import FormHelper
 from django.views import View
-from django.views.generic import CreateView
-from django.views.generic import DetailView
-from django.utils import timezone
+from django.views.generic.detail import DetailView
+from posts.models import Posts
+from django.views.generic.edit import CreateView
 
 from cupcake_site.models import UserProfile
-from posts.models import Posts
 #from posts.models import Comments
-from posts.forms import PostCreateForm 
 #from posts.forms import CommentForm 
+
+# def hello_world(request):
+#     return HttpResponse("Hello World")
 
 #any user can view a list of titles of published blog posts
 def posts_index(request):
@@ -33,19 +36,19 @@ def posts_index(request):
             'posts': posts
             }
     return render(request, 'posts/posts_index.html', context)
-    #return HttpResponse("hello from posts")
+    # return HttpResponse("hello from posts")
 
 #any user can view the details a published blog post
 
-def posts_details(request, id):
-    #try:
-    post = Posts.objects.get(id=object.id)
-    #except Posts.DoesNotExist:
-    #    return None
-    context = {
-        'post': post
-    }
-    return render(request, 'posts/posts_details.html', context)
+# def posts_details(request, id):
+#     #try:
+#     post = Posts.objects.get(id=object.id)
+#     #except Posts.DoesNotExist:
+#     #    return None
+#     context = {
+#         'post': post
+#     }
+#     return render(request, 'posts/posts_details.html', context)
 
     #return HttpResponse("hello from posts details")
 
@@ -78,11 +81,12 @@ def posts_details(request, id):
 #correct way to decorate a class, name the function to be decorated.TEST when redirect url is working 
 #@method_decorator(login_required, name='form_valid') 
 
-class PostCreateView(CreateView):
-    template_name = 'posts/add_post.html'
+class PostCreate(CreateView):
+    template_name = 'posts/posts_create.html'
     form_class = PostCreateForm
     #lazy reverse returns an object
-    #success_url = reverse_lazy('posts:posts_details', args=[id])
+    #on success of form creation redirect user to
+    success_url = reverse_lazy('posts:posts_index')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -99,21 +103,24 @@ class PostCreateView(CreateView):
 
        # """populate body with initial data"""
     def get_initial(self, *args, **kwargs):
-        initial = super(PostCreateView, self).get_initial(**kwargs)
+        initial = super(PostCreate, self).get_initial(**kwargs)
         initial['body'] = 'My blog post'
         return {
             'initial' : initial,
             }
 
     def get_form_kwargs(self, *args, **kwargs):
-        kwargs = super(PostCreateView, self).get_form_kwargs(*args, **kwargs)
+        kwargs = super(PostCreate, self).get_form_kwargs(*args, **kwargs)
         kwargs['user'] = self.request.user
         return kwargs
 
 # """class to display the view of a single post instance using generic DetailView created adapted from https://www.agiliq.com/blog/2019/01/django-when-and-how-use-detailview/"""
 # #login should be required
-# class PostDetailView(DetailView):
-#     model = Posts
+class PostDetail(DetailView):
+    model = Posts
+    template_name = 'posts/posts_detail.html'
+    #success_url = 
+
 #     #queryset = Posts.objects.filter(is_published=True)# bool for if the post status is draft or publish, remove model attribute to replace with this
 #     def get(self, request, *args, **kwargs):
 #         post = get_object_or_404(Posts, pk=kwargs['pk'])

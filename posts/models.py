@@ -44,7 +44,6 @@ class Posts(models.Model):
     #To display the post title with a clean slug instead of default post id 
     def save(self, *args, **kwargs,):
         self.slug = slugify(self.title)
-        #self.id = id(self.id)
         super(Posts, self).save(*args, **kwargs)
     
    
@@ -56,11 +55,16 @@ class Posts(models.Model):
 
 #https://stackoverflow.com/questions/14170473/get-absolute-url-in-django-when-using-class-based-views"""
     #@models.permalink
-    
-    # def get_absolute_url(self):
-    #     return reverse('posts:posts_details',args=[self.id])
 
+    #Django Projects Cookbook   
+    #def __unicode__(self):
+       # return self.name or str(self.id)
 
+    #Django Docs    
+    #def get_absolute_url(self):
+        #return reverse('posts.views.PostDetail',args=[str(self.id)])
+
+        #return reverse('people.views.details', args=[str(self.id)])
  #-user-when-creating-an-object-in-django-admin
 #with this code I may not need to set an created_by_attribute in populatePostsDb.py
     # def save_model(self, request, obj, form, change):

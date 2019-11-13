@@ -8,12 +8,13 @@
 
     <ul class = "collection">
         {% for post in posts %} 
-            <li class = "collection-item"><a href= "/posts/posts_details/{{post.id}}">{{post.title}}></a></li>
+            {% comment %} <li class = "collection-item"><a href= "{{ post.get_absolute_url }}">{{post.title}}></a></li> {% endcomment %}
+            <li class = "collection-item"><a href= "/posts/posts_detail/{{post.pk}}">{{post.title}}></a></li>
         {% endfor %}
     </ul>
     {% if user.is_authenticated %} 
     <div>
-    <a style = "display:block" class="center-align" href="{% url 'posts:add_post' %}" >Add New Post</a> 
+    <a style = "display:block" class="center-align" href="/posts/posts_create.html"  >Add New Post</a> 
     </div>
     {% endif %} 
 

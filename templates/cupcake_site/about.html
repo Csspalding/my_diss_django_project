@@ -12,22 +12,45 @@
     <div class="row">
     <div class="col-sm-8">
      <div class="container">
-        <h1>About CupCakeCode..</h1><br />
-        <strong>{{ boldmessage }} </strong><br />
-    
-{% comment %} insert coding image  in a div {% endcomment %}
+        <h1>About CupCakeCode..</h1>
+        <br /> 
     <div >
-        <img src="{% static 'images/MultiColourCode.jpg' %}"    alt="Picture of Code" /><!-- New line -->
+        <img src="{% static 'images/women.coffee.laptop.jpg' %}"    alt="Picture of Women in Tech" /><!-- New line -->
      </div> 
-<p>text with more information on women coding and job opportunities etc</p>
-     </div>
-     </div>
-     
+<p>Good at organising? Juggling the household, family commitments, clubs and events, everyone's likes dislikes, everyone's social calendar, laundry required for each day of the week, paying bills, correspondence, work, and being adaptable to fit around others. Applying your life skills and learning to code could make you more employable in the future. The great thing about coding is nobody knows it all, and there's always something new to learn. I've found coding surprisingly creative and you could too! </p>
+      <div >
+        <img src="{% static 'images/model-morph.jpg' %}" width="600" height="330"    alt="Picture of Code" /><!-- New line -->
+     </div> 
+<p>It would be great if I could inspire you into trying out some code or even enrolling on a course. I've found it much more interesting and creative than I could ever have imagined. </p>
+<p>Embracing technology can empower your confidence in any job and open the door to some great career opportunities.  Join the Digial Revolution and start learning, check out Learning tools to find out how to get started, find free resources, meetup groups and much more. Ultimately if we want to have a voice, and help to shape our evolving tech culture, rather that shying away, it's essential we embrace technology.</p> 
 
+     </div>
+
+
+     </div>
+   
       <div class="col-sm-4">
-     <h1>possible sidebar</h1><br />  <br />
-        <img src="{{ MEDIA_URL }}profile_images/Desk.jpg" width="300" hight="300"       alt="Picture of Easter Cup Cakes" /><!-- New line -->   
-       
+       <h1>Top Tips...</h1><br />  
+    <div >
+        <img src="{% static 'images/dark-computer-cake.jpg' %}"  width="300" height="330"      alt="Picture of Code" /><!-- New line -->
+     </div> 
+    <p>Links to Facts </p>
+       <br/>
+     <h1>Did You Know...</h1><br />  <br />
+        <img src="{% static 'images/women-working.jpg' %}" width="300" height="200"    alt="Picture " /><!-- New line -->   
+       <br />
+
+       <p>Links to Facts </p>
+       <br/>
+       <h1>Women in Tech</h1><br />  <br />
+       <img src="{% static 'images/photo-women-in-tech.jpg' %}" width="300" height="200"       alt="Picture of Personalised Laptop" /><!-- New line -->   
+       <br />
+
+       <p>Links to Career's  </p>
+       <li class="nav-item">
+        <a class="nav-link" href="{% url 'cupcake_site:h' %}">Careers</a>
+      </li>
+       <br/>
     </div>
     </div>
 {% endblock %} 

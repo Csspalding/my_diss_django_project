@@ -14,12 +14,11 @@
 <div class="container">
 <!--Welcome message or, if logged in Hello username-->
         {% if user.is_authenticated %}
-        <h3>Hello  {{ user.username }}</h3> 
+        <h5>Hello  {{ user.username }}</h5> 
         {% else %}
-        <h3> Welcome!</h3><h6><a href="{% url 'registration_register' %}" >Sign up</a> to experience more awesome features of this!</h6>
+        <h5> Welcome!</h5><h6><a href="{% url 'registration_register' %}" >Sign up</a> to experience more awesome features of this!</h6>
         {% endif %}
-        <p>Welcome to this information website aimed at encouraging women to learn to code, 
-        this site is aimed at enabling and empowering you with how to get started. 
+        <p>Welcome to this information website aimed at encouraging women to learn to code.
         Why not try out some code now? Try the code intro on cupcakes below.</p>
  <!--Card diplay Cupcake 3min Code App. Computer desk image with try some code message, click here to start button-->   
     <div class="card card-blog">
@@ -41,9 +40,11 @@
     </div> 
     </div>
 <!--text under image of plants/Laptop-->
-<h6>For more coding exercises and lessons...</h6>
-<p>Check out Learning Tools <a href="{% url 'cupcake_site:tools' %}" >Click Here</a>. Like cakes? I'm sure you've baked a few cupcakes over time, so you might just suprise yourself and be able to learn to code. There is an amazing quantity of resources available on-line and free guidance on offer. Once you get started, like baking cakes, it's actually pretty addictive. </p>
-<p>If you are like me then you're good at organising, keeping things clean, and being adaptable to fit around others. Applying your life skills and learning to code could make you more employable in the future. The great thing about coding is nobody knows it all, and there's always something new to learn. I've found coding suprisingly creative and you could too! 
+<br>
+<p>For more coding exercises and lessons see Learning Tools <a href="{% url 'cupcake_site:tools' %}" >Click Here</a>. Like cakes? I'm sure you've baked a few cupcakes over time, if you can follow instructions in a cookbook you may find learn to code fun. There is an amazing quantity of resources available on-line and free guidance on offer. Once you get started, like baking cakes, it's actually pretty addictive. </p>
+<div>
+ <img src="{% static 'images/vanilla1_cupcakes.jpg' %}" style="width:100%;" alt="Picture of Cass" />
+ </div>
 </div>
 </div>
 {% comment %} You might want to try one hour of code a day, or 20 minutes a day or one hour a week. You might think you prefer learning face to face, there are a few organisation listed that offer coding workshops and classes for free. If you have access to a PC why not try out the free courses as well, you might surprise yourself.  {% endcomment %}
@@ -51,13 +52,17 @@
 <!-- Page  Right -->
 <div class="col-sm-6">
 <div class="container">
-        <h3 >Hi I'm Cass,</h3>	
-        <h5>I've set up this site to encourage you into coding!</h5>
-        <img src="{% static 'images/Jo.jpg' %}" style="width:100%;" alt="Picture of Cass" />
+        <h5>I've set up this site to encourage you to start coding! </h5><p>There are so many reasons to get on board the digital revolution, understanding tech helps us protect and guide our children. Developing tech skills can lead to better career prospects.</p>
+        <img src="{% static 'images/Jo.jpg' %}" width="500" height="340"    " alt="Picture of Cass" />
         <!--text under image of person-->
-        <h6>My coding journey so far...</h6>
-        <p>I have been coding for 2 years, inspired by wanting to know more about how to protect my kids on-line. <a href="{% url 'posts:posts_index' %}">Read More</a> Check out my Blog if you would like to find out how I got into coding, and why more of us should...as well as many more inspirational stories from women in tech. It would be great if I could inspire you into trying out some code or even enrolling on a course. I've found it much more interesting and creative than I could ever have imagined. </p>
-        <p>Embracing technology can empower your confidence in any job and open the door to some great career opportunities.  Join the Digial Revolution and start learning, check out Learning tools to find out how to get started, find free resources, meetup groups and much more.</p> 
+       <br>
+       <br>
+        <p>I have been coding for 2 years, it all started with by wanting to know more about how to protect my kids on-line. <a href="{% url 'posts:posts_index' %}">Read More</a> Check out my Blog if you would like to find out how I got into coding, and why more of us should...as well as many more inspirational stories from women in tech. </p>
+<br>
+
+        <div>
+         <img src="{% static 'images/digitalcakes.jpg' %}" style="width:100%;" alt="Picture of Cass" />
+         </div>
      </div>
     <!-- Card 1 --> 
     </div> 
