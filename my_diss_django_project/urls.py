@@ -29,7 +29,7 @@ class MyRegistrationView(RegistrationView):
       return reverse( 'cupcake_site:register_profile')
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.IndexView.as_view(), name='index'),
     path('cupcake_site/', include('cupcake_site.urls')),#urls startwith 'cupcake_site/' are handled by cupcake_site app
     path('posts/', include('posts.urls')),#urls startwith 'posts/' are handled by posts app
     path('admin/', admin.site.urls),

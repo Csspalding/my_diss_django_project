@@ -66,7 +66,7 @@ class UserForm(forms.ModelForm):
     #and must specify the fields to include or exclude which are associated with the model and should
     #be present or not on the rendered form
     model = User
-    fields = ('username','email', 'password')#only make a userprofile once the user is registered
+    fields = ('username','password', 'email')#only make a userprofile once the user is registered
 
 #create a widget to render the photo
 #https://stackoverflow.com/questions/28764571/display-image-from-imagefield-by-means-of-form

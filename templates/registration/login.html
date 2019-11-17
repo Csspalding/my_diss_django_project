@@ -16,7 +16,7 @@
         <h1 class="jumbotron-heading">Login</h1>
         <p>Not yet signed up?<br/> 
         Register here for an account to access full features of this site
-         <a style = "display:block" class="center-align" href="{% url 'registration_register' %}" >Register</a> </p>
+         <a style = "display:block" class="center-align" href="{% url 'registration_register' %}" >Sign Up</a> </p>
     </div>
     
     <div class="container">
@@ -28,13 +28,17 @@
             <input type="password" name="password" id="id_password" class="form-control" placeholder="Password" required>
             <button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">Sign in</button>
         </form>
+         <p> Not registered?
+            <a href="{%url 'registration_register' %}">Sign Up</a>
+        </p>
     </div>
 
     </div>
     </div>
     </div>
-{% endblock %}   
-{% comment %} {% block body_block %}
+{% endblock %}  
+
+ {% comment %} {% block body_block %}
 <h1>Login</h1>
 <form method='post' action = ".">
   {% csrf_token %}
@@ -45,7 +49,7 @@
   <input type="hidden" name= "next" value = "{{ next }}"/>
   </form>
   <p> Not registered?
-  <a href="{%url 'registration_register' %}">Register</a>
-  </p>
-  {% endblock %} {% endcomment %}
+  <a href="{%url 'registration_register' %}">Sign Up</a>
+  </p> {% endcomment %}
+  
 

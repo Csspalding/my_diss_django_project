@@ -1,15 +1,18 @@
 from django.urls import path
 from cupcake_site import views
-from cupcake_site.views import AboutView #always import seperately 
+#from cupcake_site.views import AboutView #always import seperately 
+#from cupcake_site.views import IndexView  
 
-#created 01/08/19 by Cass
-#this file handles urls that startwith cupcakesite/  
+"""created 01/08/19 by Cassie Spalding, this file handles urls that startwith cupcakesite/ """ 
 
 app_name = 'cupcake_site'
+
 #note the about/ NOT about  - this syntax is very important was the issue with the test not working
 #url as_view() is part of the base View class provides Django engine necessary code to access views.py classes get() function
+
 urlpatterns = [
-    path('', views.index, name='index'), #this url points to the index view function
+    #path('', views.index, name='index'), #this url points to the index view function
+    path('', views.IndexView.as_view(), name='index'), #this url points to the index view function
     path('about/', views.AboutView.as_view(), name='about'),
     path('h/', views.h, name='h'),#carsole  todo place this in a template tag on About later
     path('tools/', views.tools, name='tools'),

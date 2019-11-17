@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import HttpResponse
 from django.utils.decorators import method_decorator
-#from django.utils.decorators import login_required
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
@@ -12,19 +11,26 @@ from django.utils import timezone
 
 from cupcake_site.models import Category, Page, UserProfile
 from cupcake_site.forms import CategoryForm, PageForm, UserForm, UserProfileForm, ImageUploadForm
-#view handles responce to request from client
 
 
-#index view is the home page for the project
-def index(request):
-  #construct a dictionary to pass to the template engin as its context.
-  context_dict= {'boldmessage':'did you know... you can learn coding skills for free...'}
-  return render(request, 'cupcake_site/index.html', context=context_dict)
 
-#About page
+"""index view is the home page for the web application site"""
+
+# def index(request):
+#   """construct a dictionary to pass to the template html as its context or data to be rendered."""
+#   context_dict= {'boldmessage':'did you know... you can learn coding skills for free...'}
+#   return render(request, 'cupcake_site/index.html', context=context_dict)
+
+class IndexView(View):
+  """construct a dictionary to pass to the template html as its context or data to be rendered."""
+  def get(self, request):
+    context_dict= {'boldmessage':'did you know... you can learn coding skills for free...'}
+    return render(request, 'cupcake_site/index.html', context=context_dict)
+
+"""About page"""
 class AboutView(View):
   def get(self, request):
-    context_dict={'boldmessage': 'We need more women in tech'}
+    context_dict={}
     #NOT YET tracking visits
     #context_dict = {}
     #context_dict['visits'] = request.session['visits']
