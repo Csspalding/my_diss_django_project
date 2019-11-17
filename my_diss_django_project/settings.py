@@ -153,3 +153,6 @@ STATICFILES_DIRS = [STATIC_DIR]
 
 #UserProfile
 AUTH_PROFILE_MODULE = 'cupcake_site.UserProfile'
+
+#will redirect to https  -  for development set to false for deployment set to True
+SECURE_SSL_REDIRECT = False

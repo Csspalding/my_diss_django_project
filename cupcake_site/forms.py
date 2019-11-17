@@ -26,7 +26,7 @@ class CategoryForm(forms.ModelForm):
 
 class PageForm(forms.ModelForm):
   title = forms.CharField(max_length=128, help_text="Please enter the title of the web page.")
-  url = forms.URLField(max_length=200, help_text="Please enter the web address of the page you want to add. Hint: you can copy and paste the link from your browser.")
+  url = forms.URLField(max_length=200, help_text="Please enter the web address of the page you want to add, starts with http:// Hint: you can copy and paste the link from your browser.")
   views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
 
   #visible fields displayed to user inner class Meta 
@@ -44,12 +44,9 @@ class PageForm(forms.ModelForm):
     url = cleaned_data.get('url') 
     #get function will return None if user enters nothing as new form will not exist
 
-    #TODO ALSO CONSIDER HANDLING SECURE https:// too!
+    #HANDLING SECURE https:// too!
     #if the url is not empty and doesn't start with 'http://' then prepend 'http://'
-
-    #TODO Test this next line and solve https issue
-    #if url and (not url.startswith('http://')) or (not url.startswith('https://')) :
-    if url and not url.startswith('http://'):
+    if url and not (url.startswith('http://') or url.startswith('https://')):
       url = 'http://'+ url
       cleaned_data['url'] = url
       #always end clean() by returning a reference to the cleaned_data dictionary

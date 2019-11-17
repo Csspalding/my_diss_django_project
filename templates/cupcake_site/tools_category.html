@@ -9,9 +9,16 @@
 {% endblock %}
 
 {% block body_block %}
+<div>
+  <header class = "container center-align">
     {% if category %}
-       <h1> {{ category.name}}  </h1>
-
+       <h1> {{ category.name}}  </h1><p>Clicking the link takes you to view the page, to return to this site Click the back arrow in your browser or Right Click the links to open in a new tab.</p>
+   </header>
+<div class = "container">
+<h3 class = "centre-align blue lighten-4", class="container centre-align">LINKS</h3>
+<div class ="card">
+  <div class = "card-content">
+    <div>
         {% if pages %}
           <ul>
               {% for page in pages %}
@@ -22,19 +29,24 @@
         {% else %}
           <strong>No pages currently in category.</strong>
         {% endif %}
-        
+       </div> 
         &emsp;&emsp;&nbsp;&nbsp;<a href="{% url 'cupcake_site:tools' %}">Back</a>
         <br>
 
        {% if user.is_authenticated %}
+       <div> 
   <!-- category.slug is passed thorugh as a parameter to the url template tag --> 
         &emsp;&emsp;&nbsp;&nbsp;<a href="{% url 'cupcake_site:add_page' category.slug %}">Add a Page</a>
-       {% endif %} 
+        </div> 
+       {% endif %}
+       <div>  
     {% else %}
           The specified category does not exist!
+        </div> 
     {% endif %}
-  
-
+    </div> 
+  </div>
+</div> 
   {% endblock %}
 
 
