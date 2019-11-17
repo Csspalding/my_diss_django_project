@@ -23,6 +23,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
+"""override redux package existing registration_register (when users Sign Up) to redirect to a custom user profile registration form"""
 class MyRegistrationView(RegistrationView):
     #@method_decorator(login_required)
     def get_success_url(self, user):
@@ -30,14 +31,11 @@ class MyRegistrationView(RegistrationView):
 
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
-    path('cupcake_site/', include('cupcake_site.urls')),#urls startwith 'cupcake_site/' are handled by cupcake_site app
-    path('posts/', include('posts.urls')),#urls startwith 'posts/' are handled by posts app
+    path('cupcake_site/', include('cupcake_site.urls')),# urls startwith 'cupcake_site/' are handled by cupcake_site app
+    path('posts/', include('posts.urls')),# urls startwith 'posts/' are handled by posts app
     path('admin/', admin.site.urls),
-
-    #override the existing registration_register URL mapping from redux package
-    path('accounts/register/', MyRegistrationView.as_view(), name='registration_register'),
-
-    path('accounts/',include('registration.backends.simple.urls'))#out of the box django-registration-redux package for user authentication and login etc
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('accounts/register/', MyRegistrationView.as_view(), name='registration_register'),#override existing redux package URL mapping
+    path('accounts/', include('registration.backends.simple.urls'))#out of the box django-registration-redux package for user authentication and login etc
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)# path for Media files 
 
 
