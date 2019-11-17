@@ -8,6 +8,9 @@ from crispy_forms.helper import FormHelper
 from django.views import View
 from django.views.generic import CreateView
 from django.utils import timezone
+from datetime import datetime
+from django.utils import timezone
+
 
 from cupcake_site.models import Category, Page, UserProfile
 from cupcake_site.forms import CategoryForm, PageForm, UserForm, UserProfileForm, ImageUploadForm
@@ -31,9 +34,6 @@ class IndexView(View):
 class AboutView(View):
   def get(self, request):
     context_dict={}
-    #NOT YET tracking visits
-    #context_dict = {}
-    #context_dict['visits'] = request.session['visits']
     return render(request, 'cupcake_site/about.html', context=context_dict)
 
 #carsole for the About page todo change this
@@ -49,12 +49,16 @@ def tools(request):
   page_list = Page.objects.order_by('views')[:5]
   #category_list = Category.objects.order_by('-likes')[:5]
   #save them
+  #NOT YET tracking visits
+    #context_dict = {}
+    #context_dict['visits'] = request.session['visits']
   context_dict ={}
   context_dict ['categories'] = category_list
   context_dict ['pages'] = page_list
   return render(request, 'cupcake_site/tools.html', context=context_dict)
 
 #Show links for the selected Learning Tool
+#TODO write def create_context_dic for this class
 def show_category(request, category_name_slug):
   context_dict={'boldmessage': 'There are many Free Learning Tools On-Line, click on a category below to see the links.'}
   try:
@@ -211,5 +215,44 @@ class ListProfilesView(View):
       profiles = UserProfile.objects.all()
 
       return render(request, 'cupcake_site/list_profiles.html',{'userprofile_list':profiles})
+
+"""Cookies and Likes """
+def get_server_side_cookie(request, cookie, default_val=None):
+    val = request.session.get(cookie)
+    
+    if not val:
+        val = default_val
+    
+    return val
+
+def visitor_cookie_handler(request):
+    visits = int(get_server_side_cookie(request, 'visits', '1'))
+    
+    last_visit_cookie = get_server_side_cookie(request, 'last_visit', str(datetime.now()))
+    last_visit_time = datetime.strptime(last_visit_cookie[:-7], '%Y-%m-%d %H:%M:%S')
+    
+    if (datetime.now() - last_visit_time).days > 0:
+        visits = visits + 1
+        request.session['last_visit'] = str(datetime.now())
+    else:
+        request.session['last_visit'] = last_visit_cookie
+    
+    request.session['visits'] = visits
+
+class GotoView(View):
+    def get(self, request):
+        page_id = request.GET.get('page_id')
+        
+        try:
+            selected_page = Page.objects.get(id=page_id)
+        except Page.DoesNotExist:
+            return redirect(reverse('rango:index'))
+            
+        selected_page.views = selected_page.views + 1
+        selected_page.last_visit = timezone.now()
+        selected_page.save()
+        
+        return redirect(selected_page.url)
+
 
 
