@@ -23,10 +23,7 @@ from cupcake_site.models import UserProfile
 #from posts.models import Comments
 #from posts.forms import CommentForm 
 
-# def hello_world(request):
-#     return HttpResponse("Hello World")
-
-#any user can view a list of titles of published blog posts
+"""any user can view a list of titles of published blog posts"""
 def posts_index(request):
     try:
         posts=Posts.objects.all()[:10] #gets the first 10 posts 
@@ -36,23 +33,8 @@ def posts_index(request):
             'posts': posts
             }
     return render(request, 'posts/posts_index.html', context)
-    # return HttpResponse("hello from posts")
-
-#any user can view the details a published blog post
-
-# def posts_details(request, id):
-#     #try:
-#     post = Posts.objects.get(id=object.id)
-#     #except Posts.DoesNotExist:
-#     #    return None
-#     context = {
-#         'post': post
-#     }
-#     return render(request, 'posts/posts_details.html', context)
-
-    #return HttpResponse("hello from posts details")
-
-#modified from https://realpython.com/get-started-with-django-1/ but my posts get id not pk
+    
+#modified from https://realpython.com/get-started-with-django-1/ 
     #comments = Comment.objects.filter(post=post)
 
     # form = CommentForm()
@@ -77,31 +59,25 @@ def posts_index(request):
     #     }
     # return render(request, 'posts/posts_details.html', context)
 
-#allow a registered user to create a new post, adapted from tutorial https://www.agiliq.com/blog/2019/01/django-createview/#using-createview"""
-#correct way to decorate a class, name the function to be decorated.TEST when redirect url is working 
-#@method_decorator(login_required, name='form_valid') 
+"""allow a registered user to create a new post, adapted from tutorial https://www.agiliq.com/blog/2019/01/django-createview/#using-createview"""
 
 class PostCreate(CreateView):
     template_name = 'posts/posts_create.html'
     form_class = PostCreateForm
-    #lazy reverse returns an object
-    #on success of form creation redirect user to
+    """lazy reverse returns an object, on success of form creation redirect user to the post_index.html page""" 
     success_url = reverse_lazy('posts:posts_index')
 
+
+    """ Check the user is authenticated, to get the post.user, request the user before the form is saved"""
+    @method_decorator(login_required, name='form_valid') 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
-        #return HttpResponseRedirect(self.get_success_url()) #THIS IS THE PROBLEM LINE
-        #return HttpResponseRedirect('/posts/posts_details/'+ str(self.object.id))  #THIS WORKS but page strange page not found error 
-        #posts/posts_details/18  - page not to be found! even though url is a match
-        return HttpResponse("form is saved")
-        #form.helper.form_action = reverse('url_name', kwargs={'id': id})
-        #return redirect(reverse('posts:posts_details', kwargs={'pk':self.object.id})
-        #HttpRequest.build_absolute_uri()
-        #return redirect(reverse('posts:posts_index')) #redirect to post index page once form is saved
-
-       # """populate body with initial data"""
+        """redirect to the post_index.html page"""
+        return HttpResponseRedirect(self.get_success_url()) 
+        
+    """populate the form body with initial data"""
     def get_initial(self, *args, **kwargs):
         initial = super(PostCreate, self).get_initial(**kwargs)
         initial['body'] = 'My blog post'
@@ -109,19 +85,20 @@ class PostCreate(CreateView):
             'initial' : initial,
             }
 
+    """build keyword arguments to instanticate the form https://docs.djangoproject.com/en/2.2/ref/class-based-views/mixins-editing/"""
     def get_form_kwargs(self, *args, **kwargs):
         kwargs = super(PostCreate, self).get_form_kwargs(*args, **kwargs)
         kwargs['user'] = self.request.user
         return kwargs
 
-# """class to display the view of a single post instance using generic DetailView created adapted from https://www.agiliq.com/blog/2019/01/django-when-and-how-use-detailview/"""
-# #login should be required
+"""class to display the view of a single post instance using generic DetailView created adapted from https://www.agiliq.com/blog/2019/01/django-when-and-how-use-detailview/"""
+"""no login decorator is required as any user can view post details"""
 class PostDetail(DetailView):
     model = Posts
     template_name = 'posts/posts_detail.html'
     #success_url = 
 
-#queryset = Posts.objects.filter(is_published=True)# bool for if the post status is draft or publish, remove model attribute to replace with this
+#queryset = Posts.objects.filter(is_published=True)# bool for if the post status is draft or publish, remove model attribute to replace with this? TODO test once view for update post had been coded
 
     def get(self, request, *args, **kwargs):
         post = get_object_or_404(Posts, pk=kwargs['pk'])

@@ -87,9 +87,11 @@ class UserProfileForm(forms.ModelForm):#when a userprofile is made it wont yet h
 
   class Meta:
     model = UserProfile
-    fields = ('bio','email', 'picture')
+    fields = ('bio', 'picture')
+    #TODO test clean_pic function
     #clean_pic=('picture')
     #picture = ImageField(widget=PictureWidget)
+    #TODO add link to change/update email
 
     #https://stackoverflow.com/questions/6396442/add-image-avatar-field-to-users-in-django/6396744
     def clean_pic(self):
@@ -118,7 +120,7 @@ class UserProfileForm(forms.ModelForm):#when a userprofile is made it wont yet h
         except AttributeError:
             pass
             """
-            Handles case when we updating the user profile
+            Handles case when updating the user profile
             and does not supply a new profile picture
             """
 
