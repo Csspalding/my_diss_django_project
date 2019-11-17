@@ -35,7 +35,7 @@ urlpatterns = [
     path('posts/', include('posts.urls')),# urls startwith 'posts/' are handled by posts app
     path('admin/', admin.site.urls),
     path('accounts/register/', MyRegistrationView.as_view(), name='registration_register'),#override existing redux package URL mapping
-    path('accounts/', include('registration.backends.simple.urls'))#out of the box django-registration-redux package for user authentication and login etc
+    path('accounts/', include('registration.backends.simple.urls')),#out of the box django-registration-redux package for user authentication and login etc
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)# path for Media files 
 
 

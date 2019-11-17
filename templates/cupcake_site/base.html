@@ -127,11 +127,14 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
 <!--This is the footer layout with authenticiation restriction-->
 <br/> 
 <div class = "container">
+
       {% if user.is_authenticated %}
-           <a style = "display:block" class="center-align" href="{% url 'admin:login' %}" >Admin</a>
            <a style = "display:block" class="center-align" href="{% url 'cupcake_site:list_profiles' %}" >List of Members</a>
       {% endif %}
-        <a style = "display:block" class="center-align" href="/contact" >Contact Cupcake Code</a>
+      {% if user.is_staff %}
+           <a style = "display:block" class="center-align" href="{% url 'admin:login' %}" >Admin</a>
+      {% endif %}
+        {% comment %} <a style = "display:block" class="center-align" href="/contact" >Contact Cupcake Code</a> {% endcomment %}
 </div>
 </div>  
 </body>

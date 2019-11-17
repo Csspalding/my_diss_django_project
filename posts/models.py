@@ -46,11 +46,11 @@ class Posts(models.Model):
         self.slug = slugify(self.title)
         super(Posts, self).save(*args, **kwargs)
     
-   
-    # def picture_or_default(self, default_path="/static/images/no_user_image.jpg"):
-    #     if self.picture:
-    #         return self.picture
-    #     return default_path
+    #TODO not working or rendering
+    def picture_or_default(self, default_path="/static/images/digitalcakes.jpg"):
+        if self.picture:
+            return self.picture
+        return default_path
         #{{ user.picture_or_default }} in template
 
 #https://stackoverflow.com/questions/14170473/get-absolute-url-in-django-when-using-class-based-views"""

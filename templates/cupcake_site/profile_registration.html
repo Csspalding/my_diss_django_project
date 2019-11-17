@@ -24,7 +24,9 @@ ChangeUserProfile CupcakeCode
 <!--This is the crispy form -->
             {% block main %}
                 <form  method="post" action="{% url 'cupcake_site:register_profile' %}" enctype="multipart/form-data">
+                
 <!--default profile picture image to display-->
+
                 <input type="image" src="{% static 'images/no_user_image.jpg' %}" width="100" hight="100" alt="profile picture" asp-route="Custom">
                     {% csrf_token %}
                     {{form|crispy}}
