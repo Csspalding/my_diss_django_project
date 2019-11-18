@@ -82,9 +82,8 @@ class PostCreate(CreateView):
     def get_initial(self, *args, **kwargs):
         initial = super(PostCreate, self).get_initial(**kwargs)
         initial['body'] = 'My blog post'
-        return {
-            'initial' : initial,
-            }
+        return initial
+            
         
 
     """build keyword arguments to instanticate the form https://docs.djangoproject.com/en/2.2/ref/class-based-views/mixins-editing/"""
