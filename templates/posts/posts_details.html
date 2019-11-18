@@ -20,8 +20,10 @@
         </div>
         <div class = "card-action">
             {{post.created_at}} 
+        <br/>
+        <a href="{% url 'posts:posts_index' %}"  class="btn btn-secondary" role="button">Back to Blogs</a>
         </div>
     </div>   
-<a style = "display:block" class="center-align" href= "{% url 'posts:posts_index' %}" class="btn">Go Back</a> 
+{% comment %} <a style = "display:block" class="center-align" href= "{% url 'posts:posts_index' %}" class="btn">Go Back</a>  {% endcomment %}
 
 {% endblock %}

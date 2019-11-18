@@ -29,17 +29,20 @@
         {% else %}
           <strong>No pages currently in category.</strong>
         {% endif %}
-       </div> 
-        &emsp;&emsp;&nbsp;&nbsp;<a href="{% url 'cupcake_site:tools' %}">Back</a>
+     </div> 
+    </div>
+       <div class = "container">
         <br>
 
-       {% if user.is_authenticated %}
-       <div> 
-  <!-- category.slug is passed thorugh as a parameter to the url template tag --> 
-        &emsp;&emsp;&nbsp;&nbsp;<a href="{% url 'cupcake_site:add_page' category.slug %}">Add a Page</a>
-        </div> 
+        {% if user.is_authenticated %} 
+        <!-- category.slug is passed thorugh as a parameter to the url template tag --> 
+        {% comment %} &emsp;&emsp;&nbsp;&nbsp;<a href="{% url 'cupcake_site:add_page',  category.slug %}">Add a Page</a> {% endcomment %}
+        <h6>Found something useful, want to share with others? Why not add a new page to this category of learning tools.</h6>
+        <a href="{% url 'cupcake_site:add_page' category.slug %}"  class="btn btn-secondary" role="button">Add Page </a>
+        
        {% endif %}
-       <div>  
+       <a href="{% url 'cupcake_site:tools' %}"  class="btn btn-secondary" role="button">Back to Learning Tools</a>
+        </div> 
     {% else %}
           The specified category does not exist!
         </div> 

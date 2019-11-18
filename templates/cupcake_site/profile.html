@@ -51,12 +51,16 @@ Profile {{ selecteduser.username }}
               {{ form|crispy}} 
               <input type= "submit" value ="Update"/>
         </form>
+         {% comment %} <li class="nav-item">
+        <a class="nav-link" href="{% url 'registration:password_form' %}">Change Password</a>
+      </li> {% endcomment %}
         {% else %}
         <!--if selected user is not logged in user - display the selected user member's profile bio details-->
         <p><strong>Bio</strong><br/>
         {{userprofile.bio}}
         {% endif %}
         </div>
+
         </div>
         </div>                 
                 

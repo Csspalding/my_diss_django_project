@@ -32,7 +32,8 @@
   <!--Link to add a new category - this is still inside the card-->        
  {% if user.is_authenticated %}
 <div>
-    <a style = "display:block" class="center-align" href="{% url 'cupcake_site:add_category' %}" >Add New Category</a>
+    {% comment %} <a style = "display:block" class="center-align" href="{% url 'cupcake_site:add_category' %}" >Add New Category</a> {% endcomment %}
+    <a href="{% url 'cupcake_site:add_category' %}"  class="btn btn-secondary" role="button">Add New Category Tool</a>
       </div>
        {% endif %} 
   

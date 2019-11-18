@@ -109,9 +109,17 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
 </nav>        
 </div>
 
-    <div class="card">
-        {% comment %} Could add another image or animation in the area beneath the nav bar if required this is an EXAMPLE
-        <img id="rectangular" class="img-fluid" src="{% static 'images/digitalcakes.jpg' %}" alt="Code Background" style="width:100%; height:50%;">  {% endcomment %}    
+    <div class="container">
+     <div class="col-sm-4">
+   <!--additional buttons features for authenticated users, only display if authenticated go here--> 
+  
+    {% if user.is_authenticated %}
+      <a href="{% url 'cupcake_site:list_profiles' %}" class="btn btn-secondary" role="button">Members</a>  
+    {% endif %}
+    {% if user.is_staff %}
+      <a href="{% url 'admin:login' %}"  class="btn btn-secondary" role="button">Admin</a>
+    {% endif %}
+          
     </div>
 <!--close the above nav bar column, then close the container-->
 </div>    
@@ -122,20 +130,22 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
 
 <div>
 {% block body_block %}
-{% endblock %}
+{% endblock %} 
 </div>
-<!--This is the footer layout with authenticiation restriction-->
+<!--This is the footer layout with authenticiation restriction//TODO test with users if this is preferable to above navigation bar NOW coded this in buttons above, this is alternative design-->
 <br/> 
-<div class = "container">
-
+{% comment %} <div class = "container">
       {% if user.is_authenticated %}
            <a style = "display:block" class="center-align" href="{% url 'cupcake_site:list_profiles' %}" >List of Members</a>
+           <a href="{% url 'cupcake_site:list_profiles' %}" class="btn btn-secondary" role="button">Members</a>
+         
       {% endif %}
       {% if user.is_staff %}
            <a style = "display:block" class="center-align" href="{% url 'admin:login' %}" >Admin</a>
+           <a href="{% url 'admin:login' %}"  class="btn btn-secondary" role="button">Admin</a>
       {% endif %}
-        {% comment %} <a style = "display:block" class="center-align" href="/contact" >Contact Cupcake Code</a> {% endcomment %}
-</div>
+        <a style = "display:block" class="center-align" href="/contact" >Contact Cupcake Code</a>
+</div> {% endcomment %}
 </div>  
 </body>
 </html>
