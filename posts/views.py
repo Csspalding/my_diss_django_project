@@ -76,7 +76,8 @@ class PostCreate(CreateView):
         self.object.save()
         """redirect to the post_index.html page"""
         return HttpResponseRedirect(self.get_success_url()) 
-        
+
+    #no longer working    
     """populate the form body with initial data"""
     def get_initial(self, *args, **kwargs):
         initial = super(PostCreate, self).get_initial(**kwargs)
@@ -84,6 +85,7 @@ class PostCreate(CreateView):
         return {
             'initial' : initial,
             }
+        
 
     """build keyword arguments to instanticate the form https://docs.djangoproject.com/en/2.2/ref/class-based-views/mixins-editing/"""
     def get_form_kwargs(self, *args, **kwargs):
@@ -103,4 +105,4 @@ class PostDetail(DetailView):
     def get(self, request, *args, **kwargs):
         post = get_object_or_404(Posts, pk=kwargs['pk'])
         context = {'post': post}
-        return render(request, 'posts/posts_details.html', context)
+        return render(request, 'posts/posts_detail.html', context)
