@@ -24,7 +24,7 @@
                                 {% if listuser.picture %}
                                 <img src="{{ MEDIA_URL }}{{ listuser.picture }}" width="50" height="50" />
                                 {% else %}
-                                <img src="{% static 'images/carrot_cupcakes.jpg' %}" width="50" height="50" />
+                                <img src="{% static 'images/no_user_image.jpg' %}" width="50" height="50" />
                                 {% endif %}
                                 {{ listuser.user.username }}
                             </a>
