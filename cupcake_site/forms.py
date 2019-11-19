@@ -26,6 +26,7 @@ class CategoryForm(forms.ModelForm):
 
 class PageForm(forms.ModelForm):
   title = forms.CharField(max_length=128, help_text="Please enter the title of the web page.")
+  description = forms.CharField(max_length=500, help_text="Describes why this page is a great resource to help direct others towards useful information.")
   url = forms.URLField(max_length=200, help_text="Please enter the web address of the page you want to add, starts with http:// Hint: you can copy and paste the link from your browser.")
   views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
 
