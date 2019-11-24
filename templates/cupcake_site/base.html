@@ -60,7 +60,17 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
    <!--right of page is wider area for the navigation bar --> 
     <div class="container">
   <!--logo header above navigation buttons-->
-    <h2>&nbsp;&nbsp;&nbsp;CUPCAKE CODE <> anyone can code....</h2>
+    <h2>&nbsp;&nbsp;&nbsp;CUPCAKE CODE <> anyone can code....
+     <!--additional buttons features for authenticated users, only display if authenticated go here--> 
+     {% if user.is_authenticated %}
+      <a href="{% url 'auth_logout' %}" class="btn btn-secondary" role="button">Logout</a> 
+     {%else%} 
+      <a href="{% url 'auth_login' %}" class="btn btn-secondary" role="button">Login</a> 
+    {% endif %}
+    {% if user.is_staff %}
+      <a href="{% url 'admin:login' %}"  class="btn btn-secondary" role="button">Admin</a>
+    {% endif %}
+    </h2>
     <!--Navigation BAR adapted from https://getbootstrap.com/docs/4.0/components/navbar/#responsive-behaviors-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,7 +99,7 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
         <a class="nav-link" href="{% url 'cupcake_site:profile' user.username %}">My Profile</a>
       </li>
        <li class="nav-item">
-        <a class="nav-link" href="{% url 'auth_logout' %}">Logout</a>
+        <a class="nav-link" href="{% url 'cupcake_site:list_profiles' %}">Members</a>
       </li>
       {% else %}
       <li class="nav-item">
@@ -111,14 +121,7 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
 
     <div class="container">
      <div class="col-sm-4">
-   <!--additional buttons features for authenticated users, only display if authenticated go here--> 
-  
-    {% if user.is_authenticated %}
-      <a href="{% url 'cupcake_site:list_profiles' %}" class="btn btn-secondary" role="button">Members</a>  
-    {% endif %}
-    {% if user.is_staff %}
-      <a href="{% url 'admin:login' %}"  class="btn btn-secondary" role="button">Admin</a>
-    {% endif %}
+   <!--hook extra space for additional image or info if necessary for future-->  
           
     </div>
 <!--close the above nav bar column, then close the container-->
@@ -132,19 +135,10 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
 {% block body_block %}
 {% endblock %} 
 </div>
-<!--This is the footer layout with authenticiation restriction//TODO test with users if this is preferable to above navigation bar NOW coded this in buttons above, this is alternative design-->
+<!--This is the footer hook for contact info as a grey button TODO map url and write view and template -->
 <br/> 
 {% comment %} <div class = "container">
-      {% if user.is_authenticated %}
-           <a style = "display:block" class="center-align" href="{% url 'cupcake_site:list_profiles' %}" >List of Members</a>
-           <a href="{% url 'cupcake_site:list_profiles' %}" class="btn btn-secondary" role="button">Members</a>
-         
-      {% endif %}
-      {% if user.is_staff %}
-           <a style = "display:block" class="center-align" href="{% url 'admin:login' %}" >Admin</a>
-           <a href="{% url 'admin:login' %}"  class="btn btn-secondary" role="button">Admin</a>
-      {% endif %}
-        <a style = "display:block" class="center-align" href="/contact" >Contact Cupcake Code</a>
+      <a href="{% url 'cupcake_site:contact' %}"  class="btn btn-secondary" role="button">Contact Us</a>
 </div> {% endcomment %}
 </div>  
 </body>
