@@ -12,7 +12,7 @@
 <div>
   <header class = "container center-align">
     {% if category %}
-       <h1> {{ category.name}}  </h1><p>Clicking the link takes you to view the page, to return to this site Click the back arrow in your browser or Right Click the links to open in a new tab.</p>
+       <h1><b> {{ category.name}} </b> </h1><h6>Clicking the link takes you to view the page, to return to this site Click the back arrow in your browser or Right Click the links to open in a new tab.</h6>
    </header>
 <div class = "container">
 <h3 class = "centre-align blue lighten-4", class="container centre-align">LINKS</h3>
@@ -22,7 +22,7 @@
         {% if pages %}
           <ul>
               {% for page in pages %}
-                <li><a href="{{ page.url }}">{{ page.title}}</a> {{page.description}} </li>
+                <li><a href="{{ page.url }}">{{ page.title}}</a> <br/>{{page.description}} </li>
 
               {% endfor %}
           </ul> 
