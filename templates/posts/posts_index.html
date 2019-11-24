@@ -4,12 +4,12 @@
 {% block blog_content %}
  
     <h4 class = "container center-align"><n></n><n></n>l a t e s t &nbsp;&nbsp;p o s t s</h4>
-    <h6 class = "centre-align blue lighten-4", class="container centre-align">sub heading</h6>
+    <h6 class = "centre-align blue lighten-4", class="container centre-align"><h6>Sign up to post your coding learning journey here. <br/> You could outline your progress on a project, or share experiences at a tech event, career pathway or anything you would like to contribute.</h6>
 
     <ul class = "collection">
         {% for post in posts %} 
             {% comment %} <li class = "collection-item"><a href= "{{ post.get_absolute_url }}">{{post.title}}></a></li> {% endcomment %}
-            <li class = "collection-item"><a href= "/posts/posts_detail/{{post.pk}}">{{post.title}}></a></li>
+            <li class = "collection-item"><a href= "/posts/posts_detail/{{post.pk}}">{{post.title}} </a></li>
         {% endfor %}
     </ul>
     {% if user.is_authenticated %} 
