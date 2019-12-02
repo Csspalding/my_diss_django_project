@@ -13,17 +13,17 @@
 
 <!--Different Design style in a box <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
 
-    <!--so each template is different wrap into a container, this is Jinja below in brackets-->
     <header class = "container center-align">
         <h1><b>B L O G  - learning journey</b></h1> 
     </header>
     
+    <!--so each template is different wrap into a container, this is Jinja below in brackets-->
     <div class = "container">
         {% block blog_content %}
         {% endblock %}
-
+    </div>
         
        
 {% endblock %} 
-<!--footer is inherited from cupcake_site base template-->
+<!--any footer is inherited from cupcake_site base template-->
   

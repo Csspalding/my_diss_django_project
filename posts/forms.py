@@ -9,18 +9,6 @@ from posts.models import Posts
 from crispy_forms.helper import FormHelper
 from django.core.files.images import get_image_dimensions
 
-#Not using a Post Form
-class PostForm(forms.ModelForm):
-#when a post is made it wont yet have instance of a user unless already registered
-
-    class Meta:
-        model = Posts
-        fields = ('title', 'body', 'post_image')
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
-
 class PostCreateForm(forms.ModelForm):
     class Meta:
         model = Posts

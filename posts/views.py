@@ -12,7 +12,7 @@ from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from posts.forms import PostForm, PostCreateForm
+from posts.forms import PostCreateForm
 from crispy_forms.helper import FormHelper
 from django.views import View
 from django.views.generic.detail import DetailView
@@ -26,7 +26,7 @@ from cupcake_site.models import UserProfile
 """any user can view a list of titles of published blog posts"""
 def posts_index(request):
     try:
-        posts=Posts.objects.all()[:10] #gets the first 10 posts 
+        posts=Posts.objects.all()[:10] #gets the first 10 posts to display
     except Posts.DoesNotExist:
         return None 
     context = {
