@@ -1,12 +1,12 @@
 from django.db import models
 from datetime import datetime
 from django.urls import reverse
-from django.contrib.auth.models import User # PostAuthor and CommentAuthor
+from django.contrib.auth.models import User #PostAuthor, CommentAuthor
 from cupcake_site.models import UserProfile
 from django.template.defaultfilters import slugify
 #from django.utils.decorators import method_decorator
 
-#Tango book & travery media tutorial helped with these post models
+#Azzopardi & Maxwell  & Travery Media tutorial helped with these post models
 #Meta inner class helps get rid of the extra default 's' on Postss, as displayed on /admin page 
 # Status and Display choices adapted from The Abhijeet https://github.com/TheAbhijeet/Django_blog/blob/master/blog/models.py
 #post has one author but authors have many posts, relationship is ForeignKey to userprofile
@@ -35,8 +35,8 @@ class Posts(models.Model):
     class Meta:
         verbose_name_plural = "Posts"
         ordering=['-created_at']
-        # / or ordering by likes?
-        #ordering = ['-id'] # or ordering by ['last_modified']
+        #ordering = ['-id'] 
+        # or ordering by ['last_modified']
 
     def __str__(self):
         return self.title
@@ -45,45 +45,28 @@ class Posts(models.Model):
     def save(self, *args, **kwargs,):
         self.slug = slugify(self.title)
         super(Posts, self).save(*args, **kwargs)
-    
-    #TODO not working or rendering
+
+    #To display a default picture when a user does not load one
     def picture_or_default(self, default_path="/static/images/digitalcakes.jpg"):
         if self.picture:
             return self.picture
         return default_path
-        #{{ user.picture_or_default }} in template
-
-#https://stackoverflow.com/questions/14170473/get-absolute-url-in-django-when-using-class-based-views"""
-
-    
-    #Django Docs    
-    #def get_absolute_url(self):
-        #return reverse('posts.views.PostDetail',args=[str(self.id)])
-
-        #return reverse('people.views.details', args=[str(self.id)])
-#-user-when-creating-an-object-in-django-admin
-#with this code I may not need to set an created_by_attribute in populatePostsDb.py
-    # def save_model(self, request, obj, form, change):
-    #     if not obj.created_by_user:
-    #         obj.created_by_user = request.user
-    #     obj.save() 
-
+      
 #Comment code adapted from https://realpython.com/get-started-with-django-1/
 
-# class Comment(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_comments')#the author of the comment, one author one comment, NB user.username is the 
-#     #author = models.CharField(max_length=60)
-#     body = models.TextField()
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     post = models.ForeignKey('Posts', on_delete=models.CASCADE)#post.id is id, do not post.user for user instead its user_author.username see comment below
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_comments')#the author of the  comment, one author one comment, NB user.username is the 
+    #author = models.CharField(max_length=60)
+    body = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    post = models.ForeignKey('Posts', on_delete=models.CASCADE)#post.id is id, do not post.user for user instead its user_author.username see comment below
     
-#     class Meta:
-#         verbose_name_plural = "Comments"
-        
-#         ordering=['-created_at']
+    class Meta:
+        verbose_name_plural = "Comments"
+        ordering=['-created_at']
 
-#     def __str__(self):
-#         return self.author # .auth.models import User as registered by redux package
+    def __str__(self):
+        return self.author # .auth.models import User as registered by ajax package
 
 
         

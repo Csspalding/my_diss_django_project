@@ -19,26 +19,11 @@ AddPost
      <!-- ony authenticated users should access this page -->
        <h1 class="jumotron-heading">{{post.user}} create your new Blog article</h1>
 
-<!--display  - TODO refactor picture this not necessary here, but may be in a display and update  -->
-      {% comment %} 
-      <div class="container">
-      <div class="col-sm-4">
-      {% if post.post_image %}
-       <br />
-        <img src="{{ MEDIA_URL }}{{ post.post_image }}" width="300" hight="300" alt="{{post.author_post}}'s profile picture {{post.post_image.name}}" /><!-- New line -->   
-        <br/>
-      {% else %}
-      <!--if media files are not loading, render a default static file-->
-      <br/>
-      <img src="{% static 'images/carrot_cupcakes.jpg' %}" width="50" height="50" />
-      <br/>
-      {% endif %} 
-      {% endcomment %}
+
 
 <!--Crispy form-->
  {% block main %} 
      <!--display post details form enable them to update values title, picture, body, status-->
-        {% comment %} <div>  {% if user.is_authenticated %}  {% endcomment %}
         <form method = "post" action="." enctype="multipart/form-data">
               {% csrf_token %} 
               {{ form|crispy}}

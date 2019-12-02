@@ -13,7 +13,6 @@
     </ul>
     {% if user.is_authenticated %} 
     <div>
-    {% comment %} <a style = "display:block" class="center-align" href="{% url 'posts:posts_create' %}"  >Add New Post</a> {% endcomment %}
     <a href="{% url 'posts:posts_create' %}"  class="btn btn-secondary" role="button">Add New Blog Post</a> 
     </div>
     {% endif %} 

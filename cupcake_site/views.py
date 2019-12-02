@@ -19,11 +19,6 @@ from cupcake_site.forms import CategoryForm, PageForm, UserForm, UserProfileForm
 
 """index view is the home page for the web application site"""
 
-# def index(request):
-#   """construct a dictionary to pass to the template html as its context or data to be rendered."""
-#   context_dict= {'boldmessage':'did you know... you can learn coding skills for free...'}
-#   return render(request, 'cupcake_site/index.html', context=context_dict)
-
 class IndexView(View):
   """construct a dictionary to pass to the template html as its context or data to be rendered."""
   def get(self, request):
@@ -36,7 +31,7 @@ class AboutView(View):
     context_dict={}
     return render(request, 'cupcake_site/about.html', context=context_dict)
 
-#carsole for the About page todo change this
+#carsole for the About page todo change this name and position
 def h(request):
   context_dict={'boldmessage': 'We need more women in tech'}
   return render(request, 'cupcake_site/h.html', context=context_dict)
@@ -190,7 +185,7 @@ class ProfileCreateView(CreateView):
         except TypeError:
             return redirect('cupcake_site:index')
 
-        #To test user authentication    
+        #To test if user is authenticated    
         if user == request.user:
             form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
   
@@ -208,7 +203,7 @@ class ProfileCreateView(CreateView):
         form.helper.include_media = True
         return render(request, 'cupcake_site/profile.html', context_dict)
    
-#modified from Tango book    
+    
 class ListProfilesView(View):
     @method_decorator(login_required)
     def get(self, request):

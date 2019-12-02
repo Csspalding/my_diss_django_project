@@ -102,9 +102,9 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
         <a class="nav-link" href="{% url 'cupcake_site:list_profiles' %}">Members</a>
       </li>
       {% else %}
-      <li class="nav-item">
+      {% comment %} <li class="nav-item">
         <a class="nav-link" href="{% url 'auth_login' %}">Login</a>
-      </li>
+      </li> {% endcomment %}
       <li class="nav-item">
         <a class="nav-link" href="{% url 'registration_register' %}">SignUp</a>
       </li>
