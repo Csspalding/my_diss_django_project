@@ -10,7 +10,7 @@ from cupcake_site.models import UserProfile
 from crispy_forms.helper import FormHelper
 from django.core.files.images import get_image_dimensions
 
-"""Learning Tools category form to add another category"""
+"""Learning Tools category form"""
 class CategoryForm(forms.ModelForm):
   name = forms.CharField(max_length=128, help_text="Please enter the category name.")
   views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
@@ -23,7 +23,7 @@ class CategoryForm(forms.ModelForm):
     model = Category
     fields = ('name',)
 
-"""Learning Tools form to add a new Page link"""
+"""Learning Tools Page link form"""
 class PageForm(forms.ModelForm):
   title = forms.CharField(max_length=128, help_text="Please enter the title of the web page.")
   description = forms.CharField(max_length=500, help_text="Describes why this page is a great resource to help direct others towards useful information.")
@@ -51,31 +51,7 @@ class PageForm(forms.ModelForm):
       #always end clean() by returning a reference to the cleaned_data dictionary
       return cleaned_data
 
-""" """
-class UserForm(forms.ModelForm):
-  password = forms.CharField(widget=forms.PasswordInput())#hides password as it is typed
- 
-  """For passing variable number of arguments and keyword dictionary arguments in the function """
-  def __init__(self, *args, **kwargs):
-    super().__init__(*args, **kwargs)
-
-  class Meta:
-    model = User
-    fields = ('username','password', 'email') 
-    #A userprofile is only created once the user is registered
-
-#create a widget to render the photo
-#https://stackoverflow.com/questions/28764571/display-image-from-imagefield-by-means-of-form
-
-class ImageUploadForm(forms.Form):
-  profile_photo = forms.ImageField()
-
-
-# class PictureWidget(forms.widgets.Widget):
-#     def render(self, name, value, attrs=None, renderer=None):
-#         html = Template("""<img src="$media$link"/>""")
-#         return mark_safe(html.substitute(media=settings.MEDIA_URL, link=value))
-
+"""Create A User Profile"""
 class UserProfileForm(forms.ModelForm):#when a userprofile is made it wont yet have instance of a user unless already registered
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
