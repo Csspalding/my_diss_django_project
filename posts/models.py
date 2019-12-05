@@ -4,11 +4,10 @@ from django.urls import reverse
 from django.contrib.auth.models import User #PostAuthor, CommentAuthor
 from cupcake_site.models import UserProfile
 from django.template.defaultfilters import slugify
-#from django.utils.decorators import method_decorator
 
-#Azzopardi & Maxwell  & Travery Media tutorial helped with these post models
+"""Azzopardi & Maxwell "Tango with Django" (2019) & Traversy Media (2017) tutorial helped with these post models"""
 #Meta inner class helps get rid of the extra default 's' on Postss, as displayed on /admin page 
-# Status and Display choices adapted from The Abhijeet https://github.com/TheAbhijeet/Django_blog/blob/master/blog/models.py
+"""Status and Display choices adapted from The Abhijeet https://github.com/TheAbhijeet/Django_blog/blob/master/blog/models.py"""
 #post has one author but authors have many posts, relationship is ForeignKey to userprofile
 #For the slug Adding unique=True attrubute after database is created avoids database conflicts, as posts are only for registered users, this are constrained to a userprofile instance existing
 

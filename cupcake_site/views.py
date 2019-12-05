@@ -11,14 +11,14 @@ from django.utils import timezone
 from datetime import datetime
 from django.utils import timezone
 
-
 from cupcake_site.models import Category, Page, UserProfile
 from cupcake_site.forms import CategoryForm, PageForm, UserProfileForm
 
+"""
+Cassie Spalding 2140148s 
+Code for the view's adapted and guided by Azzopardi & Maxwell "Tango with Django" (2019)"""
 
-
-"""index view is the home page for the web application site"""
-
+"""index view is the Home page for the web application site"""
 class IndexView(View):
   """construct a dictionary to pass to the template html as its context for data to be rendered."""
   def get(self, request):
@@ -55,20 +55,20 @@ def show_category(request, category_name_slug):
   try:
     # get method returns DoesNotExist or instance // try/catch  handles exception if no categories exist
     category= Category.objects.get(slug=category_name_slug)
-    #filter method  return a list of page objects or an empty list
+    # filter method  return a list of page objects or an empty list
     pages= Page.objects.filter(category=category)
-    #Save results from filter 
+    # Save results from filter 
     context_dict['pages'] = pages
-    #add the category object from database to the context dictionary, which is used to verify it exists in the template 
+    # add the category object from database to the context dictionary, which is used to verify it exists in the template 
     context_dict['category']= category
   except Category.DoesNotExist:
-    #set context_dict to None as none found, DoesNotExist exception is displayed
+    # set context_dict to None as none found, DoesNotExist exception is displayed
     context_dict['pages'] = None 
     context_dict['category']= None 
   return render(request, 'cupcake_site/tools_category.html', context=context_dict)
 
 """Add a page link to a specified Learning Tool category"""
-#the slug eliminates white spaces in URL, is the title of the category passed in
+# the slug eliminates white spaces in URL, is the title of the category passed in
 def add_page(request, category_name_slug):
   try:
     category = Category.objects.get(slug=category_name_slug)
@@ -125,11 +125,12 @@ class RegisterProfileCreateView(CreateView):
 
       if form.is_valid():
         user_profile = form.save(commit=False)#creates user profile instance, but does not save it
-        #allows user to upload data user's profile 
+        #allows user to upload data and maps profile to user registered 
         user_profile.user = request.user 
         user_profile.save()# saves the new data attributes to the userprofile
         form.helper.include_media = True
-        return redirect('cupcake_site:index')
+        #redirect index page
+        return redirect ('cupcake_site:index')
         
       else:
         print(form.errors)

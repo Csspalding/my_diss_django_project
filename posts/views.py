@@ -23,7 +23,8 @@ from cupcake_site.models import UserProfile
 #from posts.models import Comments
 #from posts.forms import CommentForm 
 
-"""any user can view a list of titles of published blog posts"""
+
+"""any user can view a list of titles of published blog posts code adapted from Traversy Media (2017) tutorial "Django crash course" """
 def posts_index(request):
     try:
         posts=Posts.objects.all()[:10] #gets the first 10 posts to display

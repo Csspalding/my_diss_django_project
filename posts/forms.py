@@ -14,23 +14,17 @@ class PostCreateForm(forms.ModelForm):
         model = Posts
         exclude = ('slug', 'user')
 
-#https://stackoverflow.com/questions/49218302/python-difference-between-kwargs-pop-and-kwargs-get If i use kwargs.get I get an error TypeError at /posts/add_post/     __init__() got an unexpected keyword argument 'user'
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
         super().__init__(*args, **kwargs)
-        #super(PostCreateForm, self).__init__(*args, **kwargs)
-
+       
     def clean_title(self):
         title = self.cleaned_data['title']
         if Posts.objects.filter(user=self.user, title=title).exists():
-            #user = self.user
             raise forms.ValidationError("You have already written a post with the same title.")
         return title
 
-      #     #error cannot resolve keywork into field user/ userprofile /username BUT when I use author_post= Error is cannot query Cassie2  must use UserProfile instance
-    #     #profile = request.user.get_profile()
-    #     if Posts.objects.filter(title=title).exists():
-
+     
 # https://stackoverflow.com/questions/13460426/get-user-profile-in-django    
 # a=User.objects.get(email='x@x.xom')
 # a.get_profile().DOB will give the dateofbirth value from extrauser table.

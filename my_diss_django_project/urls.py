@@ -25,14 +25,13 @@ from django.conf.urls.static import static
 
 """override redux package existing registration_register (when users Sign Up) to redirect to a custom user profile registration form"""
 class MyRegistrationView(RegistrationView):
-    #@method_decorator(login_required)
     def get_success_url(self, user):
       return reverse( 'cupcake_site:register_profile')
 
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
-    path('cupcake_site/', include('cupcake_site.urls')),# urls startwith 'cupcake_site/' are handled by cupcake_site app
-    path('posts/', include('posts.urls')),# urls startwith 'posts/' are handled by posts app
+    path('cupcake_site/', include('cupcake_site.urls')),
+    path('posts/', include('posts.urls')),
     path('admin/', admin.site.urls),
     path('accounts/register/', MyRegistrationView.as_view(), name='registration_register'),#override existing redux package URL mapping
     path('accounts/', include('registration.backends.simple.urls')),#out of the box django-registration-redux package for user authentication and login etc

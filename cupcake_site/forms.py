@@ -1,7 +1,4 @@
 from django import forms
-from string import Template
-from django.utils.safestring import mark_safe
-from django.forms import ImageField
 from my_diss_django_project import settings
 from cupcake_site.models import Page
 from cupcake_site.models import Category
@@ -60,11 +57,9 @@ class UserProfileForm(forms.ModelForm):#when a userprofile is made it wont yet h
   class Meta:
     model = UserProfile
     fields = ('bio', 'picture')
-    #TODO test clean_pic function
-    #clean_pic=('picture')
+    clean_pic=('picture')
    
-
-    #https://stackoverflow.com/questions/6396442/add-image-avatar-field-to-users-in-django/6396744
+    """Code adapted from https://stackoverflow.com/questions/6396442/add-image-avatar-field-to-users-in-django/6396744"""
     def clean_pic(self):
         pic = self.cleaned_data['picture']
 
