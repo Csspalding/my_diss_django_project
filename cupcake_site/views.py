@@ -224,36 +224,3 @@ def visitor_cookie_handler(request):
     
     request.session['visits'] = visits
 
-class GotoView(View):
-    def get(self, request):
-        page_id = request.GET.get('page_id')
-        
-        try:
-            selected_page = Page.objects.get(id=page_id)
-        except Page.DoesNotExist:
-            return redirect(reverse('rango:index'))
-            
-        selected_page.views = selected_page.views + 1
-        selected_page.last_visit = timezone.now()
-        selected_page.save()
-        
-        return redirect(selected_page.url)
-        
-"""Like a category"""
-class LikeCategoryView(View):
-    @method_decorator(login_required)
-    def get(self, request):
-        category_id = request.GET['category_id']
-        
-        try:
-            category = Category.objects.get(id=int(category_id))
-        except Category.DoesNotExist:
-            return HttpResponse(-1)
-        except ValueError:
-            return HttpResponse(-1)
-        
-        category.likes = category.likes + 1
-        category.save()
-        
-        return HttpResponse(category.likes)
-
