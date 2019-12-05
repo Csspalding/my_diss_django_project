@@ -10,6 +10,7 @@ from cupcake_site.models import UserProfile
 from crispy_forms.helper import FormHelper
 from django.core.files.images import get_image_dimensions
 
+"""Learning Tools category form to add another category"""
 class CategoryForm(forms.ModelForm):
   name = forms.CharField(max_length=128, help_text="Please enter the category name.")
   views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
@@ -17,54 +18,51 @@ class CategoryForm(forms.ModelForm):
   slug = forms.CharField(widget=forms.HiddenInput(), required=False)
   
   
-  #visible fields displayed to user
+  """Specify model for form, and visible fields to be displayed""" 
   class Meta:
-    #provides link from modelForm to a model
     model = Category
-    #includes this field from Category in rango/models.py
     fields = ('name',)
 
+"""Learning Tools form to add a new Page link"""
 class PageForm(forms.ModelForm):
   title = forms.CharField(max_length=128, help_text="Please enter the title of the web page.")
   description = forms.CharField(max_length=500, help_text="Describes why this page is a great resource to help direct others towards useful information.")
   url = forms.URLField(max_length=200, help_text="Please enter the web address of the page you want to add, starts with http:// Hint: you can copy and paste the link from your browser.")
   views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
 
-  #visible fields displayed to user inner class Meta 
   class Meta:
     model = Page
-    #Name = ('Title',) TODO Test this
     exclude = ('category',)
 
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
 
-#override ModelForm clean() to handles missing data or default fields in this case url syntax 
+  """override the form to handle missing data/ default fields for the url""" 
   def clean(self):
     cleaned_data = self.cleaned_data
     url = cleaned_data.get('url') 
-    #get function will return None if user enters nothing as new form will not exist
+    #Note: the get function will return None if user enters nothing as new form will not exist
 
-    #HANDLING SECURE https:// too!
-    #if the url is not empty and doesn't start with 'http://' then prepend 'http://'
+    """HANDLING SECURE https:// too!
+    if the url is not empty and doesn't start with 'http://' then automatically input 'http://'  """
     if url and not (url.startswith('http://') or url.startswith('https://')):
       url = 'http://'+ url
       cleaned_data['url'] = url
       #always end clean() by returning a reference to the cleaned_data dictionary
       return cleaned_data
 
-
+""" """
 class UserForm(forms.ModelForm):
   password = forms.CharField(widget=forms.PasswordInput())#hides password as it is typed
-  #visible fields displayed to user  
+ 
+  """For passing variable number of arguments and keyword dictionary arguments in the function """
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
 
-  class Meta:#meta classes must have a model, they describe additional properties for that class
-    #and must specify the fields to include or exclude which are associated with the model and should
-    #be present or not on the rendered form
+  class Meta:
     model = User
-    fields = ('username','password', 'email')#only make a userprofile once the user is registered
+    fields = ('username','password', 'email') 
+    #A userprofile is only created once the user is registered
 
 #create a widget to render the photo
 #https://stackoverflow.com/questions/28764571/display-image-from-imagefield-by-means-of-form
@@ -88,8 +86,7 @@ class UserProfileForm(forms.ModelForm):#when a userprofile is made it wont yet h
     fields = ('bio', 'picture')
     #TODO test clean_pic function
     #clean_pic=('picture')
-    #picture = ImageField(widget=PictureWidget)
-    #TODO add link to change/update email
+   
 
     #https://stackoverflow.com/questions/6396442/add-image-avatar-field-to-users-in-django/6396744
     def clean_pic(self):
@@ -123,19 +120,3 @@ class UserProfileForm(forms.ModelForm):#when a userprofile is made it wont yet h
             """
 
         return pic
-
-
-#to avoid Django userprofile default being displayed https://simpleisbetterthancomplex.com/tutorial/2016/11/23/how-to-add-user-profile-to-django-admin.html
-  # class ProfileInline(admin.StackedInline):
-  #   model = Profile
-  #   can_delete = False
-  #   verbose_name_plural = 'Profile'
-  #   fk_name = 'user'
-
-  # class CustomUserAdmin(UserAdmin):
-  #   inlines = (ProfileInline, )def get_inline_instances(self, request, obj=None):
-  #       if not obj:
-  #           return list()
-  #       return super(CustomUserAdmin, self).get_inline_instances(request, obj)
-  # admin.site.unregister(User)
-#   admin.site.register(User, CustomUserAdmin)  

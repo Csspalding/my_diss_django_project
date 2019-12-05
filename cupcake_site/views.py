@@ -13,17 +13,16 @@ from django.utils import timezone
 
 
 from cupcake_site.models import Category, Page, UserProfile
-from cupcake_site.forms import CategoryForm, PageForm, UserForm, UserProfileForm, ImageUploadForm
+from cupcake_site.forms import CategoryForm, PageForm, UserProfileForm
 
 
 
 """index view is the home page for the web application site"""
 
 class IndexView(View):
-  """construct a dictionary to pass to the template html as its context or data to be rendered."""
+  """construct a dictionary to pass to the template html as its context for data to be rendered."""
   def get(self, request):
-    context_dict= {'boldmessage':'did you know... you can learn coding skills for free...'}
-    return render(request, 'cupcake_site/index.html', context=context_dict)
+    return render(request, 'cupcake_site/index.html')
 
 """About page"""
 class AboutView(View):
@@ -31,40 +30,36 @@ class AboutView(View):
     context_dict={}
     return render(request, 'cupcake_site/about.html', context=context_dict)
 
-#carsole for the About page todo change this name and position
+"""Career carsousel"""
 def career(request):
   context_dict={'boldmessage': 'We need more women in tech'}
   return render(request, 'cupcake_site/career.html', context=context_dict)
 
 
-#Learning Tools Categories Page 
+"""Learning Tools Categories Page"""
 def tools(request):
-  #get all the categories, later maximum 10 [:10]
-  category_list = Category.objects.all()#can order by likes
+  """display all the categories in a list, to only show a  maximum 10  use [:10]"""
+  category_list = Category.objects.all()
   page_list = Page.objects.order_by('views')[:5]
-  #category_list = Category.objects.order_by('-likes')[:5]
-  #save them
-  #NOT YET tracking visits
-    #context_dict = {}
-    #context_dict['visits'] = request.session['visits']
+  
   context_dict ={}
   context_dict ['categories'] = category_list
   context_dict ['pages'] = page_list
+  #context_dict['visits'] = request.session['visits']
   return render(request, 'cupcake_site/tools.html', context=context_dict)
 
-#Show links for the selected Learning Tool
-#TODO write def create_context_dic for this class
+"""Display a list of links for the selected Learning Tool"""
+#TODO write def create_context_dic for this class"""
 def show_category(request, category_name_slug):
-  context_dict={'boldmessage': 'There are many Free Learning Tools On-Line, click on a category below to see the links.'}
+  context_dict={}
   try:
-    # get () returns DoesNotExist or instance // try/catch  handles exception if no categories exist
+    # get method returns DoesNotExist or instance // try/catch  handles exception if no categories exist
     category= Category.objects.get(slug=category_name_slug)
-    #filter()  will return a list of page objects or an empty list
+    #filter method  return a list of page objects or an empty list
     pages= Page.objects.filter(category=category)
-    #Save results from filter() 
+    #Save results from filter 
     context_dict['pages'] = pages
-    #add the category object from db to the context dictionary
-    # which is used to verify it exists in the template 
+    #add the category object from database to the context dictionary, which is used to verify it exists in the template 
     context_dict['category']= category
   except Category.DoesNotExist:
     #set context_dict to None as none found, DoesNotExist exception is displayed
@@ -72,7 +67,8 @@ def show_category(request, category_name_slug):
     context_dict['category']= None 
   return render(request, 'cupcake_site/tools_category.html', context=context_dict)
 
-#Add another link to a Learning Tool category
+"""Add a page link to a specified Learning Tool category"""
+#the slug eliminates white spaces in URL, is the title of the category passed in
 def add_page(request, category_name_slug):
   try:
     category = Category.objects.get(slug=category_name_slug)
@@ -89,21 +85,16 @@ def add_page(request, category_name_slug):
         page.category = category
         page.view =0
         page.save()
-    #once page form is created redirect user to the show_category() view, if a match is found from show_category ()the complete url is returned
-    #as an added complication show_category(category_name_slug) passed in parameter, by providing a value in dictionary as kwargs to the reverse function it can formulate the url
-
-        #form.helper.form_action = reverse('url_name', kwargs={'category_name_slug': category_name_slug})
-        
+    #once page form is created, check it has a valid category 
+    #category_name_slug passed in parameter, by providing a value in dictionary as kwargs to the reverse function, Django can formulate the url
         return redirect(reverse('cupcake_site:show_category', kwargs={'category_name_slug':category_name_slug}))
-        #return show_category(request, category_name_slug)
     else:
       print(form.errors)
 
-  context_dict = { 'form':form, 'category':category } #objects passed through the template context dictionary to the html
+  context_dict = { 'form':form, 'category':category } 
   return render(request, 'cupcake_site/add_page.html', context=context_dict)
-
-     
-#Class to create and process the Form to add a new Category to Learning Tools       
+    
+"""Form to Add a new Category to Learning Tools and process"""       
 class CategoryCreateView(CreateView):
     @method_decorator(login_required)
     def get(self, request):
@@ -121,7 +112,7 @@ class CategoryCreateView(CreateView):
         print(form.errors)
       return render(request, 'cupcake_site/add_category.html', {'form': form})  
 
-# Create User Profile Form, assumes a user has signed up and created a django.contrib.auth.models.User instance prior
+"""Create a User Profile, assumes a user has signed up and created a django.contrib.auth.models.User instance prior"""
 class RegisterProfileCreateView(CreateView):
     @method_decorator(login_required)
     def get(self, request):
@@ -145,7 +136,7 @@ class RegisterProfileCreateView(CreateView):
     
       return render(request, 'cupcake_site/profile_registration.html', {'form': form}) 
 
-#allow a registered user to view and amend their profile
+"""Display a registered users profile, allow a registered user to view and amend their profile"""
 class ProfileCreateView(CreateView):
     def get_user_details(self, username):
       try:
@@ -157,9 +148,6 @@ class ProfileCreateView(CreateView):
       include_media = True
       form = UserProfileForm({'bio': userprofile.bio,
                               'email':userprofile.email,
-                              #'web' :userprofile.web,
-                              #'coding_level':userprofile.coding_level,
-                              #'tech_interests':userprofile.tech_interests,
                               'picture': userprofile.picture})
       return (user, userprofile, form)
   
@@ -185,7 +173,7 @@ class ProfileCreateView(CreateView):
         except TypeError:
             return redirect('cupcake_site:index')
 
-        #To test if user is authenticated    
+        #To test if user is authenticated this is a second check, method decorator already checks this.   
         if user == request.user:
             form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
   
@@ -203,7 +191,7 @@ class ProfileCreateView(CreateView):
         form.helper.include_media = True
         return render(request, 'cupcake_site/profile.html', context_dict)
    
-    
+"""Allow a user to see a list of Members"""    
 class ListProfilesView(View):
     @method_decorator(login_required)
     def get(self, request):
