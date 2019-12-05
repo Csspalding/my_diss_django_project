@@ -40,7 +40,7 @@ SECRET_KEY = 'g9$649y9cbm4lq_%9f22fvho22-y2%k4gxgk9s%)4*&4$xo)0z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cupcakecode.pythonanywhere.com']
 
 
 # Application definition
