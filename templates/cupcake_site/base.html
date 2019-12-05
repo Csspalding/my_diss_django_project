@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 <html lang="en">
-  {% comment %} {% load rango_template_tags %}
-  sidebar is in the rango_template tag  {% endcomment %}
+ 
 <head>
 <!--  #author Cass July 8th 2019 this is the BASE.html
-from bootstrap 4 CSS getting started link is copied from the CND box. Note there is also a JavaScript & Poppie -->
+Note bootstrapCND source is the from  "getting started" https://getbootstrap.com/docs/4.0/getting-started/introduction/ 
+Note there is also a JavaScript & Poppie from the same source -->
 
 <!--Browser tab title-->
 <title>
@@ -49,7 +49,7 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
             <div class="table-responsive">
             </div>
         </div>
-      <!--close card, then slose card-blog-->
+      <!--close card, then close card-blog-->
       </div>
     </div>
     <!--close container, then close column-->
@@ -59,7 +59,7 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
   <div class="col-sm-9">
    <!--right of page is wider area for the navigation bar --> 
     <div class="container">
-  <!--logo header above navigation buttons-->
+  <!--logo header above navigation bar with Login/Logout and Admin Buttons-->
     <h2>&nbsp;&nbsp;&nbsp;CUPCAKE CODE <> anyone can code....
      <!--additional buttons features for authenticated users, only display if authenticated go here--> 
      {% if user.is_authenticated %}
@@ -77,7 +77,7 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
       <span class="navbar-toggler-icon"></span>
     </button>
   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-    <!--heading  Nav Bar if requried-->
+    <!--space for a heading in Nav Bar if requried later, not required now - the example is commented out-->
     {% comment %} <a class="navbar-brand" href="#">CupCakeCode</a> {% endcomment %}
    
     <!--List of Links for Navigation Bar-->
@@ -94,6 +94,7 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
       <li class="nav-item">
         <a class="nav-link" href="{% url 'cupcake_site:tools' %}">Learning Tools</a>
       </li>
+       <!--extra features for logged in users -->
        {% if user.is_authenticated %}
         <li class="nav-item">
         <a class="nav-link" href="{% url 'cupcake_site:profile' user.username %}">My Profile</a>
@@ -102,9 +103,7 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
         <a class="nav-link" href="{% url 'cupcake_site:list_profiles' %}">Members</a>
       </li>
       {% else %}
-      {% comment %} <li class="nav-item">
-        <a class="nav-link" href="{% url 'auth_login' %}">Login</a>
-      </li> {% endcomment %}
+      <!--Sign up button if not logged in -->
       <li class="nav-item">
         <a class="nav-link" href="{% url 'registration_register' %}">SignUp</a>
       </li>
@@ -130,7 +129,7 @@ from bootstrap 4 CSS getting started link is copied from the CND box. Note there
 <!--close the row-->
 </div>  
 </header> 
-
+ <!--Templates extending this base place content inside body block-->
 <div>
 {% block body_block %}
 {% endblock %} 

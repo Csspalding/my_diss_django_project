@@ -16,7 +16,6 @@
    </header>
 <div class = "container">
 <h3 class = "centre-align blue lighten-4", class="container centre-align">LINKS</h3>
-{% comment %} <div class ="card"> {% endcomment %}
   <div class = "card-content">
     <div>
         {% if pages %}
@@ -33,16 +32,16 @@
     </div>
        <div class = "container">
         <br>
-
+  <!--authorised users can add a page-->
         {% if user.is_authenticated %} 
         <!-- category.slug is passed thorugh as a parameter to the url template tag --> 
-        {% comment %} &emsp;&emsp;&nbsp;&nbsp;<a href="{% url 'cupcake_site:add_page',  category.slug %}">Add a Page</a> {% endcomment %}
         <h6>Found something useful, want to share with others? Why not add a new page to this category of learning tools.</h6>
         <a href="{% url 'cupcake_site:add_page' category.slug %}"  class="btn btn-secondary" role="button">Add Page </a>
-        
+   <!--Go Back button-->     
        {% endif %}
        <a href="{% url 'cupcake_site:tools' %}"  class="btn btn-secondary" role="button">Back to Learning Tools</a>
         </div> 
+    <!--If the category does not exit-->
     {% else %}
           The specified category does not exist!
         </div> 

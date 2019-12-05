@@ -8,55 +8,58 @@
    
 {% block body_block %}
  <header class = "container centre-align">
-    <!-- divide page into two areas left for main text and right as a sidebar area -->
-    <!--Right side container for main-->
-    <div class="row">
-    <div class="col-sm-8">
-     <div class="container">
-        <h1>About CupCakeCode..</h1>
-        <br /> 
-    <div >
-        <img src="{% static 'images/women.coffee.laptop.jpg' %}"    alt="Picture of Women in Tech" /><!-- New line -->
-     </div> 
+ <!-- divide page into two areas left for main text and right as a sidebar area -->
+ <!--Left side column for main area text-->
+<div class="row">
+<div class="col-sm-8">
+<div class="container">
+   <h1>About CupCakeCode..</h1><br /> 
+<div >
+<img src="{% static 'images/women.coffee.laptop.jpg' %}"  alt="Picture of person with coffee and laptop" />
+</div> 
 <p>Good at organising? Juggling the household, family commitments, clubs and events, everyone's likes dislikes, everyone's social calendar, laundry required for each day of the week, paying bills, correspondence, work, and being adaptable to fit around others. Applying your life skills and learning to code could make you more employable in the future. The great thing about coding is nobody knows it all, and there's always something new to learn. I've found coding surprisingly creative and you could too! </p>
-      <div >
-        <img src="{% static 'images/model-morph.jpg' %}" width="600" height="330"    alt="Picture of Code" /><!-- New line -->
-     </div> 
+<div >
+<img src="{% static 'images/model-morph.jpg' %}" width="600" height="330"    alt="Picture of icing model desk with figure" />
+</div> 
 <p>It would be great if I could inspire you into trying out some code or even enrolling on a course. I've found it much more interesting and creative than I could ever have imagined. </p>
-<p>Embracing technology can empower your confidence in any job and open the door to some great career opportunities.  Join the Digial Revolution and start learning, check out Learning tools to find out how to get started, find free resources, meetup groups and much more. Ultimately if we want to have a voice, and help to shape our evolving tech culture, rather that shying away, it's essential we embrace technology.</p> 
-     </div>
+<p>Embracing technology can empower your confidence in any job and open the door to some great career opportunities.  Join the Digial Revolution and start learning, check out Learning tools to find out how to get started, find free resources, meetup groups and much more. Ultimately if we want to have a voice, and help to shape our evolving tech culture, rather that shying away, it's essential we embrace technology.</p>
+<!--close container --> 
+</div>
+<!--close column-->
+</div>
 
+<!--Right side column for smaller side bar area-->
+<div class="col-sm-4">
 
-     </div>
-    <!--Left side container for side bar area-->
-      <div class="col-sm-4">
-       <h1>Top Tips...</h1><br />  
-    <div >
-        <!--Image, room for any links Blog Article etc-->
-        <img src="{% static 'images/dark-computer-cake.jpg' %}"  width="300" height="330"      alt="Picture of Code" />
-        <!-- New line -->
-     </div> 
-    <p>Links to Facts </p>
-       <br/>
-     <h1>Did You Know...</h1><br />  <br />
-        <img src="{% static 'images/women-working.jpg' %}" width="300" height="200"    alt="Picture " /><!-- New line -->   
-       <br />
+   <h1>Top Tips...</h1><br />  
+      <!--Image-->
+      <img src="{% static 'images/dark-computer-cake.jpg' %}"  width="300" height="330"      alt="Picture of Computer Cake" />
+      <!-- New line -->
+      <br /> 
+      <p>Links to Facts </p>
+      <!-- List links here -->
+      <br/>
 
-       <p>Links to Facts </p>
-       <br/>
-       <h1>Women in Tech</h1><br />
-        <!--Image, room for any links Blog Article on Women in Tech etc--> 
+   <h1>Did You Know...</h1><br /> 
+      <!--Image-->
+      <img src="{% static 'images/women-working.jpg' %}" width="300" height="200"    alt="Picture of person at work in IT " />
+      <!-- New line -->   
       <br />
-       <img src="{% static 'images/photo-women-in-tech.jpg' %}" width="300" height="200"       alt="Picture of Personalised Laptop" />
-       <!-- New line -->   
-       <br />
- <!--carsole TODO rename class and link--> 
-       <p>Links to Career's  </p>
-       <li class="nav-item">
-        <a class="nav-link" href="{% url 'cupcake_site:career' %}">Careers</a>
-      </li>
-       <br/>
+      <p>Links to Facts </p>
+      <!-- List links here -->
+      <br/>
+
+   <h1>Women in Tech</h1><br />
+      <!--Image--> 
+      <img src="{% static 'images/photo-women-in-tech.jpg' %}" width="300" height="200"       alt="Picture of group of women working in IT" />
+      <!-- New line -->   
+      <br />
+      <!--List Links here. Currently Career's link takes users to view a carousel --> 
+      <p>Links to <a href="{% url 'cupcake_site:career' %}">Careers</a></p>
+      <br/>
+   <!--close column-->
     </div>
+   <!--close rows-->
     </div>
 {% endblock %} 
 

@@ -1,30 +1,25 @@
 {%extends 'cupcake_site/base.html' %}
 {% load staticfiles %}
+
 {% block title_block %}
 AddCategoryCupcakeCode 
 {% endblock %}
-
- <head>
-  <!--also put JavaScript file for bootstrap 4 in here if using js-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<!--container, row, col_x and justify-content-centre creates a simple layout with one row and one column-->
-   
-  </head> 
+ 
 {% block body_block %}
 <div class="container d-flex h-100">
-      <div class="row justify-content-center">
-        <div class="col-20"> 
+  <div class="row justify-content-center">
+    <div class="col-20"> 
  <h3>Add a new category to Learning Tools</h3><br />
         {% load crispy_forms_tags %}
-<!--This is the crispy form default block -->
-                {% block main %}
+        <!--This is the crispy form  -->
+           {% block main %}
                 <form  method="post">
                     {% csrf_token %}
                     {{ form|crispy }}
-                    <!--Added in a submit button to save the form to the db-->
+                    <!--Added in a submit button to save the form to the database -->
                     <button  type="submit"  class="btn btn-success">Submit</button>
                 </form>
-                {% endblock %}
+            {% endblock %}
          </div>
       </div>
     </div>

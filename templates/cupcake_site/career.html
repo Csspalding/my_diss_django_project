@@ -1,31 +1,19 @@
 <!DOCTYPE html>
-{% extends 'cupcake_site/base.html' %}
 {% load staticfiles %}
-{% block title_block %}
-CareersCupcakeCode  
-{% endblock %}
 
-{% block body_block %}
+<!--Carousel Adapted from https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_carousel2&stacked=h -->
+<head>
+<title>CupCakeCode</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
 <body>
-<div>
-<!--Adapted from https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_carousel2&stacked=h -->
- {% comment %} Not sure if this charset and stylesheet is needed {% endcomment %}
-  {% comment %} <meta charset="utf-8"> {% endcomment %}
-  {% comment %} <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> {% endcomment %}
-
-
-
- <a href="{% url 'cupcake_site:about' %}"  class="btn btn-secondary" role="button">Back to About Page</a>
- <br/>
+<li><a href="{% url 'cupcake_site:about' %}"  class="btn btn-secondary" role="button">Go Back </a></li>
+ <br/> 
 <div class="container">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
-
   <h2>CupCakeCode</h2>
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -43,8 +31,8 @@ CareersCupcakeCode
         <div class="carousel-caption">
           <h3>Coding</h3>
           <p>The Digital Revolution is here</p>
-          {% comment %} Shape the future<br>
-          Open doors to opportunities with great salaries</p> {% endcomment %}
+          Shape the future<br>
+          </p> 
         </div>
       </div>
 
@@ -61,7 +49,6 @@ CareersCupcakeCode
         <div class="carousel-caption">
           <h3>Coding</h3>
           <p>Creative Industries</p>
-          {% comment %} Web Design, User Experience, Project Management</p> {% endcomment %}
         </div>
       </div>
   
@@ -78,6 +65,4 @@ CareersCupcakeCode
     </a>
   </div>
 </div>
-</div>
 </body>
-{% endblock %}

@@ -5,25 +5,18 @@
   AddPageCupcakeCode  
 {% endblock %}
 
-
- <head>
-  <!--also put JavaScript file for bootstrap 4 in here if using js-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<!--container, row, col_x and justify-content-centre creates a simple layout with one row and one column-->
-   
-  </head> 
 {% block body_block %}
 <div class="container d-flex h-100">
       <div class="row justify-content-center">
         <div class="col-20"> 
  <h3>Add a new web page to this Learning Tool</h3><br />
 <!--This is the crispy form default block -->
-                    <!--Added in a submit button to save the form to the db-->
         {% load crispy_forms_tags %}
                 {% block main %}
                 <form  method="post">
                     {% csrf_token %}
                     {{ form|crispy }} {{category.slug}}
+                    <!--Added in a submit button to save the form to the db-->
                     <button  type="submit"  class="btn btn-success">Submit</button>
                 </form>
                 {% endblock %}
