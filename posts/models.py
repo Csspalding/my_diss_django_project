@@ -19,7 +19,7 @@ STATUS = (
       
 class Posts(models.Model):
     title = models.CharField(max_length=200, blank=True)# choices=DISPLAY, default=1)
-    slug = models.SlugField(max_length=200, blank=True, unique=True)#add unique true attribute after database is created.
+    slug = models.SlugField(max_length=200, blank=True)#add unique=true attribute after database is created.
     body = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     created_at = models.DateTimeField(default=datetime.now, blank=True)
