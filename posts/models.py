@@ -9,18 +9,14 @@ from django.template.defaultfilters import slugify
 #Meta inner class helps get rid of the extra default 's' on Postss, as displayed on /admin page 
 """Status and Display choices adapted from The Abhijeet https://github.com/TheAbhijeet/Django_blog/blob/master/blog/models.py"""
 #post has one author but authors have many posts, relationship is ForeignKey to userprofile
-#For the slug Adding unique=True attrubute after database is created avoids database conflicts, as posts are only for registered users, this are constrained to a userprofile instance existing
+#For the slug Adding unique=True attrubute after database is created avoids database conflicts, as posts are only for registered users. 
 
 STATUS = (
         (0, "Draft"),
         (1, "Publish")
 )
-DISPLAY = (
-        (0, "No"),
-        (1, "Yes")
-)
 
-#"""Model for Blog Posts"""       
+      
 class Posts(models.Model):
     title = models.CharField(max_length=200, blank=True)# choices=DISPLAY, default=1)
     slug = models.SlugField(max_length=200, blank=True, unique=True)#add unique true attribute after database is created.
@@ -28,14 +24,13 @@ class Posts(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     created_at = models.DateTimeField(default=datetime.now, blank=True)
     last_modified = models.DateTimeField(auto_now=True)
-    status= models.BooleanField(default=True)#TODO add helper text to explain display /draft
+    status= models.BooleanField(default=True)# so posts can be in published or draft status
     post_image = models.ImageField(upload_to ='post_images/', blank=True)
 
     class Meta:
         verbose_name_plural = "Posts"
         ordering=['-created_at']
-        #ordering = ['-id'] 
-        # or ordering by ['last_modified']
+        
 
     def __str__(self):
         return self.title
@@ -51,21 +46,7 @@ class Posts(models.Model):
             return self.picture
         return default_path
       
-#Comment code adapted from https://realpython.com/get-started-with-django-1/
 
-class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_comments')#the author of the  comment, one author one comment, NB user.username is the 
-    #author = models.CharField(max_length=60)
-    body = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    post = models.ForeignKey('Posts', on_delete=models.CASCADE)#post.id is id, do not post.user for user instead its user_author.username see comment below
-    
-    class Meta:
-        verbose_name_plural = "Comments"
-        ordering=['-created_at']
-
-    def __str__(self):
-        return self.author # .auth.models import User as registered by ajax package
 
 
         

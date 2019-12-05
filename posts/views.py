@@ -5,23 +5,16 @@ from django.http import HttpRequest
 from django.urls import reverse
 from django.urls import reverse_lazy
 
-#from posts.models import Comment
 from datetime import datetime
-from django.utils import timezone
 
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from posts.forms import PostCreateForm
-from crispy_forms.helper import FormHelper
 from django.views import View
 from django.views.generic.detail import DetailView
 from posts.models import Posts
 from django.views.generic.edit import CreateView
-
-from cupcake_site.models import UserProfile
-#from posts.models import Comments
-#from posts.forms import CommentForm 
 
 
 """any user can view a list of titles of published blog posts code adapted from Traversy Media (2017) tutorial "Django crash course" """
@@ -34,31 +27,6 @@ def posts_index(request):
             'posts': posts
             }
     return render(request, 'posts/posts_index.html', context)
-    
-#modified from https://realpython.com/get-started-with-django-1/ 
-    #comments = Comment.objects.filter(post=post)
-
-    # form = CommentForm()
-    # if request.method == 'POST':
-    #     form = CommentForm(request.POST)
-    #     if form.is_valid():
-    #         comment = Comment(
-    #             author=form.cleaned_data["author"],
-    #             body=form.cleaned_data["body"],
-    #             post=post
-    #         )
-    #         comment.save()
-        # context = {
-        #     'post': post,
-
-        # 'comments': comments,
-        # 'form': form
-
-    # context = {
-    #     'post': post,
-
-    #     }
-    # return render(request, 'posts/posts_details.html', context)
 
 """allow a registered user to create a new post, adapted from tutorial https://www.agiliq.com/blog/2019/01/django-createview/#using-createview"""
 
@@ -96,9 +64,6 @@ class PostCreate(CreateView):
 class PostDetail(DetailView):
     model = Posts
     template_name = 'posts/posts_detail.html'
-    #success_url = 
-
-#queryset = Posts.objects.filter(is_published=True)# bool for if the post status is draft or publish, remove model attribute to replace with this? TODO test once view for update post had been coded
 
     def get(self, request, *args, **kwargs):
         post = get_object_or_404(Posts, pk=kwargs['pk'])
