@@ -1,8 +1,9 @@
 {%extends 'cupcake_site/base.html' %}
 {% load staticfiles %}
 <!--Create and display CreateUserProfile Form -->
+
 {% block title_block %}
-ChangeUserProfile CupcakeCode 
+UserProfileRegister CupcakeCode 
 {% endblock %}
 
 <head>
@@ -16,11 +17,6 @@ ChangeUserProfile CupcakeCode
     <div class="container">
        <h1 class="jumotron-heading">{{user.username}}, create your Profile</h1>
 
-<!--display user's profile picture -->
-      {% comment %} <div class="container">
-      <div class="col-sm-4">
-      <br/>  {% endcomment %}
-
 <!--This is the crispy form -->
             {% block main %}
                 <form  method="post" action="{% url 'cupcake_site:register_profile' %}" enctype="multipart/form-data">
@@ -31,7 +27,7 @@ ChangeUserProfile CupcakeCode
                     {% csrf_token %}
                     {{form|crispy}}
                    
-                    <!--Added in a submit button to save the form to the db-->
+                    <!--Added in a submit button to save the form to the database-->
                     <button  type="submit"  class="btn btn-success">Create Profile</button>
                 </form>
             {% endblock %}

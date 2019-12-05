@@ -43,7 +43,7 @@ Profile {{ selecteduser.username }}
       
       {% endif %}
 
-     <!--display current user's profile details form enable them to update profile picture or email -->
+     <!--If logged in user is registered user, display current user's profile data, form enables an update of data- profile picture, bio -->
         <div> {% if selecteduser == user %}
 
         <form method = "post" action="." enctype="multipart/form-data">
@@ -51,9 +51,7 @@ Profile {{ selecteduser.username }}
               {{ form|crispy}} 
               <input type= "submit" value ="Update"/>
         </form>
-         {% comment %} <li class="nav-item">
-        <a class="nav-link" href="{% url 'registration:password_form' %}">Change Password</a>
-      </li> {% endcomment %}
+        
         {% else %}
         <!--if selected user is not logged in user - display the selected user member's profile bio details-->
         <p><strong>Bio</strong><br/>

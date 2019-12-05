@@ -1,21 +1,32 @@
 <!DOCTYPE html>
-{% load staticfiles %}<!-- New line -->
+{% extends 'cupcake_site/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+CareersCupcakeCode  
+{% endblock %}
 
-
-<html lang="en">
-<head>
-{% comment %} Adapted from https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_carousel2&stacked=h {% endcomment %}
-  <title>CupCakeCode</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+{% block body_block %}
+<body>
+<div>
+<!--Adapted from https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_carousel2&stacked=h -->
+ {% comment %} Not sure if this charset and stylesheet is needed {% endcomment %}
+  {% comment %} <meta charset="utf-8"> {% endcomment %}
+  {% comment %} <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-</head>
-<body>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> {% endcomment %}
 
+
+
+ <a href="{% url 'cupcake_site:about' %}"  class="btn btn-secondary" role="button">Back to About Page</a>
+ <br/>
 <div class="container">
-  {% comment %} <h2>CupCakeCode</h2> {% endcomment %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
+
+  <h2>CupCakeCode</h2>
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -67,6 +78,6 @@
     </a>
   </div>
 </div>
-
+</div>
 </body>
-</html>
+{% endblock %}

@@ -32,9 +32,9 @@ class AboutView(View):
     return render(request, 'cupcake_site/about.html', context=context_dict)
 
 #carsole for the About page todo change this name and position
-def h(request):
+def career(request):
   context_dict={'boldmessage': 'We need more women in tech'}
-  return render(request, 'cupcake_site/h.html', context=context_dict)
+  return render(request, 'cupcake_site/career.html', context=context_dict)
 
 
 #Learning Tools Categories Page 
