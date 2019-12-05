@@ -11,11 +11,24 @@
 {% block body_block %}
 <div>
 <header class = "container center-align">
-<!--If the category exists, display the list of pages-->
+<!--If the category exists, display the category name-->
   {% if category %}
     <h1><b> {{ category.name}} </b> </h1><h6>Clicking the link takes you to view the page, to return to this site Click the back arrow in your browser or Right Click the links to open in a new tab.</h6>
 </header>
-
+    <!--Likes bar -->
+    <div class="jumbotron p-4">
+      <div class="container">
+        <div>
+          <strong id="like_count">{{ category.likes }}</strong> likes
+            {% if user.is_authenticated %}
+              <button id="like_btn" data-categoryid="{{ category.id }}" class="btn btn-secondary btn-sm" type="button">
+              <span data-feather="thumbs-up"></span>
+              Like this Learning Tool</button>
+            {% endif %}
+        </div>   
+      </div>
+    </div>
+<!--Display the list of page links for this learning tool category-->
 <div class = "container">
 <h3 class = "centre-align blue lighten-4", class="container centre-align">LINKS</h3>
   <div class = "card-content">

@@ -159,3 +159,11 @@ AUTH_PROFILE_MODULE = 'cupcake_site.UserProfile'
 
 #will redirect to https  -  for development set to false for deployment set to True
 SECURE_SSL_REDIRECT = False
+
+#set cookies, enable browser length sessions set to True, disable set to false (persistant sessions are enabled)  
+#SESSIONS_EXPIRE_AT_BROWSER_CLOSE = False
+
+#To set cookies to last for 1 week when persistant sessions are enabled
+#SESSION_COOKIE_AGE = 604800
+
+#Note to clear sessions run python manage.py clearsessions

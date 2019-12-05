@@ -45,7 +45,8 @@ def tools(request):
   context_dict ={}
   context_dict ['categories'] = category_list
   context_dict ['pages'] = page_list
-  #context_dict['visits'] = request.session['visits']
+  visitor_cookie_handler(request)
+  context_dict['visits'] = request.session['visits']
   return render(request, 'cupcake_site/tools.html', context=context_dict)
 
 """Display a list of links for the selected Learning Tool"""
@@ -200,7 +201,7 @@ class ListProfilesView(View):
 
       return render(request, 'cupcake_site/list_profiles.html',{'userprofile_list':profiles})
 
-"""Cookies and Likes """
+"""Cookies and Visits  """
 def get_server_side_cookie(request, cookie, default_val=None):
     val = request.session.get(cookie)
     
@@ -237,7 +238,8 @@ class GotoView(View):
         selected_page.save()
         
         return redirect(selected_page.url)
-
+        
+"""Like a category"""
 class LikeCategoryView(View):
     @method_decorator(login_required)
     def get(self, request):
