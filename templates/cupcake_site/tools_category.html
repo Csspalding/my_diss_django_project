@@ -1,54 +1,60 @@
 {% extends 'cupcake_site/base.html' %}
 
 {% block title_block %}   
-    {% if category %}
+  {% if category %}
       {{ category.name}}CupcakeCode
-    {% else %}
+  {% else %}
       Unknown category
-    {% endif %}
+  {% endif %}
 {% endblock %}
 
 {% block body_block %}
 <div>
-  <header class = "container center-align">
-    {% if category %}
-       <h1><b> {{ category.name}} </b> </h1><h6>Clicking the link takes you to view the page, to return to this site Click the back arrow in your browser or Right Click the links to open in a new tab.</h6>
-   </header>
+<header class = "container center-align">
+<!--If the category exists, display the list of pages-->
+  {% if category %}
+    <h1><b> {{ category.name}} </b> </h1><h6>Clicking the link takes you to view the page, to return to this site Click the back arrow in your browser or Right Click the links to open in a new tab.</h6>
+</header>
+
 <div class = "container">
 <h3 class = "centre-align blue lighten-4", class="container centre-align">LINKS</h3>
   <div class = "card-content">
     <div>
         {% if pages %}
-          <ul>
-              {% for page in pages %}
-                <li><a href="{{ page.url }}">{{ page.title}}</a> <br/>{{page.description}} </li>
-
-              {% endfor %}
-          </ul> 
+        <ul>
+        <!--Display the list of pages -->
+          {% for page in pages %}
+            <li><a href="{{ page.url }}">{{ page.title}}</a> <br/>{{page.description}} </li>
+          {% endfor %}
+        </ul> 
         {% else %}
+        <!--Display message if no pages in the list -->
           <strong>No pages currently in category.</strong>
         {% endif %}
      </div> 
     </div>
-       <div class = "container">
-        <br>
+<div class = "container">
+  <br>
   <!--authorised users can add a page-->
-        {% if user.is_authenticated %} 
-        <!-- category.slug is passed thorugh as a parameter to the url template tag --> 
-        <h6>Found something useful, want to share with others? Why not add a new page to this category of learning tools.</h6>
-        <a href="{% url 'cupcake_site:add_page' category.slug %}"  class="btn btn-secondary" role="button">Add Page </a>
-   <!--Go Back button-->     
-       {% endif %}
-       <a href="{% url 'cupcake_site:tools' %}"  class="btn btn-secondary" role="button">Back to Learning Tools</a>
-        </div> 
-    <!--If the category does not exit-->
-    {% else %}
-          The specified category does not exist!
-        </div> 
+    {% if user.is_authenticated %} 
+      <h6>Found something useful, want to share with others? Why not add a new page to this category of learning tools.</h6>
+      <!--Add Page Button-->
+      <a href="{% url 'cupcake_site:add_page' category.slug %}"  class="btn btn-secondary" role="button">Add Page </a>
     {% endif %}
-    </div> 
-  </div>
+      <!--Go Back button-->     
+       <a href="{% url 'cupcake_site:tools' %}"  class="btn btn-secondary" role="button">Back to Learning Tools</a>
+    </div>
+
+<!--If the category does not exit-->
+{% else %}
+  <p>The specified category does not exist!</p>
 </div> 
-  {% endblock %}
+{% endif %}
+    </div>
+  <!--Close Card--> 
+  </div>
+  <!--Close Container-->
+</div> 
+{% endblock %}
 
 

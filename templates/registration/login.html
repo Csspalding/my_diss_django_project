@@ -11,7 +11,7 @@
     <div class="container d-flex h-100">
       <div class="row justify-content-center">
         <div class="col-40"> 
-
+<!--Formatting -->
     <div class="jumbotron p-4">
         <h1 class="jumbotron-heading">Login</h1>
         <p>Not yet signed up?<br/> 
@@ -22,6 +22,7 @@
     <div class="container">
         <form class="form-signin" role="form" method="post" action=".">
             {% csrf_token %}
+           <!--Box style with inital input for the layout -->
             <label for="inputUsername" class="sr-only">Username</label>
             <input type="text" name="username" id="id_username" class="form-control" placeholder="Username" required autofocus>
             <label for="inputPassword" class="sr-only">Password</label>
@@ -37,19 +38,4 @@
     </div>
     </div>
 {% endblock %}  
-
- {% comment %} {% block body_block %}
-<h1>Login</h1>
-<form method='post' action = ".">
-  {% csrf_token %}
-
-  {{ form.as_p }}
-
-  <input type="submit" value="Login"/>
-  <input type="hidden" name= "next" value = "{{ next }}"/>
-  </form>
-  <p> Not registered?
-  <a href="{%url 'registration_register' %}">Sign Up</a>
-  </p> {% endcomment %}
-  
 

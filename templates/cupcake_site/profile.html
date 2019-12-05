@@ -1,61 +1,53 @@
 {%extends 'cupcake_site/base.html' %}
 {% load staticfiles %}
-<!--Display a User's Profile 
+<!--Display a User's Profile - template is only available to registered users
 if selected user is the logged in user: display form to enable user to amemd profile details-->
 {% block title_block %}
 Profile {{ selecteduser.username }} 
 {% endblock %}
 
- <head>
- 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<!--container, row, col_x and justify-content-centre creates a simple layout with one row and one column-->
-   
-  </head> 
 {% block body_block %}
 
 {% load crispy_forms_tags %}
 <!--Display  User's username in heading https://getbootstrap.com/docs/4.0/components/jumbotron/-->
-    
-      <div class="jumotron jumbotron-fluid">   
-      <div class="container">
+<div class="jumotron jumbotron-fluid">   
+  <div class="container">
       {% if selecteduser == user %}
            <h1 class="jumotron-heading">My Profile {{ selecteduser.username }} </h1>
-      <!--if selecteduser is not logged in user, display the selected user member's username-->
       {% else %}
+      <!--if selecteduser is not current user, display the selected user member's username-->
             <h1 class="jumotron-heading">Profile: {{ selecteduser.username }} </h1>
-        {% endif %}
+      {% endif %}
       </div>
       </div>
 
-<!--display user's profile picture -->
+      <!--display user's profile picture -->
       <div class="container">
       {% if userprofile.picture %}
-
        <br />
-        <img src="{{ MEDIA_URL }}{{ userprofile.picture }}" width="300" hight="300" alt="{{selecteduser.username}}'s profile picture {{userprofile.picture.name}}" /><!-- New line -->   
+        <img src="{{ MEDIA_URL }}{{ userprofile.picture }}" width="300" hight="300" alt="{{selecteduser.username}}'s profile picture {{userprofile.picture.name}}" />
+        <!-- New line -->   
         <br/>
       {% else %}
       <!--if media files are not loading, render a default static file-->
       <br/>
       <img src="{% static 'images/no_user_image.jpg' %}" width="100" height="100" />
       <br/>
-      
       {% endif %}
 
-     <!--If logged in user is registered user, display current user's profile data, form enables an update of data- profile picture, bio -->
+     <!--If selecteduser in user is current user, display current user's profile data, form enables an update of data- profile picture, bio -->
         <div> {% if selecteduser == user %}
-
         <form method = "post" action="." enctype="multipart/form-data">
               {% csrf_token %} 
               {{ form|crispy}} 
               <input type= "submit" value ="Update"/>
         </form>
-        
-        {% else %}
-        <!--if selected user is not logged in user - display the selected user member's profile bio details-->
+        <br/>
+      <a href="{% url 'auth_password_change' %}"  class="btn btn-secondary" role="button">Update Password</a>
+         {% else %}
+        <!--if selected user is not current user - display the selected user member's profile bio details-->
         <p><strong>Bio</strong><br/>
-        {{userprofile.bio}}
+        {{userprofile.bio}} 
         {% endif %}
         </div>
 

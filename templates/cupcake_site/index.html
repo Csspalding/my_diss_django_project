@@ -1,76 +1,81 @@
 {% extends 'cupcake_site/base.html' %}
-{% load staticfiles %}<!-- New line -->
+{% load staticfiles %}
+
 {% block title_block %}   
     HomeCupcakeCode
 {% endblock %}
 
 {% block body_block %}
-
- <header class = "container centre-align">
+<!--Page is split into equal columns-->
+<header class = "container centre-align">
 <div class="row">
 
 <!-- Page Left Row-->
 <div class="col-sm-6">
 <div class="container">
 <!--Welcome message or, if logged in Hello username-->
-        {% if user.is_authenticated %}
-        <h5>Hello  {{ user.username }}</h5> 
-        {% else %}
-        <h5> Welcome!</h5><h6><a href="{% url 'registration_register' %}" >Sign up</a> to experience more awesome features of this!</h6>
-        {% endif %}
-        <p>Welcome to this information website aimed at encouraging women to learn to code.
-        Why not try out some code now? Click the red Start button for a cup cake themed coding tutorial.</p>
- <!--Card diplay Cupcake 3min Code App. Computer desk image with try some code message, click here to start button-->   
-    <div class="card card-blog">
+{% if user.is_authenticated %}
+    <h5>Hello  {{ user.username }}</h5> 
+{% else %}
+    <h5> Welcome!</h5><h6><a href="{% url 'registration_register' %}" >Sign up</a> to experience more awesome features of this site!</h6>
+{% endif %}
+<p>Welcome to this information website aimed at encouraging women to learn to code. 
+Why not try out some code now? Click the red Start button for a cup cake themed coding tutorial.</p>
+<!--Card display Cupcake Tutorial red button on Computer desk image overlayed with text-->   
+<div class="card card-blog">
     <div class="card">
-        <a href="#">
-            <img id="image" src="{% static 'images/plantsLaptop.jpg' %}" alt="Picture of a Desk with PC and plants" style="width:100%;">
-        </a>
+    <!--Image-->
+        <img id="image" src="{% static 'images/plantsLaptop.jpg' %}" alt="Picture of a Desk with PC and plants" style="width:100%;">
         </div>
+    <!--Text overlayed on image-->
     <div class="card-body text-centre carousel-caption">
         <h3 class="card-title" >!! TRY SOME CODE !! </h3>
-    <div class="card-description"><strong>3 min code fun on cupcakes</strong>
-    <div class="table-responsive">go go go
-    </div> 
-    </div>
-        <div class="card-footer">
-        {% comment %} todo map link url to app <a href="{% url 'cupcake_site:cupcakeapp' %}"{% endcomment %}
-            <a href="{% url 'cupcake_site:index' %}" class="btn btn-danger btn-round">CLICK HERE TO START</a>
+        <div class="card-description"><strong>3 min code fun on cupcakes</strong>
+            <div class="table-responsive">go go go
+            </div> 
+        </div>
+    <!--Start Button overlayed on image-->
+    <div class="card-footer">
+        {% comment %} todo map link url to app <a href="{% url 'cupcake_site:tutorial' %}"{% endcomment %}
+        <a href="{% url 'cupcake_site:index' %}" class="btn btn-danger btn-round">CLICK HERE TO START</a>
         </div> 
-    </div> 
+    <!--close card-->
     </div>
-<!--text under image of plants/Laptop-->
+    <!--close blog card--> 
+    </div>
+
+<!--text beneath main image-->
 <br>
 <p>For more coding exercises and lessons see Learning Tools <a href="{% url 'cupcake_site:tools' %}" >Click Here</a>. Like cakes? I'm sure you've baked a few cupcakes over time, if you can follow instructions in a cookbook you may find learn to code fun. There is an amazing quantity of resources available on-line and free guidance on offer. Once you get started, like baking cakes, it's actually pretty addictive. </p>
+<!--lower left page image-->
 <div>
- <img src="{% static 'images/vanilla1_cupcakes.jpg' %}" style="width:100%;" alt="Picture of cupcakes" />
- </div>
+<img src="{% static 'images/vanilla1_cupcakes.jpg' %}" style="width:100%;" alt="Picture of cupcakes" />
 </div>
+<!--Close Grid Column-->
 </div>
-{% comment %} You might want to try one hour of code a day, or 20 minutes a day or one hour a week. You might think you prefer learning face to face, there are a few organisation listed that offer coding workshops and classes for free. If you have access to a PC why not try out the free courses as well, you might surprise yourself.  {% endcomment %}
-{% comment %} You may want to check out formal certified Computer Science course at your local college or university. And if you get stuck on a project, support is out there, chances are other people have experienced the same problem, and there's an answer posted someone on the internet. Also look out for Meet Up Groups in your area who offer beginers help with their projects.  {% endcomment %}
-<!-- Page  Right -->
+<!--Close Grid Container-->
+</div>
+
+<!-- Page  Right row -->
 <div class="col-sm-6">
 <div class="container">
-        <h5>I've set up this site to encourage you to start coding! </h5><p>There are so many reasons to get on board the digital revolution, understanding tech helps us protect and guide our children. Developing tech skills can lead to better career prospects.</p>
-        <img src="{% static 'images/Jo.jpg' %}" width="550" height="340"    " alt="Picture portrait of web author" />
-        <!--text under image of person-->
-       <br>
-       <br>
-        <p>I have been coding for 2 years, it all started with by wanting to know more about how to protect my kids on-line. <a href="{% url 'posts:posts_index' %}">Read More</a> Check out my Blog if you would like to find out how I got into coding, and why more of us should...as well as many more inspirational stories from women in tech. </p>
+<h5>I've set up this site to encourage you to start coding! </h5><p>There are so many reasons to get on board the digital revolution, understanding tech helps us protect and guide our children. Developing tech skills can lead to better career prospects.</p>
+<img src="{% static 'images/Jo.jpg' %}" width="550" height="340"    " alt="Picture portrait of web author" />
+<!--text under image of person-->
+<br><br>
+<p>I have been coding for 2 years, it all started with by wanting to know more about how to protect my kids on-line. <a href="{% url 'posts:posts_index' %}">Read More</a> Check out my Blog if you would like to find out how I got into coding, and why more of us should...as well as many more inspirational stories from women in tech. </p>
 <br>
-
-        <div>
-         <img src="{% static 'images/digitalcakes.jpg' %}" width="550" height="340"  alt="Picture of digital cup cakes" />
-         </div>
-     </div>
-    <!-- Card 1 --> 
-    </div> 
-    <!-- Grid column -->
-    </div>
-<!-- Container -->
+<div>
+<img src="{% static 'images/digitalcakes.jpg' %}" width="550" height="340" alt="Picture of digital cup cakes" />
 </div>
-<!-- Row -->
+</div>
+<!-- Close Card  --> 
+</div> 
+<!-- Close Grid column -->
+</div>
+<!-- Close Container -->
+</div>
+<!-- Close Row -->
 </div>
     
 {% endblock %}
