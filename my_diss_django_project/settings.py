@@ -1,5 +1,5 @@
 """
-Cassie Spalding 2140148s 
+Cassie Spalding 2140148s
 
 Django settings for my_diss_django_project project.
 
@@ -56,7 +56,6 @@ INSTALLED_APPS = [
     'cupcake_site',
     'posts',
     'crispy_forms',
-    
 ]
 #use bootstrap4 templates with crispy forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -70,7 +69,7 @@ REGISTRATION_AUTO_LOGIN = True
 #url Django redirects to when users have successfully logged in
 LOGIN_REDIRECT_URL = 'cupcake_site:index'
 #if login is unsuccessful Django redirects users to this page
-LOGIN_URL ='auth_login'    
+LOGIN_URL ='auth_login'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -153,7 +152,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR]
-STATIC_ROOT = "/home/cupcakecode/my_diss_django_project/static"
+STATIC_ROOT = '/home/cupcakecode/my_diss_django_project/static'
 
 #UserProfile
 AUTH_PROFILE_MODULE = 'cupcake_site.UserProfile'
@@ -161,17 +160,10 @@ AUTH_PROFILE_MODULE = 'cupcake_site.UserProfile'
 #will redirect to https  -  for development set to false for deployment set to True
 SECURE_SSL_REDIRECT = False
 
-#set cookies, enable browser length sessions set to True, disable set to false (persistant sessions are enabled)  
+#set cookies, enable browser length sessions set to True, disable set to false (persistant sessions are enabled)
 #SESSIONS_EXPIRE_AT_BROWSER_CLOSE = False
 
 #To set cookies to last for 1 week when persistant sessions are enabled
 #SESSION_COOKIE_AGE = 604800
 
 #Note to clear sessions run python manage.py clearsessions
-
-#Test then remove hard coded secret key above
-# key = None
-# with open('/home/my_diss_django_project/secret.key')as f:
-#     key= f.read().strip()
-
-# SECRET_KEY = key
