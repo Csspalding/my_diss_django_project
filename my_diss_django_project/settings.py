@@ -1,5 +1,5 @@
 """
-Cassie Spalding 2140148s 
+Cassie Spalding 2140148s
 
 Django settings for my_diss_django_project project.
 
@@ -38,9 +38,9 @@ MEDIA_URL = '/media/'
 SECRET_KEY = 'g9$649y9cbm4lq_%9f22fvho22-y2%k4gxgk9s%)4*&4$xo)0z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cupcakecode.pythonanywhere.com']
 
 
 # Application definition
@@ -55,8 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cupcake_site',
     'posts',
-    'crispy_forms',
-    'coverage'
+    'crispy_forms'
 ]
 #use bootstrap4 templates with crispy forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -70,7 +69,7 @@ REGISTRATION_AUTO_LOGIN = True
 #url Django redirects to when users have successfully logged in
 LOGIN_REDIRECT_URL = 'cupcake_site:index'
 #if login is unsuccessful Django redirects users to this page
-LOGIN_URL ='auth_login'    
+LOGIN_URL ='auth_login'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -160,7 +159,7 @@ AUTH_PROFILE_MODULE = 'cupcake_site.UserProfile'
 #will redirect to https  -  for development set to false for deployment set to True
 SECURE_SSL_REDIRECT = False
 
-#set cookies, enable browser length sessions set to True, disable set to false (persistant sessions are enabled)  
+#set cookies, enable browser length sessions set to True, disable set to false (persistant sessions are enabled)
 #SESSIONS_EXPIRE_AT_BROWSER_CLOSE = False
 
 #To set cookies to last for 1 week when persistant sessions are enabled
