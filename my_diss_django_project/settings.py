@@ -167,3 +167,10 @@ SECURE_SSL_REDIRECT = False
 #SESSION_COOKIE_AGE = 604800
 
 #Note to clear sessions run python manage.py clearsessions
+
+#Test then remove hard coded secret key above
+key = None
+with open('/home/my_diss_django_project/secret.key')as f:
+    key= f.read().strip()
+
+SECRET_KEY = key
