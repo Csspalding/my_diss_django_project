@@ -55,15 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cupcake_site',
     'posts',
-<<<<<<< HEAD
-    'crispy_forms'
-<<<<<<< HEAD
-=======
-=======
     'crispy_forms',
->>>>>>> 9f0e1aa6789506657b5ea4e58d261e40a267647f
-    
->>>>>>> fdde1ffb19d1eddb663c9a465fcf4a409eb61d4b
 ]
 #use bootstrap4 templates with crispy forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -160,7 +152,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR]
-STATIC_ROOT = "/home/cupcakecode/my_diss_django_project/static"
+STATIC_ROOT = '/home/cupcakecode/my_diss_django_project/static'
 
 #UserProfile
 AUTH_PROFILE_MODULE = 'cupcake_site.UserProfile'
@@ -175,10 +167,3 @@ SECURE_SSL_REDIRECT = False
 #SESSION_COOKIE_AGE = 604800
 
 #Note to clear sessions run python manage.py clearsessions
-
-#Test then remove hard coded secret key above
-key = None
-with open('/home/my_diss_django_project/secret.key')as f:
-    key= f.read().strip()
-
-SECRET_KEY = key
