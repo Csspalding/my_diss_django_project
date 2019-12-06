@@ -8,9 +8,25 @@ https://docs.djangoproject.com/en/2.1/howto/deployment/wsgi/
 """
 
 import os
+import sys
 
-from django.core.wsgi import get_wsgi_application
+#Add project directory to python path
+path = '/home/cupcakecode/my_diss_django_project/'
+if path not in sys.path:
+  sys.path.append(path)
+
+#move to the project diretory
+os.chdir(path)
+
+#tell django where the setting.py module is
+
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'my_diss_django_project.settings')
 
-application = get_wsgi_application()
+#set up Django
+import django
+django.setup()
+
+#import django to handle requests
+import django.core.handlers.wsgi
+application=django.core.handlers.wsgi.WSGIHandler()

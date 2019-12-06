@@ -38,7 +38,7 @@ MEDIA_URL = '/media/'
 SECRET_KEY = 'g9$649y9cbm4lq_%9f22fvho22-y2%k4gxgk9s%)4*&4$xo)0z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['cupcakecode.pythonanywhere.com']
 
@@ -55,8 +55,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cupcake_site',
     'posts',
-    'crispy_forms',
-    'coverage'
+    'crispy_forms'
+    
 ]
 #use bootstrap4 templates with crispy forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -153,6 +153,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR]
+STATIC_ROOT = "/home/cupcakecode/my_diss_django_project/static"
 
 #UserProfile
 AUTH_PROFILE_MODULE = 'cupcake_site.UserProfile'
