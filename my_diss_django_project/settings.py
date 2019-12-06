@@ -55,9 +55,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cupcake_site',
     'posts',
+<<<<<<< HEAD
     'crispy_forms'
 <<<<<<< HEAD
 =======
+=======
+    'crispy_forms',
+>>>>>>> 9f0e1aa6789506657b5ea4e58d261e40a267647f
     
 >>>>>>> fdde1ffb19d1eddb663c9a465fcf4a409eb61d4b
 ]
