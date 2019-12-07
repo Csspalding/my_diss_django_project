@@ -24,6 +24,12 @@ class IndexView(View):
   def get(self, request):
     return render(request, 'cupcake_site/index.html')
 
+"""Tutorial view is the page for users try a cupcake tutorial"""
+class TutorialView(View):
+  """currently under construction"""
+  def get(self, request):
+    return render(request, 'cupcake_site:cupcake_tutorial')    
+
 """About page"""
 class AboutView(View):
   def get(self, request):
@@ -35,6 +41,11 @@ def career(request):
   context_dict={'boldmessage': 'We need more women in tech'}
   return render(request, 'cupcake_site/career.html', context=context_dict)
 
+"""Search view to implement search feature"""
+class SearchView(View):
+  """currently under construction"""
+  def get(self, request):
+    return render(request, 'cupcake_site:search')  
 
 """Learning Tools Categories Page"""
 def tools(request):

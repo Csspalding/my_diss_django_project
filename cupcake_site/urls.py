@@ -21,5 +21,8 @@ urlpatterns = [
     path('register_profile/', views.RegisterProfileCreateView.as_view(), name='register_profile'),
     path('profile/<username>/', views.ProfileCreateView.as_view(), name='profile'),
     path('profiles/', views.ListProfilesView.as_view(), name='list_profiles'),
+    path('cupcake_tutorial/', views.TutorialView.as_view(), name='cupcake_tutorial'),
+    path('search/', views.SearchView.as_view(), name='search'),
+    
 ]  
 
