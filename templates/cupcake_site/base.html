@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 <html lang="en">
- 
+
 <head>
 <!--  #author Cassie Spalding 2140148s dissertation project 2019 this is the BASE layout for the site.
-Note bootstrapCND source is the from  "getting started" https://getbootstrap.com/docs/4.0/getting-started/introduction/ 
+Note bootstrapCND source is the from  "getting started" https://getbootstrap.com/docs/4.0/getting-started/introduction/
 Note there is also a JavaScript & Poppie from the same source -->
 
 <!--Browser tab title-->
@@ -37,7 +37,7 @@ Note there is also a JavaScript & Poppie from the same source -->
 <!--divide page into two areas-->
 <div class="row">
 <!--left of page holds website cupcake code title over cupcake image container-->
-  <div class="col-sm-3"> 
+  <div class="col-sm-3">
     <div class="container">
     <!--TEXT OVER IMAGE CARD-->
     <div class="card card-blog">
@@ -54,19 +54,19 @@ Note there is also a JavaScript & Poppie from the same source -->
       </div>
     </div>
     <!--close container, then close column-->
-    </div>  
-  </div> 
+    </div>
+  </div>
 
   <div class="col-sm-9">
-   <!--right of page is wider area for the navigation bar --> 
+   <!--right of page is wider area for the navigation bar -->
     <div class="container">
   <!--logo header above navigation bar with Login/Logout and Admin Buttons-->
     <h2>&nbsp;&nbsp;&nbsp;CUPCAKE CODE <> anyone can code....
-     <!--additional buttons features for authenticated users, only display if authenticated go here--> 
+     <!--additional buttons features for authenticated users, only display if authenticated go here-->
      {% if user.is_authenticated %}
-      <a href="{% url 'auth_logout' %}" class="btn btn-secondary" role="button">Logout</a> 
-     {%else%} 
-      <a href="{% url 'auth_login' %}" class="btn btn-secondary" role="button">Login</a> 
+      <a href="{% url 'auth_logout' %}" class="btn btn-secondary" role="button">Logout</a>
+     {%else%}
+      <a href="{% url 'auth_login' %}" class="btn btn-secondary" role="button">Login</a>
     {% endif %}
     {% if user.is_staff %}
       <a href="{% url 'admin:login' %}"  class="btn btn-secondary" role="button">Admin</a>
@@ -80,7 +80,7 @@ Note there is also a JavaScript & Poppie from the same source -->
   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
     <!--HOOK - a space for a heading in Nav Bar if requried later, not required now - the example is commented out-->
     {% comment %} <a class="navbar-brand" href="#">CupCakeCode</a> {% endcomment %}
-   
+
     <!--List of Links for Navigation Bar-->
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
@@ -114,34 +114,35 @@ Note there is also a JavaScript & Poppie from the same source -->
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <!--When the button is pressed the view.search redirects to the template search.html-->
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <a href="{% url 'cupcake_site:search' %}" class="btn btn-outline-success" role="button">Search</a>
+      <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
     </form>
   </div>
-</nav>        
+</nav>
 </div>
 
     <div class="container">
      <div class="col-sm-4">
-   <!--HOOK extra space for additional image or info if necessary for future-->  
-          
+   <!--HOOK extra space for additional image or info if necessary for future-->
+
     </div>
 <!--close the above nav bar column, then close the container-->
-</div>    
+</div>
 </div>
 <!--close the row-->
-</div>  
-</header> 
+</div>
+</header>
  <!--Templates extending this base place content inside body block-->
 <div>
 {% block body_block %}
-{% endblock %} 
+{% endblock %}
 </div>
 <!--This is the footer hook for contact info as a grey button TODO map url and write view and template -->
-<br/> 
+<br/>
 {% comment %} <div class = "container">
       <a href="{% url 'cupcake_site:contact' %}"  class="btn btn-secondary" role="button">Contact Us</a>
 </div> {% endcomment %}
-</div>  
+</div>
 </body>
 </html>
 
